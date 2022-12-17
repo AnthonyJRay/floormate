@@ -1,8 +1,9 @@
 import { Outlet } from "react-router-dom"
 import { Grid, GridItem } from '@chakra-ui/react'
-import NavLinks from "../Nav-Links"
 
+import NavLinks from "../Nav-Links"
 import Header from "../components/Header"
+import AvatarDisplay from "../components/AvatarDisplay"
 
 
 export default function RootLayout() {
@@ -20,12 +21,13 @@ export default function RootLayout() {
   fontWeight='bold'
 >
   {/* Header Component */}
-  <GridItem pl='2' bg='purple.100' area={'header'}>
+  <GridItem bg='purple.100' area={'header'} display="flex" alignItems="center">
     <Header />
   </GridItem>
 
    {/* Navigation Bar */}
-  <GridItem pl='2' bg='pink.100' area={'nav'}>
+  <GridItem pl='2' bg='pink.100' area={'nav'} position="relative">
+    <AvatarDisplay />
    <NavLinks />
   </GridItem>
 

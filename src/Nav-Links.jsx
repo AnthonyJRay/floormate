@@ -1,7 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { List, ListItem, ListIcon, Hide } from "@chakra-ui/react"
 
+// UI Imports
+import { 
+  List, 
+  ListItem, 
+  ListIcon, 
+  Hide, 
+  Text, 
+  Box, 
+  Button 
+} from "@chakra-ui/react"
+
+// Icon Imports
 import { BiLineChartDown } from "react-icons/bi"
 import { BiEdit } from "react-icons/bi"
 import { BiFace } from "react-icons/bi"
@@ -9,31 +20,56 @@ import { BiStoreAlt } from "react-icons/bi"
 
 export default function Navlinks() {
   return (
-    <List spacing={10}>
-  <ListItem textAlign={[ 'center', null, 'left' ]}>
+    <Box display="flex" justifyContent="center" pt="2rem">
+    <List spacing={14} w="100%">
+
+      {/* Dashboard NavLink */}
+  <ListItem textAlign={[ 'center', null, 'left' ]} padding="5px">
     <Link to={`/`}>
-      <ListIcon as={BiStoreAlt} color='black.900'/>
-      <Hide below='md'>Dashboard</Hide>
+      <Box display="flex" alignItems="center">
+      <ListIcon as={BiStoreAlt} color='black.900' fontSize={["3rem", null, "2rem"]}/>
+      <Hide below='md'><Text>Dashboard</Text></Hide>
+      </Box>
     </Link>
   </ListItem>
-  <ListItem textAlign={[ 'center', null, 'left' ]}>
+
+  {/* Estimates NavLink */}
+  <ListItem textAlign={[ 'center', null, 'left' ]} padding="5px">
     <Link to={`estimates`}>
-      <ListIcon as={BiEdit} color='black.900' />
+    <Box display="flex" alignItems="center">
+      <ListIcon as={BiEdit} color='black.900' fontSize={["3rem", null, "2rem"]} />
       <Hide below='md'>Estimates</Hide>
+    </Box>
     </Link>
   </ListItem>
-  <ListItem textAlign={[ 'center', null, 'left' ]}>
+
+  {/* Clients NavLink */}
+  <ListItem textAlign={[ 'center', null, 'left' ]} padding="5px">
     <Link to={`clients`}>
-      <ListIcon as={BiFace} color='black.900' />
+      <Box display="flex" alignItems="center">
+      <ListIcon as={BiFace} color='black.900' fontSize={["3rem", null, "2rem"]}/>
       <Hide below='md'>Clients</Hide>
+      </Box>
     </Link>
   </ListItem>
-  <ListItem textAlign={[ 'center', null, 'left' ]}>
+
+  {/* Expenses NavLink */}
+  <ListItem textAlign={[ 'center', null, 'left' ]} padding="5px">
     <Link to={`expenses`}>
-      <ListIcon as={BiLineChartDown} color='black.900' />
+      <Box display="flex" alignItems="center">
+      <ListIcon as={BiLineChartDown} color='black.900' fontSize={["3rem", null, "2rem"]}/>
       <Hide below='md'>Expenses</Hide>
+      </Box>
       </Link>
   </ListItem>
-</List>
-  )
+
+      </List>
+  {/* Sign-in / Sign-out  */}
+  <Box display="flex" position="absolute" justifyContent="center" bottom="1rem" margin="auto" bg='red.200'>
+    <Link to={`signout`}>
+        <Button size='lg' colorScheme='twitter'>Sign In</Button>
+      </Link>
+  </Box>
+  </Box>
+   )
 }
