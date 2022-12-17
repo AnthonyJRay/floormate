@@ -1,7 +1,14 @@
 import React from 'react'
 
+import CardForm from "../components/CardForm"
+
 export default function Estimates() {
   return (
-    <div>This is the Estimates page.</div>
-  )
+    <CardForm 
+    btnText={"New Estimate"}
+    header={"Estimate List"}
+    cardHeader={"Job name"}
+    cardBody={"Expand to view Estimate details"}
+    />
+)
 }

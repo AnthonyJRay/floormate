@@ -1,7 +1,13 @@
 import React from 'react'
+import CardForm from '../components/CardForm'
 
 export default function Clients() {
   return (
-    <div>This is the Clients page.</div>
+    <CardForm 
+      btnText={"New Client"}
+      header={"Client List"}
+      cardHeader={"Client Name"}
+      cardBody={"Expand to view client details"}
+      />
   )
 }
