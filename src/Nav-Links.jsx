@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { List, ListItem, ListIcon } from "@chakra-ui/react"
+import { List, ListItem, ListIcon, Hide } from "@chakra-ui/react"
 
 import { BiLineChartDown } from "react-icons/bi"
 import { BiEdit } from "react-icons/bi"
@@ -10,22 +10,29 @@ import { BiStoreAlt } from "react-icons/bi"
 export default function Navlinks() {
   return (
     <List spacing={10}>
-  <ListItem>
-    <ListIcon as={BiStoreAlt} color='black.900' />
-    <Link to={`/`}>Dashboard</Link>
+  <ListItem textAlign={[ 'center', null, 'left' ]}>
+    <Link to={`/`}>
+      <ListIcon as={BiStoreAlt} color='black.900'/>
+      <Hide below='md'>Dashboard</Hide>
+    </Link>
   </ListItem>
-  <ListItem>
-    <ListIcon as={BiEdit} color='black.900' />
-    <Link to={`estimates`}>Estimates</Link>
+  <ListItem textAlign={[ 'center', null, 'left' ]}>
+    <Link to={`estimates`}>
+      <ListIcon as={BiEdit} color='black.900' />
+      <Hide below='md'>Estimates</Hide>
+    </Link>
   </ListItem>
-  <ListItem>
-    <ListIcon as={BiFace} color='black.900' />
-    <Link to={`clients`}>Clients</Link>
+  <ListItem textAlign={[ 'center', null, 'left' ]}>
+    <Link to={`clients`}>
+      <ListIcon as={BiFace} color='black.900' />
+      <Hide below='md'>Clients</Hide>
+    </Link>
   </ListItem>
-  {/* You can also use custom icons from react-icons */}
-  <ListItem>
-    <ListIcon as={BiLineChartDown} color='black.900' />
-    <Link to={`expenses`}>Expenses</Link>
+  <ListItem textAlign={[ 'center', null, 'left' ]}>
+    <Link to={`expenses`}>
+      <ListIcon as={BiLineChartDown} color='black.900' />
+      <Hide below='md'>Expenses</Hide>
+      </Link>
   </ListItem>
 </List>
   )
