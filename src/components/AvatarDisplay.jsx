@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import {
   Box,
   Flex, 
@@ -15,11 +16,13 @@ export default function AvatarDisplay() {
     <Box height="25%" >
       <Flex flexDirection="column" height="100%" justifyContent="space-around" alignItems="center">
         <Avatar size="lg"/>
+        <Link to={`settings`}>
         <Icon as={FiSettings}/>
-        <Text>Personal Name Here</Text>
-        <Text>Business Name Here</Text>
+        </Link>
+        <Text>Personal Name</Text>
+        <Text>Business Name</Text>
       </Flex>
-    <Divider />
+    <Divider w="95%"/>
     </Box>
   )
 }

@@ -5,6 +5,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import './index.css'
 
 import RootLayout from './routes/RootLayout'
+import SettingsLayout from './routes/SettingsLayout'
 import ErrorPage from "./error-page"
 import Dashboard from './pages/Dashboard'
 import Estimates from './pages/Estimates'
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "clients",
         element: <Clients />
+      },
+      {
+        path: "settings",
+        element: <SettingsLayout />,
       }
     ]
   },

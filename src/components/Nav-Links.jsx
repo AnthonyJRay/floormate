@@ -68,7 +68,7 @@ export default function Navlinks() {
   <Box display="flex" position="absolute" justifyContent="center" bottom="1rem" margin="auto" bg='red.200'>
     <Link to={`signout`}>
         <Button size='lg' colorScheme='twitter'>Sign In</Button>
-      </Link>
+    </Link>
   </Box>
   </Box>
    )
