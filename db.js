@@ -14,5 +14,5 @@ export function getTestData() {
 }
 
 export function getEstimatesData() {
-  return pool.query("SELECT * FROM addstuff");
+  return pool.query("SELECT * FROM Estimates;");
 }

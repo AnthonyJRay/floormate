@@ -33,12 +33,12 @@ export default function RootLayout() {
   </GridItem>
 
    {/* Main Content Body */}
-  <GridItem pl='2' bg='gray.800' color="gray.400" area={'main'}>
+  <GridItem bg='gray.800' color="gray.400" area={'main'}>
     <Outlet />
   </GridItem>
 
    {/* Footer */}
-  <GridItem pl='2' bg='gray.800' color="gray.400" area={'footer'}>
+  <GridItem bg='gray.800' color="gray.400" area={'footer'}>
     Footer
   </GridItem>
 </Grid>

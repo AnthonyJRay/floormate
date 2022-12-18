@@ -1,6 +1,8 @@
 import React from 'react'
 
-import ExpensesCard from "../components/ExpensesCard"
+
+import DisplayCards from "../components/DisplayCards"
+import ExpensesBody from "../components/ExpensesBody"
 
 export default function Expenses() {
 
@@ -16,11 +18,11 @@ export default function Expenses() {
 
 
   return (
-    <ExpensesCard 
+    <DisplayCards
     btnText={"Add Expense"}
     header={"Expense Report"}
     cardHeader={"Name of Expense"}
-    cardBody={"Expand to view Expense details"}
+    cardBody={ <ExpensesBody />}
     addBtn = {() => addClickHandler}
     editBtn = {() => editClickHandler}
     deleteBtn = {() => deleteClickHandler}

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 
-import EstimatesCard from "../components/EstimatesCard"
+import DisplayCards from "../components/DisplayCards"
+import EstimatesBody from "../components/EstimatesBody"
 
 export default function Estimates() {
 
@@ -26,18 +27,22 @@ export default function Estimates() {
     estimatesData();
   },[])
 
+  estimateData.map((est) => {
+    return console.log(est);
+  })
 
 
-
+console.log(estimateData);
   return (
     <>
-    <EstimatesCard 
+    <DisplayCards 
     btnText={"New Estimate"}
     header={"Estimate List"}
-    cardHeader={"Job name"}
-    // cardBody={estimateData.map((estimates) => {
-    //   return estimates.name;
-    // })}
+    cardBody={ estimateData.map((estimate) => {
+      return(
+      <EstimatesBody key={estimate.id} header={estimate.clientname} body={estimate.estimatedesc} price={estimate.price}/>
+      )
+    })}
     addBtn = {() => addClickHandler}
     editBtn = {() => editClickHandler}
     deleteBtn = {() => deleteClickHandler}
