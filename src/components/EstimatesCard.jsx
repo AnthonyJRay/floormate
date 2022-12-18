@@ -42,12 +42,12 @@ export default function CardForm(props) {
                 padding="1rem"
                 margin="2rem"
               >
-                {props.cardBody}
+                {/* {props.cardBody} */}
               </Text>
-              <Button size="sm" colorScheme="yellow" onClick={props.editBtn()}>
+              <Button size="sm" colorScheme="yellow" onClick={()=>console.log("Edit Button: Works!")}>
                 Edit
               </Button>
-              <Button size="sm" colorScheme="red" onClick={props.deleteBtn()}>
+              <Button size="sm" colorScheme="red" onClick={()=>console.log("Delete Button: Works!")}>
                 Delete
               </Button>
             </Box>

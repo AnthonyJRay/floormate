@@ -1,5 +1,5 @@
 import React from 'react'
-import CardForm from '../components/CardForm'
+import ClientsCard from "../components/ClientsCard"
 
 export default function Clients() {
 
@@ -14,7 +14,7 @@ export default function Clients() {
   }
 
   return (
-    <CardForm 
+    <ClientsCard 
       btnText={"New Client"}
       header={"Client List"}
       cardHeader={"Client Name"}

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import CardForm from '../components/CardForm'
+import ExpensesCard from "../components/ExpensesCard"
 
 export default function Expenses() {
 
@@ -16,7 +16,7 @@ export default function Expenses() {
 
 
   return (
-    <CardForm 
+    <ExpensesCard 
     btnText={"Add Expense"}
     header={"Expense Report"}
     cardHeader={"Name of Expense"}

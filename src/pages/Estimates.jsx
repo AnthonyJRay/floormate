@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-import CardForm from "../components/CardForm"
+import EstimatesCard from "../components/EstimatesCard"
 
 export default function Estimates() {
 
@@ -19,29 +19,29 @@ export default function Estimates() {
   const estimatesData = async (req, res) => {
     const response = await fetch('http://localhost:5000/estimates')
     const jsonData = await response.json();
-    console.log(`Estimates: ${jsonData.rows}`)
     setEstimateData(jsonData.rows);
   }
 
   useEffect(() => {
     estimatesData();
-    console.log(estimateData);
   },[])
 
 
 
 
   return (
-    <CardForm 
+    <>
+    <EstimatesCard 
     btnText={"New Estimate"}
     header={"Estimate List"}
     cardHeader={"Job name"}
-    cardBody={estimateData.map((data) => {
-      return data.name
-    })}
+    // cardBody={estimateData.map((estimates) => {
+    //   return estimates.name;
+    // })}
     addBtn = {() => addClickHandler}
     editBtn = {() => editClickHandler}
     deleteBtn = {() => deleteClickHandler}
     />
+</>
 )
 }
