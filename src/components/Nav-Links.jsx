@@ -21,7 +21,7 @@ import { BiStoreAlt } from "react-icons/bi"
 export default function Navlinks() {
   return (
     <Box display="flex" justifyContent="center" pt="2rem">
-    <List spacing={6} w="100%">
+    <List spacing={12} w={["100%", "80%", "65"]}>
 
       {/* Dashboard NavLink */}
   <ListItem textAlign={[ 'center', null, 'left' ]}>

@@ -1,28 +1,24 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import {
   Box,
   Flex, 
   Avatar, 
-  Icon, 
   Divider,
-  Text
+  Text,
+  Hide
  } from "@chakra-ui/react"
-
-import { FiSettings } from "react-icons/fi"
 
 export default function AvatarDisplay() {
   return (
     <Box >
-      <Flex flexDirection="column" justifyContent="space-around" alignItems="center">
-        <Avatar size={["md", "lg"]}/>
-        <Link to={`settings`}>
-        <Icon as={FiSettings}/>
-        </Link>
-        <Text fontSize={["sm"]}>Personal Name</Text>
-        <Text fontSize={["sm"]}>Business Name</Text>
+      <Flex flexDirection={"column"} justifyContent={"space-around"} alignItems={"center"} p={"1rem"}>
+        <Avatar size={["md", "lg"]} m={"1rem"}/>
+        <Hide below="md">
+        <Text fontSize={["xs", "xs", "sm"]}>Personal Name</Text>
+        <Text fontSize={["xs", "xs", "sm"]}>Business Name</Text>
+        </Hide>
       </Flex>
-    <Divider w="95%"/>
+    <Divider w={["95%", "90%", "85%"]} m={"auto"}/>
     </Box>
   )
 }

@@ -7,7 +7,9 @@ import {
   Box,
   Text,
   Button,
-  Icon
+  Icon,
+  Grid,
+  GridItem
 } from "@chakra-ui/react";
 import { BsPlusLg } from "react-icons/bs"
 
@@ -15,18 +17,18 @@ import { BsPlusLg } from "react-icons/bs"
 export default function CardForm(props) {
   return (
     // Card Button
-    <Box p={2}>
-      <Flex justifyContent={"space-between"} alignItems={"center"} p={2}>
-        <Heading size="xl">{props.header}</Heading>
-        <Button size="sm" colorScheme="green" onClick={props.addBtn()}>
+    <Box p={5}>
+      <Box textAlign="center">
+        <Heading size={"xl"} pb={"2rem"}>{props.header}</Heading>
+        <Button size={"sm"} colorScheme="green" onClick={props.addBtn()}>
           <Text p={1}>{props.btnText}</Text>
           <Icon as={BsPlusLg} />
         </Button>
-      </Flex>
+      </Box>
       {/* Card */}
-      <Card color="gray.100" height="100%">
+      <Grid templateColumns={{ base: '1fr 1fr', md: '1fr 1fr 1fr', lg: '1fr 1fr 1fr 1fr'}} gridGap="3" autoRows={"1fr"} color={"gray.100"} pt={"1rem"}>
         {props.cardBody}
-      </Card>
+      </Grid>
     </Box>
   );
 }

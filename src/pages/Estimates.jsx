@@ -35,7 +35,7 @@ console.log(estimateData);
     <>
     <DisplayCards 
     btnText={"New Estimate"}
-    header={"Estimate List"}
+    header={"Estimates"}
     cardBody={ estimateData.map((estimate) => {
       return(
         <EstimatesBody 
