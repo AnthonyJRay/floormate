@@ -11,14 +11,12 @@ import {
 
 
 export default function EstimatesBody(props) {
-  const cardCount = [{id: 1},{id: 2},{id: 3},{id: 4}];
-  
   return (
     <CardBody border="1px" borderColor="gray.200" margin="2rem">
       <Stack divider={<StackDivider />} spacing="4">
         <Box>
           <Heading size="xs">
-          {props.header}
+            {props.header}
           </Heading>
           <Text>
             {props.body}

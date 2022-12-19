@@ -2,7 +2,7 @@ import React from 'react'
 
 
 import DisplayCards from "../components/DisplayCards"
-import ExpensesBody from "../components/ExpensesBody"
+import ExpensesBody from "../components/expenses/ExpensesBody"
 
 export default function Expenses() {
 

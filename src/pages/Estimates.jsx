@@ -1,18 +1,21 @@
 import { useState, useEffect } from 'react'
 
 import DisplayCards from "../components/DisplayCards"
-import EstimatesBody from "../components/EstimatesBody"
+import EstimatesBody from "../components/estimates/EstimatesBody"
 
 export default function Estimates() {
 
   const [estimateData, setEstimateData] = useState([]);
 
+  // Edit button
   function editClickHandler() {
     return console.log("Estimate Edit Button!")
   }
+  // Delete button
   function deleteClickHandler() {
     return console.log("Estimate Delete Button!")
   }
+  // Add button
   function addClickHandler() {
     return console.log("Estimate Add button!")
   }
@@ -27,11 +30,6 @@ export default function Estimates() {
     estimatesData();
   },[])
 
-  estimateData.map((est) => {
-    return console.log(est);
-  })
-
-
 console.log(estimateData);
   return (
     <>
@@ -40,9 +38,12 @@ console.log(estimateData);
     header={"Estimate List"}
     cardBody={ estimateData.map((estimate) => {
       return(
-      <EstimatesBody key={estimate.id} header={estimate.clientname} body={estimate.estimatedesc} price={estimate.price}/>
-      )
-    })}
+        <EstimatesBody 
+          key={estimate.id} 
+          header={estimate.clientname} 
+          body={estimate.estimatedesc} 
+          price={estimate.price}/>
+      )})}
     addBtn = {() => addClickHandler}
     editBtn = {() => editClickHandler}
     deleteBtn = {() => deleteClickHandler}

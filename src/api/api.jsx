@@ -1,13 +1,17 @@
+import testPool from "pg";
+const Pool = testPool.Pool;
 
-// const GetData = async () => {
-//   try {
-//     const response = await fetch("http://localhost:5173");
-//     const jsonData = await response.json();
+const pool = new Pool({
+  user: "postgres",
+  password: "gres@!21",
+  port: 5432,
+  database: "floormate_db",
+});
 
-//     setData(jsonData);
-//   } catch (error) {
-//     console.error(error.message)
-//   }
-// }
+export function getTestData() {
+  return pool.query("SELECT * FROM addstuff");
+}
 
-// export default GetData;
+export function getEstimatesData() {
+  return pool.query("SELECT * FROM Estimates;");
+}

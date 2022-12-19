@@ -1,5 +1,5 @@
 import React from 'react'
-import ClientsCard from "../components/ClientsCard"
+import ClientsCard from "../components/clients/ClientsCard"
 
 export default function Clients() {
 
