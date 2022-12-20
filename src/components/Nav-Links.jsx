@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Login from "./LogIn/Login"
+
 
 // UI Imports
 import { 
@@ -17,6 +19,7 @@ import { BiLineChartDown } from "react-icons/bi"
 import { BiEdit } from "react-icons/bi"
 import { BiFace } from "react-icons/bi"
 import { BiStoreAlt } from "react-icons/bi"
+import { FaFileInvoiceDollar } from 'react-icons/fa'
 
 export default function Navlinks() {
   return (
@@ -39,6 +42,16 @@ export default function Navlinks() {
     <Box display={["null", "null", "flex"]} alignItems="center">
       <ListIcon as={BiEdit} color='black.900' fontSize={["2rem", null, "2rem"]} />
       <Hide below='md'>Estimates</Hide>
+    </Box>
+    </Link>
+  </ListItem>
+
+  {/* Invoices NavLink */}
+  <ListItem textAlign={[ 'center', null, 'left' ]}>
+    <Link to={`invoices`}>
+    <Box display={["null", "null", "flex"]} alignItems="center">
+      <ListIcon as={FaFileInvoiceDollar} color='black.900' fontSize={["2rem", null, "2rem"]} />
+      <Hide below='md'>Invoices</Hide>
     </Box>
     </Link>
   </ListItem>
@@ -66,9 +79,10 @@ export default function Navlinks() {
   </List>
   {/* Sign-in / Sign-out  */}
   <Box position="absolute" justifyContent="center" bottom="5px" margin="auto" bg='red.200'>
-    <Link to={`signout`}>
-        <Button size={['sm', 'sm', 'md', 'lg']} colorScheme='twitter'>Sign In</Button>
-    </Link>
+    {/* <Link to={`login`}> */}
+        {/* <Button size={['sm', 'sm', 'md', 'lg']} colorScheme='twitter'>Sign In</Button> */}
+      <Login />
+    {/* </Link> */}
   </Box>
   </Box>
    )

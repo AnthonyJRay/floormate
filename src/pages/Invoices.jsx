@@ -29,11 +29,12 @@ export default function Estimates() {
   useEffect(() => {
     estimatesData();
   },[])
+
   return (
     <>
     <DisplayCards 
-    btnText={"New Estimate"}
-    header={"Estimates"}
+    header={"Invoices"}
+    btnText={"New Invoice"}
     cardBody={ estimateData.map((estimate) => {
       return(
         <EstimatesBody 
