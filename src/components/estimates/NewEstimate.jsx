@@ -31,7 +31,8 @@ import {
   Tfoot,
   List,
   ListItem,
-  Heading
+  Heading,
+
 
 } from "@chakra-ui/react"
 
@@ -55,6 +56,9 @@ const handleNotesChange = (e) => {
   setFormClient(e.target)
 }
 
+const currentDate = new Date().toLocaleDateString();;
+console.log(currentDate);
+
 return (
   <Box>
     <Button onClick={onOpen} size={"sm"} colorScheme="green">
@@ -68,7 +72,6 @@ return (
       <ModalContent>
     <Flex justifyContent={"space-around"} alignItems={"center"} p={2}>
           <ModalHeader flexGrow={1}>New Estimate</ModalHeader>
-          <ModalHeader as={'cite'} flexGrow={1} fontSize={"xs"} textAlign={"end"}>Estimate: #00015</ModalHeader>
         </Flex>
 
 
@@ -76,37 +79,45 @@ return (
         <Box>
           <Box display={"flex"} justifyContent={"space-around"} margin={"1rem"}>
 
-              <List border={"1px"} width={"48%"}>
-                <Box m={1}>
-                <ListItem>
+              <List border={"1px"} width={"48%"} m={1}>
+                <ListItem m={1}>
                 <Heading fontSize={"xl"}>Bill To:</Heading>
                 </ListItem>
-                <ListItem>
-                  Client Name
+                <Box m={1}>
+                <ListItem display={"flex"} alignItems={"center"}>
+                  <Text fontWeight={"bold"} fontSize={".85rem"}>Client Name:</Text>
+                  <Input type={"text"} size={"xs"} width={"60%"} variant={"flushed"}/>
                 </ListItem>
-                <ListItem>
-                  Client Address
+                <ListItem display={"flex"} alignItems={"center"}>
+                <Text fontWeight={"bold"} fontSize={".85rem"}>Client Address:</Text>
+                <Input type={"text"} size={"xs"} width={"60%"} variant={"flushed"}/>
                 </ListItem>
-                <ListItem>
-                  Client Phone
+                <ListItem display={"flex"} alignItems={"center"}>
+                <Text fontWeight={"bold"} fontSize={".85rem"}>Client Phone:</Text>
+                <Input type={"text"} size={"xs"} width={"60%"} variant={"flushed"}/>
                 </ListItem>
-                <ListItem>
-                  Client Email
+                <ListItem display={"flex"} alignItems={"center"}>
+                <Text fontWeight={"bold"} fontSize={".85rem"}>Client Email:</Text>
+                <Input type={"text"} size={"xs"} width={"60%"} variant={"flushed"}/>
                 </ListItem>
                 </Box>
               </List>
 
             <List border={"1px"} width={"48%"}>
-              <Box m={1} display={"flex"} flexDir={"column"} justifyItems={"space-around"}>
-              <ListItem>
+              <Box display={"flex"} flexDir={"column"} justifyItems={"space-around"}>
+              <ListItem display={"flex"}>
                 <Heading size={"sm"}>
-                Estimate #
+                Estimate:
                 </Heading>
+                {/* Conditionally render Estimate # from database id auto incrementation */}
+                <Text>{`#00015`}</Text>
               </ListItem>
-              <ListItem>
+              <ListItem display={"flex"} alignItems={"center"} height={"100%"}>
                 <Heading size={"sm"}>
                 Estimate Date
                 </Heading>
+                {/*  Date and Header don't vertically align. */}
+                <Text>{currentDate}</Text>
               </ListItem>
               </Box>
             </List>
