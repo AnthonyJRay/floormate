@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 
 import DisplayCards from "../components/DisplayCards"
 import EstimatesBody from "../components/estimates/EstimatesBody"
+import NewEstimate from "../components/estimates/NewEstimate"
 
 export default function Estimates() {
 
@@ -29,10 +30,11 @@ export default function Estimates() {
   useEffect(() => {
     estimatesData();
   },[])
+  
   return (
     <>
     <DisplayCards 
-    btnText={"New Estimate"}
+    cardForm={<NewEstimate btnText={"New Estimate"} addBtn = {() => addClickHandler}/>}
     header={"Estimates"}
     cardBody={ estimateData.map((estimate) => {
       return(
@@ -42,7 +44,6 @@ export default function Estimates() {
           body={estimate.estimatedesc} 
           price={estimate.price}/>
       )})}
-    addBtn = {() => addClickHandler}
     editBtn = {() => editClickHandler}
     deleteBtn = {() => deleteClickHandler}
     />

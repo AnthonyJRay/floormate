@@ -12,7 +12,8 @@ import {
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalFooter
+  ModalFooter,
+  ModalHeader
 } from "@chakra-ui/react"
 
 export default function Login() {
@@ -30,28 +31,30 @@ export default function Login() {
 // const isError = input;
 
 const { isOpen, onOpen, onClose } = useDisclosure()
+const [isLogged, setIsLogged] = useState(false)
 
-  return (
-    <>
-    <Button onClick={onOpen}>Log In Modal</Button>
+return (
+  <>
+    <Button onClick={onOpen}>{!isLogged ? "Log In" : "Log Out"}</Button>
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-    <Box>
-      <FormControl isRequired>
-        <FormLabel>Email</FormLabel>
-          <Input type="email"/>
-        <FormLabel>Password</FormLabel>
-          <Input type="password" />
-        <Button type="submit">Submit</Button>
-      </FormControl>
-    </Box>
-    <ModalFooter>
-      <Button onClick={onClose}>Close</Button>
-      <Button>Other Action</Button>
-    </ModalFooter>
-    </ModalContent>
+        <ModalHeader>Login</ModalHeader>
+          
+          <Box width={"90%"} margin={"auto"} p={"1rem"}>
+            <FormControl isRequired>
+              <FormLabel m={"2"} p={"1"}>Email</FormLabel> 
+                <Input type="email"/>
+              <FormLabel m={"2"} p={"1"}>Password</FormLabel>
+                <Input type="password" />
+            </FormControl>
+          </Box>
+
+          <ModalFooter>
+            <Button onClick={onClose}>Close</Button>
+            <Button width={"30%"}>Login</Button>
+          </ModalFooter>
+      </ModalContent>
     </Modal>
-    </>
-  )
-}
+  </>
+)}

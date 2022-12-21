@@ -79,10 +79,7 @@ export default function Navlinks() {
   </List>
   {/* Sign-in / Sign-out  */}
   <Box position="absolute" justifyContent="center" bottom="5px" margin="auto" bg='red.200'>
-    {/* <Link to={`login`}> */}
-        {/* <Button size={['sm', 'sm', 'md', 'lg']} colorScheme='twitter'>Sign In</Button> */}
       <Login />
-    {/* </Link> */}
   </Box>
   </Box>
    )

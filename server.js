@@ -5,7 +5,7 @@ import cors from "cors";
 // const pool = require("./db");
 // import pool from "./db.js";
 
-import { getTestData, getEstimatesData } from "./db.js";
+import { getTestData, getEstimatesData } from "./src/api/api.js";
 
 const app = express();
 const port = 5000;
