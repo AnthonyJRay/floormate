@@ -19,7 +19,20 @@ import {
   Icon,
   Select,
   Flex,
-  Textarea
+  Textarea,
+  TableContainer, 
+  Table,
+  TableCaption,
+  Th,
+  Td,
+  Tr,
+  Thead,
+  Tbody,
+  Tfoot,
+  List,
+  ListItem,
+  Heading
+
 } from "@chakra-ui/react"
 
 export default function NewEstimate(props) {
@@ -29,9 +42,9 @@ const [formClient, setFormClient] = useState('');
 const [formServices, setFormServices] = useState([]);
 const [formNotes, setFormNotes] = useState('');
 
-const handleClientChange = (formClient) => {
-  // setFormClient(formClient)
-  console.log(formClient.target.value)
+const handleClientChange = (e) => {
+  setFormClient(e.target.value)
+  console.log(e.target.value)
 }
 
 const handleServicesChange = (formClient) => {
@@ -48,54 +61,102 @@ return (
       <Text p={1}>{props.btnText}</Text>
       <Icon as={BsPlusLg} />
     </Button>
+    
     <Modal isOpen={isOpen} onClose={onClose} size={"full"}>
 
-      <ModalContent>
-      {/* Inside the Modal formo */}
 
-        <Flex justifyContent={"space-around"} alignItems={"center"} p={2}>
+      <ModalContent>
+    <Flex justifyContent={"space-around"} alignItems={"center"} p={2}>
           <ModalHeader flexGrow={1}>New Estimate</ModalHeader>
-          <Text as={'cite'} fontSize={"xs"}>Estimate: #00015</Text>
+          <ModalHeader as={'cite'} flexGrow={1} fontSize={"xs"} textAlign={"end"}>Estimate: #00015</ModalHeader>
         </Flex>
 
-          <Box w={"90%"} m={"auto"} p={"1rem"}>
-            <FormControl isRequired>
-              <FormLabel m={"2"} p={"1"}>Client</FormLabel>
-              <Flex justify={"center"} align={"center"}>
-                <Select placeholder='Select a Client' maxW={"75%"} onChange={(formClient) => handleClientChange(formClient)}>
-                  <option value={formClient}>Client 1</option>
-                  <option value={formClient}>Client 2</option>
-                  <option value={formClient}>Client 3</option>
-                </Select>
-                <Button onClick={() => {console.log(formClient)}}>Add Client</Button>
-              </Flex>
-            </FormControl>
-          </Box>
 
-          <Box w={"90%"} m={"auto"} p={"1rem"}>
-            <FormControl isRequired>
-              <FormLabel m={"2"} p={"1"}>Services</FormLabel>
-              <Flex justify={"center"} align={"center"}>
-                <Select placeholder='Select a Client' maxW={"75%"}>
-                  <option value='option1'>Client 1</option>
-                  <option value='option2'>Client 2</option>
-                  <option value='option3'>Client 3</option>
-                </Select>
-                <Button>Add Service</Button>
-                </Flex>
-                </FormControl>
-          </Box>
 
-          <Box width={"90%"} margin={"auto"} p={"1rem"}>
-              <FormLabel m={"2"} p={"1"}>Notes</FormLabel> 
-                <Textarea/>
-          </Box>
+        <Box>
+          <Box display={"flex"} justifyContent={"space-around"} margin={"1rem"}>
 
-          <ModalFooter>
+              <List border={"1px"} width={"48%"}>
+                <Box m={1}>
+                <ListItem>
+                <Heading fontSize={"xl"}>Bill To:</Heading>
+                </ListItem>
+                <ListItem>
+                  Client Name
+                </ListItem>
+                <ListItem>
+                  Client Address
+                </ListItem>
+                <ListItem>
+                  Client Phone
+                </ListItem>
+                <ListItem>
+                  Client Email
+                </ListItem>
+                </Box>
+              </List>
+
+            <List border={"1px"} width={"48%"}>
+              <Box m={1} display={"flex"} flexDir={"column"} justifyItems={"space-around"}>
+              <ListItem>
+                <Heading size={"sm"}>
+                Estimate #
+                </Heading>
+              </ListItem>
+              <ListItem>
+                <Heading size={"sm"}>
+                Estimate Date
+                </Heading>
+              </ListItem>
+              </Box>
+            </List>
+          </Box>
+        <Box>
+
+    </Box>
+   </Box>
+
+      <TableContainer>
+  <Table variant='simple'>
+    <TableCaption>Placeholder for Table Caption</TableCaption>    
+    <Thead>
+      <Tr>
+        <Th>Item Description</Th>
+        <Th isNumeric>Qty</Th>
+        <Th isNumeric>Rate</Th>
+        <Th isNumeric>Total</Th>
+      </Tr>
+    </Thead>
+    <Tbody>
+      <Tr>
+        <Td>Install Carpet</Td>
+        <Td isNumeric>400</Td>
+        <Td isNumeric>9.00</Td>
+        <Td isNumeric></Td>
+      </Tr>
+    </Tbody>
+    <Tfoot>
+      <Tr>
+        <Th>Sub Total:</Th>
+      </Tr>
+      <Tr>
+        <Th>Tax:</Th>
+      </Tr>
+      <Tr>
+        <Th>
+          Total:
+        </Th>
+      </Tr>
+    </Tfoot>
+  </Table>
+</TableContainer>
+
+<ModalFooter>
             <Button onClick={onClose}>Close</Button>
-            <Button width={"30%"} onClick={props.addBtn()}>Login</Button>
+            <Button width={"30%"} onClick={props.addBtn() } bg={"green"}>Save</Button>
           </ModalFooter>
       </ModalContent>
     </Modal>
+    
   </Box>
 )}
