@@ -12,32 +12,35 @@ import {
   FormErrorMessage,
   useDisclosure,
   Modal,
-  ModalOverlay,
   ModalContent,
   ModalFooter,
   ModalHeader,
   Text,
   Icon,
   Select,
-  Flex
+  Flex,
+  Textarea
 } from "@chakra-ui/react"
 
 export default function NewEstimate(props) {
-
-  // const [data, setData] = useState([]);
-  // const [token, setToken] = useState();
-
-  // if (!token) {
-  //   return <Login setToken={setToken}/>
-  // }
-
-// const [input, setInput] = useState('');
-
-// const inputChangeHandler = (e) => setInput(e.target.value);
-// const isError = input;
-
 const { isOpen, onOpen, onClose } = useDisclosure()
-const [isLogged, setIsLogged] = useState(false)
+
+const [formClient, setFormClient] = useState('');
+const [formServices, setFormServices] = useState([]);
+const [formNotes, setFormNotes] = useState('');
+
+const handleClientChange = (formClient) => {
+  // setFormClient(formClient)
+  console.log(formClient.target.value)
+}
+
+const handleServicesChange = (formClient) => {
+  setFormClient(formClient.value)
+}
+
+const handleNotesChange = (e) => {
+  setFormClient(e.target)
+}
 
 return (
   <Box>
@@ -45,8 +48,7 @@ return (
       <Text p={1}>{props.btnText}</Text>
       <Icon as={BsPlusLg} />
     </Button>
-    <Modal isOpen={isOpen} onClose={onClose} >
-      <ModalOverlay bg={"blackAlpha.900"}/>
+    <Modal isOpen={isOpen} onClose={onClose} size={"full"}>
 
       <ModalContent>
       {/* Inside the Modal formo */}
@@ -54,29 +56,39 @@ return (
         <Flex justifyContent={"space-around"} alignItems={"center"} p={2}>
           <ModalHeader flexGrow={1}>New Estimate</ModalHeader>
           <Text as={'cite'} fontSize={"xs"}>Estimate: #00015</Text>
-          </Flex>
+        </Flex>
 
           <Box w={"90%"} m={"auto"} p={"1rem"}>
             <FormControl isRequired>
               <FormLabel m={"2"} p={"1"}>Client</FormLabel>
+              <Flex justify={"center"} align={"center"}>
+                <Select placeholder='Select a Client' maxW={"75%"} onChange={(formClient) => handleClientChange(formClient)}>
+                  <option value={formClient}>Client 1</option>
+                  <option value={formClient}>Client 2</option>
+                  <option value={formClient}>Client 3</option>
+                </Select>
+                <Button onClick={() => {console.log(formClient)}}>Add Client</Button>
+              </Flex>
+            </FormControl>
+          </Box>
+
+          <Box w={"90%"} m={"auto"} p={"1rem"}>
+            <FormControl isRequired>
+              <FormLabel m={"2"} p={"1"}>Services</FormLabel>
               <Flex justify={"center"} align={"center"}>
                 <Select placeholder='Select a Client' maxW={"75%"}>
                   <option value='option1'>Client 1</option>
                   <option value='option2'>Client 2</option>
                   <option value='option3'>Client 3</option>
                 </Select>
-                <Button>Add Client</Button>
-              </Flex>
-            </FormControl>
+                <Button>Add Service</Button>
+                </Flex>
+                </FormControl>
           </Box>
 
           <Box width={"90%"} margin={"auto"} p={"1rem"}>
-            <FormControl isRequired>
-              <FormLabel m={"2"} p={"1"}>Email</FormLabel> 
-                <Input type="email"/>
-              <FormLabel m={"2"} p={"1"}>Password</FormLabel>
-                <Input type="password" />
-            </FormControl>
+              <FormLabel m={"2"} p={"1"}>Notes</FormLabel> 
+                <Textarea/>
           </Box>
 
           <ModalFooter>
