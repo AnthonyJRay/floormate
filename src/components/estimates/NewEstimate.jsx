@@ -44,7 +44,7 @@ const initialEstimateForm = {
     lineItemsID: 1,
     lineItemsName: "Line Item #1",
     lineItemsDesc: "Line item description area.",
-    lineItemsQty: 3,
+    lineItemsQty: "",
     lineItemsRate: "9.00",
     lineItemsTotal: "",
   },
@@ -71,17 +71,25 @@ const [estimateFormData, setEstimateFormData] = useState(initialEstimateForm)
 const [lineItemData, setLineItemData] = useState(estimateFormData.lineItems)
 // console.log(lineItemData)
 
-const handleLineItems = () => {
-
+const handleLineItems = (e, id) => {
+  console.log(`Inside Handler ${lineItemData}`)
+  lineItemData.map(item => {
+    if(item.lineItemsID === id) {
+      console.log("ID MATCHED")
+      item.lineItemsQty = e.target.value,
+      setLineItemData([...lineItemData])
+    } else {
+      setLineItemData([...lineItemData])
+    }
+  })
+// if lineItemID === id
+// set target.value to matching ID, return array
+// otherwise, return array
+    setLineItemData(
+      [...lineItemData])
 }
-// const handleEstimateChange = (e) => {
-//         setEstimateFormData(estimateFormData.lineItems.map((item) => {
-//           [...estimateFormData,
-//           console.log(item)]
-//         }))
-//   console.log(estimateFormData.lineItems)
-// }
 
+console.log(`Outside Handler ${lineItemData}`)
 
 const currentDate = new Date().toLocaleDateString();
 
@@ -159,12 +167,13 @@ return (
             </Thead>
             <Tbody>
               {console.log(lineItemData)}
-              {estimateFormData.lineItems.map((item) => {
+              {lineItemData.map((item, id) => {
+                console.log(`ID??? ${id}`)
                return (
                 <Tr key={item.lineItemsID}>
                   <Td>{item.lineItemsName}</Td>
                   <Td>{item.lineItemsDesc}</Td>
-                  <Td textAlign={"end"}><Input value={item.lineItemsQty} onChange={(e) =>  {handleLineItems(e)}}/></Td>
+                  <Td textAlign={"end"}><Input value={item.lineItemsQty} onChange={(e, id) => console.log(id)}/></Td>
                   <Td textAlign={"end"}>{item.lineItemsRate}</Td>
                   <Td textAlign={"end"}>{(item.lineItemsQty * item.lineItemsRate)}</Td>
                   <Td p={0} textAlign={"center"}><Button size={"sm"}colorScheme={"red"}>X</Button></Td>
