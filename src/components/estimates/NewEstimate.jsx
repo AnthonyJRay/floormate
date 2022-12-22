@@ -38,31 +38,55 @@ import {
 
 } from "@chakra-ui/react"
 
-export default function NewEstimate(props) {
-const { isOpen, onOpen, onClose } = useDisclosure()
 
-const [estimateData, setEstimateData] = useState({
+const initialEstimateForm = {
   clientName: "",
   clientAddress: "",
   clientPhone: "",
   clientEmail: "",
   estimateDate: "",
-  lineItems: {
-    lineItemsName: "",
-    lineItemsDesc: "",
-    lineItemsQty: "",
-    lineItemsRate: "",
+  lineItems: [
+    {
+    lineItemsID: 1,
+    lineItemsName: "Line Item #1",
+    lineItemsDesc: "Line item description area.",
+    lineItemsQty: 1,
+    lineItemsRate: "9.00",
     lineItemsTotal: "",
   },
+  {
+    lineItemsID: 2,
+    lineItemsName: "Line Item #2",
+    lineItemsDesc: "Line item #2 description area.",
+    lineItemsQty: 2,
+    lineItemsRate: "20.00",
+    lineItemsTotal: "",
+  }
+],
   notes: "",
   estimateSubTotal: "",
   estimateTaxRate: "",
   estimateTotal: "",
-})
+}
 
-const handleClientChange = (e) => {
-  setFormClient(e.target.value)
-  console.log(e.target.value)
+
+export default function NewEstimate(props) {
+const { isOpen, onOpen, onClose } = useDisclosure()
+
+const [estimateData, setEstimateData] = useState(initialEstimateForm)
+
+const handleEstimateChange = (id, e) => {
+  setEstimateData(estimateData.lineItems.map((item => {
+    if (item.lineItemsID === id) {
+      return {
+        lineItemsQty: e.target.value,
+        ...item,
+      }
+    } else {
+      return item;
+    }
+  })))
+  // console.log(estimateData.lineItems[0].lineItemsQty)
 }
 
 const handleServicesChange = (formClient) => {
@@ -73,8 +97,7 @@ const handleNotesChange = (e) => {
   setFormClient(e.target)
 }
 
-const currentDate = new Date().toLocaleDateString();;
-console.log(currentDate);
+const currentDate = new Date().toLocaleDateString();
 
 return (
   <Box>
@@ -141,6 +164,7 @@ return (
             <TableCaption>Placeholder for Table Caption</TableCaption>    
             <Thead>
               <Tr>
+                <Th>Item Name</Th>
                 <Th>Item Description</Th>
                 <Th isNumeric>Qty</Th>
                 <Th isNumeric>Rate</Th>
@@ -148,17 +172,20 @@ return (
               </Tr>
             </Thead>
             <Tbody>
-              <Tr>
-                <Td>Install Carpet</Td>
-                <Td w={"10%"} isNumeric>
-                  <Input textAlign={"end"} size={"xs"} w={"75%"} value={estimateData.lineItems.lineItemsQty} onChange={(e) => setEstimateData({...estimateData, lineItemsQty: e.target.value})}/>
-                </Td>
-                <Td w={"10%"} isNumeric>
-                  <Input textAlign={"end"} size={"xs"} w={"75%"} value={estimateData.lineItems.lineItemsQty} onChange={() => {console.log("Rate Changed!")}}/>
-                </Td>
-                <Td w={"10%"} isNumeric></Td>
-                <Td p={0} textAlign={"center"}><Button p={0} colorScheme={"red"}>X</Button></Td>
-              </Tr>
+              
+              {estimateData.lineItems.map((item) => {
+               return (
+                <Tr key={item.lineItemsID}>
+                  <Td>{item.lineItemsName}</Td>
+                  <Td>{item.lineItemsDesc}</Td>
+                  <Td textAlign={"end"}><Input value={item.lineItemsQty} onChange={e => handleEstimateChange(item.lineItemsID, e)}/></Td>
+                  <Td textAlign={"end"}>{item.lineItemsRate}</Td>
+                  <Td textAlign={"end"}>{(item.lineItemsQty * item.lineItemsRate)}</Td>
+                  <Td p={0} textAlign={"center"}><Button size={"sm"}colorScheme={"red"}>X</Button></Td>
+                </Tr>
+               )
+              })}
+
               <Tr>
                 <Td><Button colorScheme={"green"}>New Line Item</Button></Td>
               </Tr>
