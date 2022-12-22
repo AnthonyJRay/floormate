@@ -46,7 +46,7 @@ const initialEstimateForm = {
     lineItemsDesc: "Line item description area.",
     lineItemsQty: "",
     lineItemsRate: "9.00",
-    lineItemsTotal: "",
+    lineItemsTotal: ""
   },
   {
     lineItemsID: 2,
@@ -54,7 +54,7 @@ const initialEstimateForm = {
     lineItemsDesc: "Line item #2 description area.",
     lineItemsQty: "",
     lineItemsRate: "20.00",
-    lineItemsTotal: "",
+    lineItemsTotal: ""
   }
 ],
   notes: "",
@@ -69,8 +69,8 @@ const { isOpen, onOpen, onClose } = useDisclosure()
 
 const [estimateFormData, setEstimateFormData] = useState(initialEstimateForm)
 const [lineItemData, setLineItemData] = useState(estimateFormData.lineItems)
-// console.log(lineItemData)
 
+// Qty Input
 const handleLineItems = (e, id) => {
   lineItemData.map(item => {
     if(item.lineItemsID === id+1) {
@@ -81,6 +81,43 @@ const handleLineItems = (e, id) => {
       setLineItemData([...lineItemData])
     }
   })
+}
+
+// Rate Input
+const handleRateInput = (e, id) => {
+  lineItemData.map(item => {
+    if(item.lineItemsID === id+1) {
+      console.log("ID MATCHED")
+      item.lineItemsRate = e.target.value,
+      setLineItemData([...lineItemData])
+    } else {
+      setLineItemData([...lineItemData])
+    }
+  })
+}
+
+// Totals Display
+const handleEstimateTotals = () => {
+    lineItemData.map(item => {
+      item.lineItemsTotal = item.lineItemsQty * item.lineItemsRate
+      setLineItemData(
+        [...lineItemData]
+      )
+    }
+  )
+  console.log(`Other totals: ${handleEstimateTotals}`)
+}
+
+console.log(`Totals: ${lineItemData[0].lineItemsTotal}`)
+console.log(lineItemData)
+
+// Tax Rate Display
+const handleTaxRate = () => {
+
+}
+
+const handleAddLineItems = () => {
+
 }
 
 console.log(`Parent State: ${estimateFormData}`)
@@ -166,9 +203,9 @@ return (
                 <Tr key={item.lineItemsID}>
                   <Td>{item.lineItemsName}</Td>
                   <Td>{item.lineItemsDesc}</Td>
-                  <Td textAlign={"end"}><Input value={item.lineItemsQty} onChange={(e) => handleLineItems(e, id)}/></Td>
-                  <Td textAlign={"end"}>{item.lineItemsRate}</Td>
-                  <Td textAlign={"end"}>{(item.lineItemsQty * item.lineItemsRate)}</Td>
+                  <Td textAlign={"end"}><Input p={1} w={"3rem"} textAlign={"end"} value={item.lineItemsQty} onChange={(e) => handleLineItems(e, id)}/></Td>
+                  <Td textAlign={"end"}><Input p={1} w={"3rem"} textAlign={"end"} value={item.lineItemsRate} onChange={(e) =>  handleRateInput(e, id)}/></Td>
+                  <Td textAlign={"end"}>{item.lineItemsTotal}</Td>
                   <Td p={0} textAlign={"center"}><Button size={"sm"}colorScheme={"red"}>X</Button></Td>
                 </Tr>
                )
