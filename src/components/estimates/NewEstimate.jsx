@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+import "./tableBody.css"
+
 import { BsPlusLg } from "react-icons/bs"
 
 import {
@@ -39,9 +41,10 @@ import {
 export default function NewEstimate(props) {
 const { isOpen, onOpen, onClose } = useDisclosure()
 
-const [formClient, setFormClient] = useState('');
-const [formServices, setFormServices] = useState([]);
-const [formNotes, setFormNotes] = useState('');
+const [clientName, setClientName] = useState({client: {firstName: "", lastName: ""}})
+const [clientAddress, setClientAddress] = useState('');
+const [clientPhone, setClientPhone] = useState();
+const [clientEmail, setClientEmail] = useState("");
 
 const handleClientChange = (e) => {
   setFormClient(e.target.value)
@@ -67,107 +70,103 @@ return (
     </Button>
     
     <Modal isOpen={isOpen} onClose={onClose} size={"full"}>
-
-
       <ModalContent>
-    <Flex justifyContent={"space-around"} alignItems={"center"} p={2}>
+        <Flex justifyContent={"space-around"} alignItems={"center"} p={2}>
           <ModalHeader flexGrow={1}>New Estimate</ModalHeader>
         </Flex>
 
-
-
         <Box>
           <Box display={"flex"} justifyContent={"space-around"} margin={"1rem"}>
-
-              <List border={"1px"} width={"48%"} m={1}>
-                <ListItem m={1}>
-                <Heading fontSize={"xl"}>Bill To:</Heading>
-                </ListItem>
-                <Box m={1}>
+            <List border={"1px"} width={"48%"} m={1}>
+              <ListItem m={1}>
+              <Heading fontSize={"xl"}>Bill To:</Heading>
+              </ListItem>
+              <Box m={1}>
                 <ListItem display={"flex"} alignItems={"center"}>
                   <Text fontWeight={"bold"} fontSize={".85rem"}>Client Name:</Text>
                   <Input type={"text"} size={"xs"} width={"60%"} variant={"flushed"}/>
                 </ListItem>
                 <ListItem display={"flex"} alignItems={"center"}>
-                <Text fontWeight={"bold"} fontSize={".85rem"}>Client Address:</Text>
-                <Input type={"text"} size={"xs"} width={"60%"} variant={"flushed"}/>
+                  <Text fontWeight={"bold"} fontSize={".85rem"}>Client Address:</Text>
+                  <Input type={"text"} size={"xs"} width={"60%"} variant={"flushed"}/>
                 </ListItem>
                 <ListItem display={"flex"} alignItems={"center"}>
-                <Text fontWeight={"bold"} fontSize={".85rem"}>Client Phone:</Text>
-                <Input type={"text"} size={"xs"} width={"60%"} variant={"flushed"}/>
+                  <Text fontWeight={"bold"} fontSize={".85rem"}>Client Phone:</Text>
+                  <Input type={"text"} size={"xs"} width={"60%"} variant={"flushed"}/>
                 </ListItem>
                 <ListItem display={"flex"} alignItems={"center"}>
-                <Text fontWeight={"bold"} fontSize={".85rem"}>Client Email:</Text>
-                <Input type={"text"} size={"xs"} width={"60%"} variant={"flushed"}/>
+                  <Text fontWeight={"bold"} fontSize={".85rem"}>Client Email:</Text>
+                  <Input type={"text"} size={"xs"} width={"60%"} variant={"flushed"}/>
                 </ListItem>
-                </Box>
-              </List>
+              </Box>
+            </List>
 
-            <List border={"1px"} width={"48%"}>
+            <List display={"flex"}border={"1px"} width={"48%"} pl={"1rem"} m={"1"}>
               <Box display={"flex"} flexDir={"column"} justifyItems={"space-around"}>
-              <ListItem display={"flex"}>
-                <Heading size={"sm"}>
-                Estimate:
-                </Heading>
-                {/* Conditionally render Estimate # from database id auto incrementation */}
-                <Text>{`#00015`}</Text>
-              </ListItem>
-              <ListItem display={"flex"} alignItems={"center"} height={"100%"}>
-                <Heading size={"sm"}>
-                Estimate Date
-                </Heading>
-                {/*  Date and Header don't vertically align. */}
-                <Text>{currentDate}</Text>
-              </ListItem>
+                <ListItem display={"flex"} height={"100%"} alignItems={"center"}>
+                  <Heading size={"sm"}>
+                  Estimate:
+                  </Heading>
+                  {/* Conditionally render Estimate # from database id auto incrementation */}
+                  <Text>{`#00015`}</Text>
+                </ListItem>
+                <ListItem display={"flex"} alignItems={"center"} height={"100%"}>
+                  <Heading size={"sm"}>
+                  Estimate Date: 
+                  </Heading>
+                  {/*  Date and Header don't vertically align. */}
+                  <Text>{currentDate}</Text>
+                </ListItem>
               </Box>
             </List>
           </Box>
-        <Box>
+        </Box>
 
-    </Box>
-   </Box>
+        <TableContainer>
+          <Table variant='simple' mt={"2rem"} mb={"2rem"}>
+            <TableCaption>Placeholder for Table Caption</TableCaption>    
+            <Thead>
+              <Tr>
+                <Th>Item Description</Th>
+                <Th isNumeric>Qty</Th>
+                <Th isNumeric>Rate</Th>
+                <Th isNumeric>Total</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              <Tr>
+                <Td>Install Carpet</Td>
+                <Td isNumeric>400</Td>
+                <Td isNumeric>9.00</Td>
+                <Td isNumeric></Td>
+                <Td p={1} textAlign={"end"}><Button p={5} colorScheme={"yellow"}>Edit</Button></Td>
+                <Td p={0}><Button p={0} colorScheme={"red"}>X</Button></Td>
+              </Tr>
+              <Tr>
+                <Td><Button colorScheme={"green"}>New Line Item</Button></Td>
+              </Tr>
+            </Tbody>
+          </Table>
+        </TableContainer>
 
-      <TableContainer>
-  <Table variant='simple'>
-    <TableCaption>Placeholder for Table Caption</TableCaption>    
-    <Thead>
-      <Tr>
-        <Th>Item Description</Th>
-        <Th isNumeric>Qty</Th>
-        <Th isNumeric>Rate</Th>
-        <Th isNumeric>Total</Th>
-      </Tr>
-    </Thead>
-    <Tbody>
-      <Tr>
-        <Td>Install Carpet</Td>
-        <Td isNumeric>400</Td>
-        <Td isNumeric>9.00</Td>
-        <Td isNumeric></Td>
-      </Tr>
-    </Tbody>
-    <Tfoot>
-      <Tr>
-        <Th>Sub Total:</Th>
-      </Tr>
-      <Tr>
-        <Th>Tax:</Th>
-      </Tr>
-      <Tr>
-        <Th>
-          Total:
-        </Th>
-      </Tr>
-    </Tfoot>
-  </Table>
-</TableContainer>
+        <Box display={"flex"} justifyContent={"flex-end"} m={"2rem"}mr={10}>
+          <List fontWeight={"bold"}>
+            <ListItem p={1}>SUBTOTAL: </ListItem>
+            <ListItem p={1}>TAX: </ListItem>
+            <ListItem p={1}>TOTAL: </ListItem>
+          </List>
+          <List pl={5}>
+            <ListItem p={1}>$100.00</ListItem>
+            <ListItem p={1}>10%</ListItem>
+            <ListItem p={1}>$110.00</ListItem>
+          </List>
+        </Box>
 
-<ModalFooter>
-            <Button onClick={onClose}>Close</Button>
-            <Button width={"30%"} onClick={props.addBtn() } bg={"green"}>Save</Button>
-          </ModalFooter>
+        <ModalFooter>
+          <Button mr={1} colorScheme={"linkedin"} onClick={onClose}>Close</Button>
+          <Button width={"25%"} onClick={props.addBtn() } bg={"green"} color={"whiteAlpha.900"}>Save</Button>
+        </ModalFooter>
       </ModalContent>
     </Modal>
-    
   </Box>
 )}
