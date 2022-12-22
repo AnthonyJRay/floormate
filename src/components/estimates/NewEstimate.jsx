@@ -41,10 +41,24 @@ import {
 export default function NewEstimate(props) {
 const { isOpen, onOpen, onClose } = useDisclosure()
 
-const [clientName, setClientName] = useState({client: {firstName: "", lastName: ""}})
-const [clientAddress, setClientAddress] = useState('');
-const [clientPhone, setClientPhone] = useState();
-const [clientEmail, setClientEmail] = useState("");
+const [estimateData, setEstimateData] = useState({
+  clientName: "",
+  clientAddress: "",
+  clientPhone: "",
+  clientEmail: "",
+  estimateDate: "",
+  lineItems: {
+    lineItemsName: "",
+    lineItemsDesc: "",
+    lineItemsQty: "",
+    lineItemsRate: "",
+    lineItemsTotal: "",
+  },
+  notes: "",
+  estimateSubTotal: "",
+  estimateTaxRate: "",
+  estimateTotal: "",
+})
 
 const handleClientChange = (e) => {
   setFormClient(e.target.value)
@@ -136,11 +150,14 @@ return (
             <Tbody>
               <Tr>
                 <Td>Install Carpet</Td>
-                <Td isNumeric>400</Td>
-                <Td isNumeric>9.00</Td>
-                <Td isNumeric></Td>
-                <Td p={1} textAlign={"end"}><Button p={5} colorScheme={"yellow"}>Edit</Button></Td>
-                <Td p={0}><Button p={0} colorScheme={"red"}>X</Button></Td>
+                <Td w={"10%"} isNumeric>
+                  <Input textAlign={"end"} size={"xs"} w={"75%"} value={estimateData.lineItems.lineItemsQty} onChange={(e) => setEstimateData({...estimateData, lineItemsQty: e.target.value})}/>
+                </Td>
+                <Td w={"10%"} isNumeric>
+                  <Input textAlign={"end"} size={"xs"} w={"75%"} value={estimateData.lineItems.lineItemsQty} onChange={() => {console.log("Rate Changed!")}}/>
+                </Td>
+                <Td w={"10%"} isNumeric></Td>
+                <Td p={0} textAlign={"center"}><Button p={0} colorScheme={"red"}>X</Button></Td>
               </Tr>
               <Tr>
                 <Td><Button colorScheme={"green"}>New Line Item</Button></Td>
@@ -157,7 +174,7 @@ return (
           </List>
           <List pl={5}>
             <ListItem p={1}>$100.00</ListItem>
-            <ListItem p={1}>10%</ListItem>
+            <ListItem p={1}><Input w={"3rem"} size={"xs"}></Input> %</ListItem>
             <ListItem p={1}>$110.00</ListItem>
           </List>
         </Box>
