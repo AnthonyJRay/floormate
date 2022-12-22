@@ -44,23 +44,23 @@ const initialEstimateForm = {
     lineItemsID: 1,
     lineItemsName: "Line Item #1",
     lineItemsDesc: "Line item description area.",
-    lineItemsQty: "",
-    lineItemsRate: "9.00",
-    lineItemsTotal: ""
+    lineItemsQty: 0,
+    lineItemsRate: 0,
+    lineItemsTotal: 0
   },
   {
     lineItemsID: 2,
     lineItemsName: "Line Item #2",
     lineItemsDesc: "Line item #2 description area.",
-    lineItemsQty: "",
-    lineItemsRate: "20.00",
-    lineItemsTotal: ""
+    lineItemsQty: 0,
+    lineItemsRate: 0,
+    lineItemsTotal: 0
   }
 ],
   notes: "",
-  estimateSubTotal: "",
+  estimateSubTotal: 0,
   estimateTaxRate: "",
-  estimateTotal: "",
+  estimateTotal: 0,
 }
 
 
@@ -74,7 +74,6 @@ const [lineItemData, setLineItemData] = useState(estimateFormData.lineItems)
 const handleLineItems = (e, id) => {
   lineItemData.map(item => {
     if(item.lineItemsID === id+1) {
-      console.log("ID MATCHED")
       item.lineItemsQty = e.target.value,
       setLineItemData([...lineItemData])
     } else {
@@ -87,7 +86,6 @@ const handleLineItems = (e, id) => {
 const handleRateInput = (e, id) => {
   lineItemData.map(item => {
     if(item.lineItemsID === id+1) {
-      console.log("ID MATCHED")
       item.lineItemsRate = e.target.value,
       setLineItemData([...lineItemData])
     } else {
@@ -98,18 +96,21 @@ const handleRateInput = (e, id) => {
 
 // Totals Display
 const handleEstimateTotals = () => {
-    lineItemData.map(item => {
-      item.lineItemsTotal = item.lineItemsQty * item.lineItemsRate
-      setLineItemData(
-        [...lineItemData]
-      )
-    }
-  )
-  console.log(`Other totals: ${handleEstimateTotals}`)
+  let totals = 0;
+    lineItemData.map((item) => {
+      item.lineItemsTotal = parseFloat(item.lineItemsQty) * parseFloat(item.lineItemsRate)
+      totals += item.lineItemsTotal
+    },
+    console.log(estimateFormData.estimateTotal)
+    )
+    setEstimateFormData(estimateFormData.estimateSubTotal += totals)
+    console.log(`Parent State Totals: ${estimateFormData.estimateTotal}`)
+    // setEstimateFormData(() => estimateFormData.estimateTotal += totals)
 }
 
-console.log(`Totals: ${lineItemData[0].lineItemsTotal}`)
-console.log(lineItemData)
+// console.log(`Totals: ${(handleEstimateTotals())}`)
+const newTotals = handleEstimateTotals();
+console.log(`NEW TOTALS ${newTotals}`)
 
 // Tax Rate Display
 const handleTaxRate = () => {
@@ -119,8 +120,6 @@ const handleTaxRate = () => {
 const handleAddLineItems = () => {
 
 }
-
-console.log(`Parent State: ${estimateFormData}`)
 
 const currentDate = new Date().toLocaleDateString();
 
