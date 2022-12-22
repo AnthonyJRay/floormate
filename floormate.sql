@@ -1,5 +1,6 @@
 create table Users {
-
+  Email VARCHAR(100),
+  Password
 }
 
 create table Clients {

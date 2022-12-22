@@ -1,4 +1,4 @@
-import { Box, Heading, Text, Button, Flex, GridItem, Highlight } from "@chakra-ui/react";
+import { Heading, Text, Button, Flex, GridItem } from "@chakra-ui/react";
 
 export default function EstimatesBody(props) {
   return (

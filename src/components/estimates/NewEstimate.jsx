@@ -5,13 +5,9 @@ import "./tableBody.css"
 import { BsPlusLg } from "react-icons/bs"
 
 import {
-  FormControl,
-  FormLabel,
   Input,
-  FormHelperText,
   Box,
   Button,
-  FormErrorMessage,
   useDisclosure,
   Modal,
   ModalContent,
@@ -19,9 +15,7 @@ import {
   ModalHeader,
   Text,
   Icon,
-  Select,
   Flex,
-  Textarea,
   TableContainer, 
   Table,
   TableCaption,
@@ -50,7 +44,7 @@ const initialEstimateForm = {
     lineItemsID: 1,
     lineItemsName: "Line Item #1",
     lineItemsDesc: "Line item description area.",
-    lineItemsQty: 1,
+    lineItemsQty: 3,
     lineItemsRate: "9.00",
     lineItemsTotal: "",
   },
@@ -73,29 +67,21 @@ const initialEstimateForm = {
 export default function NewEstimate(props) {
 const { isOpen, onOpen, onClose } = useDisclosure()
 
-const [estimateData, setEstimateData] = useState(initialEstimateForm)
+const [estimateFormData, setEstimateFormData] = useState(initialEstimateForm)
+const [lineItemData, setLineItemData] = useState(estimateFormData.lineItems)
+// console.log(lineItemData)
 
-const handleEstimateChange = (id, e) => {
-  setEstimateData(estimateData.lineItems.map((item => {
-    if (item.lineItemsID === id) {
-      return {
-        lineItemsQty: e.target.value,
-        ...item,
-      }
-    } else {
-      return item;
-    }
-  })))
-  // console.log(estimateData.lineItems[0].lineItemsQty)
-}
+const handleLineItems = () => {
 
-const handleServicesChange = (formClient) => {
-  setFormClient(formClient.value)
 }
+// const handleEstimateChange = (e) => {
+//         setEstimateFormData(estimateFormData.lineItems.map((item) => {
+//           [...estimateFormData,
+//           console.log(item)]
+//         }))
+//   console.log(estimateFormData.lineItems)
+// }
 
-const handleNotesChange = (e) => {
-  setFormClient(e.target)
-}
 
 const currentDate = new Date().toLocaleDateString();
 
@@ -116,7 +102,7 @@ return (
           <Box display={"flex"} justifyContent={"space-around"} margin={"1rem"}>
             <List border={"1px"} width={"48%"} m={1}>
               <ListItem m={1}>
-              <Heading fontSize={"xl"}>Bill To:</Heading>
+                <Heading fontSize={"xl"}>Bill To:</Heading>
               </ListItem>
               <Box m={1}>
                 <ListItem display={"flex"} alignItems={"center"}>
@@ -172,13 +158,13 @@ return (
               </Tr>
             </Thead>
             <Tbody>
-              
-              {estimateData.lineItems.map((item) => {
+              {console.log(lineItemData)}
+              {estimateFormData.lineItems.map((item) => {
                return (
                 <Tr key={item.lineItemsID}>
                   <Td>{item.lineItemsName}</Td>
                   <Td>{item.lineItemsDesc}</Td>
-                  <Td textAlign={"end"}><Input value={item.lineItemsQty} onChange={e => handleEstimateChange(item.lineItemsID, e)}/></Td>
+                  <Td textAlign={"end"}><Input value={item.lineItemsQty} onChange={(e) =>  {handleLineItems(e)}}/></Td>
                   <Td textAlign={"end"}>{item.lineItemsRate}</Td>
                   <Td textAlign={"end"}>{(item.lineItemsQty * item.lineItemsRate)}</Td>
                   <Td p={0} textAlign={"center"}><Button size={"sm"}colorScheme={"red"}>X</Button></Td>
