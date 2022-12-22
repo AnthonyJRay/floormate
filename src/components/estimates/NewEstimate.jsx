@@ -52,7 +52,7 @@ const initialEstimateForm = {
     lineItemsID: 2,
     lineItemsName: "Line Item #2",
     lineItemsDesc: "Line item #2 description area.",
-    lineItemsQty: 2,
+    lineItemsQty: "",
     lineItemsRate: "20.00",
     lineItemsTotal: "",
   }
@@ -72,9 +72,8 @@ const [lineItemData, setLineItemData] = useState(estimateFormData.lineItems)
 // console.log(lineItemData)
 
 const handleLineItems = (e, id) => {
-  console.log(`Inside Handler ${lineItemData}`)
   lineItemData.map(item => {
-    if(item.lineItemsID === id) {
+    if(item.lineItemsID === id+1) {
       console.log("ID MATCHED")
       item.lineItemsQty = e.target.value,
       setLineItemData([...lineItemData])
@@ -82,14 +81,9 @@ const handleLineItems = (e, id) => {
       setLineItemData([...lineItemData])
     }
   })
-// if lineItemID === id
-// set target.value to matching ID, return array
-// otherwise, return array
-    setLineItemData(
-      [...lineItemData])
 }
 
-console.log(`Outside Handler ${lineItemData}`)
+console.log(`Parent State: ${estimateFormData}`)
 
 const currentDate = new Date().toLocaleDateString();
 
@@ -168,12 +162,11 @@ return (
             <Tbody>
               {console.log(lineItemData)}
               {lineItemData.map((item, id) => {
-                console.log(`ID??? ${id}`)
                return (
                 <Tr key={item.lineItemsID}>
                   <Td>{item.lineItemsName}</Td>
                   <Td>{item.lineItemsDesc}</Td>
-                  <Td textAlign={"end"}><Input value={item.lineItemsQty} onChange={(e, id) => console.log(id)}/></Td>
+                  <Td textAlign={"end"}><Input value={item.lineItemsQty} onChange={(e) => handleLineItems(e, id)}/></Td>
                   <Td textAlign={"end"}>{item.lineItemsRate}</Td>
                   <Td textAlign={"end"}>{(item.lineItemsQty * item.lineItemsRate)}</Td>
                   <Td p={0} textAlign={"center"}><Button size={"sm"}colorScheme={"red"}>X</Button></Td>
