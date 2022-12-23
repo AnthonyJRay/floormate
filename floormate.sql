@@ -3,16 +3,25 @@ create table Users {
   Password
 }
 
-create table Clients {
-
-}
+CREATE TABLE Clients (
+  ID INT PRIMARY KEY  NOT NULL,
+  ClientFirstName CHAR(20),
+  ClientLastName CHAR(20),
+  ClientAddress CHAR(100),
+  ClientPhone INT NOT NULL
+  ClientEmail char(100)
+  Estimates
+  Invoices
+  Invoiced BOOLEAN
+)
 
 CREATE TABLE Estimates (
   ID INT PRIMARY KEY  NOT NULL,
-  ClientName CHAR(20),
-  EstimateDesc CHAR(100),
+  InvoiceNO INT ,
+  EstimateDesc VARCHAR,
   Price INT NOT NULL
-  Invoiced BOOLEAN
+  Paid BOOLEAN NOT NULL
+
 )
 
 INSERT INTO Estimates VALUES (3, 'Anthony', 'Description #3 coming from the third estimate.', 299);
@@ -20,19 +29,8 @@ create table Invoices {
 
 }
 
-create table Business {
-  
-}
 
 
 
 
 
-CREATE TABLE Invoice (
-  ID INT PRIMARY KEY  NOT NULL,
-  InvoiceNO INT,
-  EstimateDesc VARCHAR,
-  Price INT NOT NULL
-  Paid BOOLEAN NOT NULL
-
-)

@@ -34,10 +34,11 @@ import {
 
 
 const initialEstimateForm = {
-  clientName: "",
-  clientAddress: "",
-  clientPhone: "",
-  clientEmail: "",
+  clientFirstName: "Test First name",
+  clientLastName: "Test Last name",
+  clientAddress: "123 N Example St.",
+  clientPhone: "(555) 555-5555",
+  clientEmail: "textClient@example.com",
   estimateDate: "",
   notes: "",
   estimateSubTotal: 0,
@@ -54,8 +55,8 @@ const initialEstimateForm = {
     },
     {
       lineItemsID: 2,
-      lineItemsName: "Line Item #2",
-      lineItemsDesc: "Line item #2 description area.",
+      lineItemsName: "",
+      lineItemsDesc: "",
       lineItemsQty: 0,
       lineItemsRate: 0,
       lineItemsTotal: 0
@@ -68,6 +69,11 @@ export default function NewEstimate(props) {
 const { isOpen, onOpen, onClose } = useDisclosure()
 
 const [estimateFormData, setEstimateFormData] = useState(initialEstimateForm)
+
+// Get Client information
+const handleClientInfo = () => {
+
+}
 
 // Qty Input
 const handleQtyInput = (e, id) => {
@@ -180,10 +186,6 @@ const handleDeleteItem = () => {
   // return new list.
 }
 
-// Tax Rate Display
-const handleTaxRate = () => {
-
-}
 
 const currentDate = new Date().toLocaleDateString();
 
@@ -209,19 +211,19 @@ return (
               <Box m={1}>
                 <ListItem display={"flex"} alignItems={"center"}>
                   <Text fontWeight={"bold"} fontSize={".85rem"}>Client Name:</Text>
-                  <Input type={"text"} size={"xs"} width={"60%"} variant={"flushed"}/>
+                  <Input type={"text"} size={"xs"} width={"60%"} variant={"flushed"} defaultValue={estimateFormData.clientFirstName}/>
                 </ListItem>
                 <ListItem display={"flex"} alignItems={"center"}>
                   <Text fontWeight={"bold"} fontSize={".85rem"}>Client Address:</Text>
-                  <Input type={"text"} size={"xs"} width={"60%"} variant={"flushed"}/>
+                  <Input type={"text"} size={"xs"} width={"60%"} variant={"flushed"} defaultValue={estimateFormData.clientAddress}/>
                 </ListItem>
                 <ListItem display={"flex"} alignItems={"center"}>
                   <Text fontWeight={"bold"} fontSize={".85rem"}>Client Phone:</Text>
-                  <Input type={"text"} size={"xs"} width={"60%"} variant={"flushed"}/>
+                  <Input type={"text"} size={"xs"} width={"60%"} variant={"flushed"} defaultValue={estimateFormData.clientPhone}/>
                 </ListItem>
                 <ListItem display={"flex"} alignItems={"center"}>
                   <Text fontWeight={"bold"} fontSize={".85rem"}>Client Email:</Text>
-                  <Input type={"text"} size={"xs"} width={"60%"} variant={"flushed"}/>
+                  <Input type={"text"} size={"xs"} width={"60%"} variant={"flushed"} defaultValue={estimateFormData.clientEmail}/>
                 </ListItem>
               </Box>
             </List>
@@ -257,14 +259,14 @@ return (
                 <Th isNumeric>Qty</Th>
                 <Th isNumeric>Rate</Th>
                 <Th isNumeric>Total</Th>
-              </Tr>
+              </Tr>1
             </Thead>
             <Tbody>
               {estimateFormData.lineItems.map((item, id) => {
                return (
                 <Tr key={item.lineItemsID}>
-                  <Td>{item.lineItemsName}</Td>
-                  <Td>{item.lineItemsDesc}</Td>
+                  <Td><Input p={1} value={item.lineItemsName}/></Td>
+                  <Td><Input p={1} value={item.lineItemsDesc}/></Td>
                   <Td textAlign={"end"}><Input p={1} w={"3rem"} textAlign={"end"} value={item.lineItemsQty} onChange={(e) => handleQtyInput(e, id)}/></Td>
                   <Td textAlign={"end"}><Input p={1} w={"3rem"} textAlign={"end"} value={item.lineItemsRate} onChange={(e) =>  handleRateInput(e, id)}/></Td>
                   <Td textAlign={"end"}>{item.lineItemsTotal}</Td>
