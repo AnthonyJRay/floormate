@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import "./tableBody.css"
 
@@ -39,28 +39,28 @@ const initialEstimateForm = {
   clientPhone: "",
   clientEmail: "",
   estimateDate: "",
-  lineItems: [
-    {
-    lineItemsID: 1,
-    lineItemsName: "Line Item #1",
-    lineItemsDesc: "Line item description area.",
-    lineItemsQty: 0,
-    lineItemsRate: 0,
-    lineItemsTotal: 0
-  },
-  {
-    lineItemsID: 2,
-    lineItemsName: "Line Item #2",
-    lineItemsDesc: "Line item #2 description area.",
-    lineItemsQty: 0,
-    lineItemsRate: 0,
-    lineItemsTotal: 0
-  }
-],
   notes: "",
   estimateSubTotal: 0,
   estimateTaxRate: "",
   estimateTotal: 0,
+  lineItems: [
+      {
+      lineItemsID: 1,
+      lineItemsName: "Line Item #1",
+      lineItemsDesc: "Line item description area.",
+      lineItemsQty: 0,
+      lineItemsRate: 0,
+      lineItemsTotal: 0
+    },
+    {
+      lineItemsID: 2,
+      lineItemsName: "Line Item #2",
+      lineItemsDesc: "Line item #2 description area.",
+      lineItemsQty: 0,
+      lineItemsRate: 0,
+      lineItemsTotal: 0
+    }
+  ]
 }
 
 
@@ -74,11 +74,11 @@ const [lineItemData, setLineItemData] = useState(estimateFormData.lineItems)
 const handleLineItems = (e, id) => {
   lineItemData.map(item => {
     if(item.lineItemsID === id+1) {
-      item.lineItemsQty = e.target.value,
-      setLineItemData([...lineItemData])
+        item.lineItemsQty = e.target.value,
+        setLineItemData([...lineItemData])
     } else {
-      setLineItemData([...lineItemData])
-    }
+        setLineItemData([...lineItemData])
+      }
   })
 }
 
@@ -91,26 +91,26 @@ const handleRateInput = (e, id) => {
     } else {
       setLineItemData([...lineItemData])
     }
+    item.lineItemsTotal = parseFloat(item.lineItemsQty) * parseFloat(item.lineItemsRate)
+    
   })
 }
 
 // Totals Display
-const handleEstimateTotals = () => {
-  let totals = 0;
-    lineItemData.map((item) => {
-      item.lineItemsTotal = parseFloat(item.lineItemsQty) * parseFloat(item.lineItemsRate)
-      totals += item.lineItemsTotal
-    },
-    console.log(estimateFormData.estimateTotal)
-    )
-    setEstimateFormData(estimateFormData.estimateSubTotal += totals)
-    console.log(`Parent State Totals: ${estimateFormData.estimateTotal}`)
-    // setEstimateFormData(() => estimateFormData.estimateTotal += totals)
-}
+// const handleEstimateTotals = () => {
+//   let totals = 0;
+//     lineItemData.map((item) => {
+//       console.log(`INSIDE MAP: Line Items Qty - ${item.lineItemsQty}`)
+//       item.lineItemsTotal = parseFloat(item.lineItemsQty) * parseFloat(item.lineItemsRate)
+//       totals = totals + item.lineItemsTotal
+//     })
+//     return totals;
+//   }
+//   const newTotals = handleEstimateTotals();
+// console.log(`NEW TOTALS ${newTotals}`)
 
-// console.log(`Totals: ${(handleEstimateTotals())}`)
-const newTotals = handleEstimateTotals();
-console.log(`NEW TOTALS ${newTotals}`)
+
+// setEstimateFormData(prev => ({...prev, estimateSubTotal: handleEstimateTotals}))
 
 // Tax Rate Display
 const handleTaxRate = () => {
