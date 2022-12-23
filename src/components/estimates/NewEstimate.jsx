@@ -71,30 +71,49 @@ const [estimateFormData, setEstimateFormData] = useState(initialEstimateForm)
 const [lineItemData, setLineItemData] = useState(estimateFormData.lineItems)
 
 // Qty Input
-const handleLineItems = (e, id) => {
-  lineItemData.map(item => {
+const handleQtyInput = (e, id) => {
+  estimateFormData.lineItems.map(item => {
     if(item.lineItemsID === id+1) {
         item.lineItemsQty = e.target.value,
-        setLineItemData([...lineItemData])
-    } else {
-        setLineItemData([...lineItemData])
-      }
+        setEstimateFormData(prevState => ({
+          lineItems: [...prevState.lineItems]
+        }))
+    }
   })
 }
 
 // Rate Input
 const handleRateInput = (e, id) => {
-  lineItemData.map(item => {
+  estimateFormData.lineItems.map( item => {
     if(item.lineItemsID === id+1) {
-      item.lineItemsRate = e.target.value,
-      setLineItemData([...lineItemData])
-    } else {
-      setLineItemData([...lineItemData])
+      item.lineItemsRate = e.target.value
+      setEstimateFormData(prevState => ({
+        lineItems: [...prevState.lineItems]
+      }))
     }
-    item.lineItemsTotal = parseFloat(item.lineItemsQty) * parseFloat(item.lineItemsRate)
-    
   })
 }
+
+// Add new line item
+const handleAddItem = (e) => {
+  setEstimateFormData((prevState) => ({
+    lineItems: [...prevState.lineItems, { lineItemsID: 3, lineItemsName: "New line item!", lineItemsDesc: "New line item created with Add new button!", lineItemsQty: 0, lineItemsRate: 0, lineItemsTotal: 0 }]
+  }))
+}
+
+// Rate Input
+// const handleRateInput = (e, id) => {
+//   lineItemData.map(item => {
+//     if(item.lineItemsID === id+1) {
+//       item.lineItemsRate = e.target.value,
+//       setLineItemData([...lineItemData])
+//     } else {
+//       setLineItemData([...lineItemData])
+//     }
+//     item.lineItemsTotal = parseFloat(item.lineItemsQty) * parseFloat(item.lineItemsRate)
+    
+//   })
+// }
 
 // Totals Display
 // const handleEstimateTotals = () => {
@@ -197,12 +216,12 @@ return (
             </Thead>
             <Tbody>
               {console.log(lineItemData)}
-              {lineItemData.map((item, id) => {
+              {estimateFormData.lineItems.map((item, id) => {
                return (
                 <Tr key={item.lineItemsID}>
                   <Td>{item.lineItemsName}</Td>
                   <Td>{item.lineItemsDesc}</Td>
-                  <Td textAlign={"end"}><Input p={1} w={"3rem"} textAlign={"end"} value={item.lineItemsQty} onChange={(e) => handleLineItems(e, id)}/></Td>
+                  <Td textAlign={"end"}><Input p={1} w={"3rem"} textAlign={"end"} value={item.lineItemsQty} onChange={(e) => handleQtyInput(e, id)}/></Td>
                   <Td textAlign={"end"}><Input p={1} w={"3rem"} textAlign={"end"} value={item.lineItemsRate} onChange={(e) =>  handleRateInput(e, id)}/></Td>
                   <Td textAlign={"end"}>{item.lineItemsTotal}</Td>
                   <Td p={0} textAlign={"center"}><Button size={"sm"}colorScheme={"red"}>X</Button></Td>
@@ -211,7 +230,7 @@ return (
               })}
 
               <Tr>
-                <Td><Button colorScheme={"green"}>New Line Item</Button></Td>
+                <Td><Button colorScheme={"green"} onClick={(e) => handleAddItem(e)}>New Line Item</Button></Td>
               </Tr>
             </Tbody>
           </Table>
