@@ -41,7 +41,7 @@ const initialEstimateForm = {
   estimateDate: "",
   notes: "",
   estimateSubTotal: 0,
-  estimateTaxRate: "",
+  estimateTaxRate: 0,
   estimateTotal: 0,
   lineItems: [
       {
@@ -74,6 +74,9 @@ const handleQtyInput = (e, id) => {
   estimateFormData.lineItems.map(item => {
     if(item.lineItemsID === id+1) {
       item.lineItemsQty = e.target.value
+      if(item.lineItemsQty < 0) {
+        item.lineItemsQty = 0
+      }
       let qty = parseFloat(item.lineItemsQty);
       let rate = parseFloat(item.lineItemsRate)
         if(isNaN(qty)) {
@@ -83,12 +86,13 @@ const handleQtyInput = (e, id) => {
           rate = 0;
         }
         item.lineItemsTotal = qty * rate;
-      }
         setEstimateFormData(prevState => ({
           lineItems: [...prevState.lineItems]
         }))
+      }
     }
   )
+  handleInputTotals();
 }
 
 // Rate Input
@@ -96,6 +100,9 @@ const handleRateInput = (e, id) => {
   estimateFormData.lineItems.map( item => {
     if(item.lineItemsID === id+1) {
       item.lineItemsRate = e.target.value
+      if(item.lineItemsRate < 0) {
+        item.lineItemsRate = 0
+      }
       let qty = parseFloat(item.lineItemsQty);
       let rate = parseFloat(item.lineItemsRate);
       if(isNaN(qty)) {
@@ -105,12 +112,40 @@ const handleRateInput = (e, id) => {
         rate = 0;
       }
       item.lineItemsTotal = qty * rate;
-    }
       setEstimateFormData(prevState => ({
         lineItems: [...prevState.lineItems]
       }))
     }
+    }
   )
+  handleInputTotals();
+}
+
+// Get Tax
+const handleTaxInput = (e) => {
+  let taxRate = parseFloat(e.target.value);
+  setEstimateFormData(prevState => ({
+    ...prevState,
+    estimateTaxRate: taxRate
+  }))
+}
+
+// Get Totals from inputs
+const handleInputTotals = () => {
+  let subtotal = 0;
+  estimateFormData.lineItems.map( item => {
+    subtotal = subtotal + item.lineItemsTotal
+  })
+  if(subtotal === estimateFormData.estimateSubTotal) {
+    return;
+  }
+  setEstimateFormData(prevState => ({
+
+      ...prevState,
+      estimateSubTotal: subtotal
+
+  })) 
+  return subtotal;
 }
 
 // Add new line item
@@ -240,9 +275,9 @@ return (
             <ListItem p={1}>TOTAL: </ListItem>
           </List>
           <List pl={5}>
-            <ListItem p={1}>$100.00</ListItem>
-            <ListItem p={1}><Input w={"3rem"} size={"xs"}></Input> %</ListItem>
-            <ListItem p={1}>$110.00</ListItem>
+            <ListItem h={"32px"} p={1}>{estimateFormData.estimateSubTotal}</ListItem>
+            <ListItem h={"32px"} p={1}><Input w={"3rem"} size={"xs"} value={estimateFormData.estimateTaxRate} onChange={(e) => handleTaxInput(e)} /> %</ListItem>
+            <ListItem h={"32px"} p={1}>$110.00</ListItem>
           </List>
         </Box>
 
