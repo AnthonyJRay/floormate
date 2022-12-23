@@ -123,11 +123,23 @@ const handleRateInput = (e, id) => {
 
 // Get Tax
 const handleTaxInput = (e) => {
-  let taxRate = parseFloat(e.target.value);
+  let taxInput = e.target.value
+  let taxRate = parseFloat(taxInput) / 100
+  if(isNaN(taxRate)) {
+    taxRate = 0
+  }
+  let subtotal = estimateFormData.estimateSubTotal
+  let taxAmount = subtotal * taxRate
+  if(isNaN(taxInput)) {
+    taxRate = 0;
+  }
+
   setEstimateFormData(prevState => ({
     ...prevState,
-    estimateTaxRate: taxRate
+    estimateTaxRate: taxInput,
+    estimateTotal: subtotal + taxAmount
   }))
+  return taxInput;
 }
 
 // Get Totals from inputs
@@ -277,7 +289,7 @@ return (
           <List pl={5}>
             <ListItem h={"32px"} p={1}>{estimateFormData.estimateSubTotal}</ListItem>
             <ListItem h={"32px"} p={1}><Input w={"3rem"} size={"xs"} value={estimateFormData.estimateTaxRate} onChange={(e) => handleTaxInput(e)} /> %</ListItem>
-            <ListItem h={"32px"} p={1}>$110.00</ListItem>
+            <ListItem h={"32px"} p={1}>{estimateFormData.estimateTotal}</ListItem>
           </List>
         </Box>
 
