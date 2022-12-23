@@ -68,18 +68,27 @@ export default function NewEstimate(props) {
 const { isOpen, onOpen, onClose } = useDisclosure()
 
 const [estimateFormData, setEstimateFormData] = useState(initialEstimateForm)
-const [lineItemData, setLineItemData] = useState(estimateFormData.lineItems)
 
 // Qty Input
 const handleQtyInput = (e, id) => {
   estimateFormData.lineItems.map(item => {
     if(item.lineItemsID === id+1) {
-        item.lineItemsQty = e.target.value,
+      item.lineItemsQty = e.target.value
+      let qty = parseFloat(item.lineItemsQty);
+      let rate = parseFloat(item.lineItemsRate)
+        if(isNaN(qty)) {
+          qty = 0;
+        }
+        if(isNaN(rate)) {
+          rate = 0;
+        }
+        item.lineItemsTotal = qty * rate;
+      }
         setEstimateFormData(prevState => ({
           lineItems: [...prevState.lineItems]
         }))
     }
-  })
+  )
 }
 
 // Rate Input
@@ -87,56 +96,45 @@ const handleRateInput = (e, id) => {
   estimateFormData.lineItems.map( item => {
     if(item.lineItemsID === id+1) {
       item.lineItemsRate = e.target.value
+      let qty = parseFloat(item.lineItemsQty);
+      let rate = parseFloat(item.lineItemsRate);
+      if(isNaN(qty)) {
+        qty = 0;
+      }
+      if(isNaN(rate)) {
+        rate = 0;
+      }
+      item.lineItemsTotal = qty * rate;
+    }
       setEstimateFormData(prevState => ({
         lineItems: [...prevState.lineItems]
       }))
     }
-  })
+  )
 }
 
 // Add new line item
 const handleAddItem = (e) => {
   setEstimateFormData((prevState) => ({
-    lineItems: [...prevState.lineItems, { lineItemsID: 3, lineItemsName: "New line item!", lineItemsDesc: "New line item created with Add new button!", lineItemsQty: 0, lineItemsRate: 0, lineItemsTotal: 0 }]
+    lineItems: [...prevState.lineItems, { 
+      lineItemsID: 3, // This needs a better way to dynamically add an ID property. Only 3 line items allowed before errors because 4th still has ID of 3. 
+      lineItemsName: "New line item!", 
+      lineItemsDesc: "New line item created with Add new button!", 
+      lineItemsQty: 0, 
+      lineItemsRate: 0, 
+      lineItemsTotal: 0 }]
   }))
 }
 
-// Rate Input
-// const handleRateInput = (e, id) => {
-//   lineItemData.map(item => {
-//     if(item.lineItemsID === id+1) {
-//       item.lineItemsRate = e.target.value,
-//       setLineItemData([...lineItemData])
-//     } else {
-//       setLineItemData([...lineItemData])
-//     }
-//     item.lineItemsTotal = parseFloat(item.lineItemsQty) * parseFloat(item.lineItemsRate)
-    
-//   })
-// }
-
-// Totals Display
-// const handleEstimateTotals = () => {
-//   let totals = 0;
-//     lineItemData.map((item) => {
-//       console.log(`INSIDE MAP: Line Items Qty - ${item.lineItemsQty}`)
-//       item.lineItemsTotal = parseFloat(item.lineItemsQty) * parseFloat(item.lineItemsRate)
-//       totals = totals + item.lineItemsTotal
-//     })
-//     return totals;
-//   }
-//   const newTotals = handleEstimateTotals();
-// console.log(`NEW TOTALS ${newTotals}`)
-
-
-// setEstimateFormData(prev => ({...prev, estimateSubTotal: handleEstimateTotals}))
+// Delete line item
+const handleDeleteItem = () => {
+  // Attach to "X" element "onClick"
+  // Match lineItems id and "filter" out. 
+  // return new list.
+}
 
 // Tax Rate Display
 const handleTaxRate = () => {
-
-}
-
-const handleAddLineItems = () => {
 
 }
 
@@ -215,7 +213,6 @@ return (
               </Tr>
             </Thead>
             <Tbody>
-              {console.log(lineItemData)}
               {estimateFormData.lineItems.map((item, id) => {
                return (
                 <Tr key={item.lineItemsID}>
