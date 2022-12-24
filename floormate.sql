@@ -4,13 +4,13 @@
 -- Table for creating new users/accounts?
 create table Users (
   id BIGSERIAL PRIMARY KEY NOT NULL,
-  user_email varchar(100) not null,
-  user_password varchar(20) not null,
   user_firstname varchar(20) not null,
   user_lastname varchar(20) not null,
-  user_address varchar(100) not null,
-  user_phone int not null,
   user_business_name varchar(100),
+  user_address varchar(100),
+  user_phone int not null,
+  user_email varchar(100) not null,
+  user_password varchar(20) not null,
   -- user_clients FOREIGN KEY REFERENCES Clients(id),
   -- user_estimates FOREIGN KEY REFERENCES Estimates(id),
   -- user_invoices FOREIGN KEY REFERENCES Invoices(id),

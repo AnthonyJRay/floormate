@@ -35,20 +35,20 @@ export default function Login() {
 const { isOpen, onOpen, onClose } = useDisclosure()
 const [isLogged, setIsLogged] = useState(false)
 
-const [signUp, setSignUp] = useState(true)
+const [signUp, setSignUp] = useState(false)
 
 const handleSignUp = () => {
-  setSignUp(false)
+  setSignUp(!signUp)
 }
 
 return (
   <>
-    <Button onClick={onOpen}>{!isLogged ? "Log In" : "Log Out"}</Button>
+    <Button onClick={onOpen} colorScheme={"green"}>{!isLogged ? "Log In" : "Log Out"}</Button>
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
         {!signUp ? 
-          <SignUpForm onClose={onClose} /> : 
-          <LoginForm onClose={onClose} handleSignUp={() => handleSignUp}/>
+          <LoginForm onClose={onClose} handleSignUp={() => handleSignUp}/> :
+          <SignUpForm onClose={onClose} handleSignUp={() => handleSignUp}/>
         }
       </Modal>
   </>

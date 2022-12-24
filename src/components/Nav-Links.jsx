@@ -78,7 +78,7 @@ export default function Navlinks() {
 
   </List>
   {/* Sign-in / Sign-out  */}
-  <Box position="absolute" justifyContent="center" bottom="5px" margin="auto" bg='red.200'>
+  <Box position="absolute" justifyContent="center" bottom="5px" margin="auto">
       <Login />
   </Box>
   </Box>
