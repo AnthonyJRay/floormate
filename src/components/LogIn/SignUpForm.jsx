@@ -17,12 +17,10 @@ import {
 
 export default function SignUpForm(props) {
   const { register, handleSubmit, formState: { errors }} = useForm();
+
+  // onSubmit is where you may query database etc.
   const onSubmit = data => console.log(data)
   console.log(errors)
-  // Need a function to handle the sign up submission.
-  // Once clicked, modal should display a loading state
-  // once loaded modal should display "Account Created, Please Login"
-  // Return to Login Page
 
 
 
@@ -33,6 +31,7 @@ export default function SignUpForm(props) {
       <Box width={"90%"} margin={"auto"} p={"1rem"}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <FormControl isRequired>
+
           <FormLabel m={"2"} p={"1"}>First Name:</FormLabel>
             <Input type="text" placeholder={"John"} {...register("First Name", {required: true, maxLength: 20})}/>
 
@@ -57,18 +56,17 @@ export default function SignUpForm(props) {
               <Input type="password" placeholder={"Password"} {...register("Password", {required: true, maxLength: 20})}/>
 
           </FormControl>
-
-            <Input type="submit"/>
+            <Box display={"flex"} w={"100%"} justifyContent={"center"}>
+              <Button type={"submit"} colorScheme={"green"} w={"90%"} m={2}>Sign Up</Button>
+            </Box>
           </form>
       </Box>
 
-      {/* <Box display={"flex"} w={"85%"} m={"auto"} justifyContent={"center"}>
-          <Button type={"submit"} colorScheme={"twitter"} w={"100%"}>Sign Up</Button>
-      </Box> */}
-
-      <ModalFooter w={"85%"} margin={"auto"} mt={10} p={0}>
-        <Button colorScheme={"yellow"} onClick={props.onClose}>Close</Button>
-        <Button colorScheme={"green"} m={1} onClick={props.handleSignUp()}>Login</Button>
+      <ModalFooter w={"90%"} margin={"auto"}>
+        <Box textAlign={"end"} w={"90%"} m={1}>
+          <Button colorScheme={"yellow"} color={"white"} onClick={props.onClose}>Close</Button>
+          <Button colorScheme={"twitter"} m={1} onClick={props.handleSignUp()}>Login</Button>
+        </Box>
       </ModalFooter>
   </ModalContent>
   )

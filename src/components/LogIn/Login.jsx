@@ -20,18 +20,6 @@ import LoginForm from "./LoginForm"
 
 export default function Login() {
 
-  // const [data, setData] = useState([]);
-  // const [token, setToken] = useState();
-
-  // if (!token) {
-  //   return <Login setToken={setToken}/>
-  // }
-
-// const [input, setInput] = useState('');
-
-// const inputChangeHandler = (e) => setInput(e.target.value);
-// const isError = input;
-
 const { isOpen, onOpen, onClose } = useDisclosure()
 const [isLogged, setIsLogged] = useState(false)
 

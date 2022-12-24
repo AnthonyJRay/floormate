@@ -16,6 +16,25 @@ create table Users (
   -- user_invoices FOREIGN KEY REFERENCES Invoices(id),
 );
 
+-- Create a new user.
+insert into Users (
+  user_firstname,
+  user_lastname,
+  user_business_name,
+  user_address,
+  user_phone,
+  user_email,
+  user_password
+) values (
+  'First Name',
+  'Last Name',
+  'Business Name',
+  'Business Address',
+    1234567890,
+  'Email Address',
+  'Password'
+)
+
 -- Users can have many clients.
 -- Clients can have many estimates. (Many to many relationship)
 -- Estimates can only be owned by one client and user.
