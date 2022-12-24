@@ -1,13 +1,12 @@
 import { useState } from 'react'
 
+import { Link } from 'react-router-dom'
 import {
   FormControl,
   FormLabel,
   Input,
-  FormHelperText,
   Box,
   Button,
-  FormErrorMessage,
   useDisclosure,
   Modal,
   ModalOverlay,
@@ -15,6 +14,9 @@ import {
   ModalFooter,
   ModalHeader
 } from "@chakra-ui/react"
+
+import SignUpForm from "./SignUpForm"
+import LoginForm from "./LoginForm"
 
 export default function Login() {
 
@@ -33,28 +35,21 @@ export default function Login() {
 const { isOpen, onOpen, onClose } = useDisclosure()
 const [isLogged, setIsLogged] = useState(false)
 
+const [signUp, setSignUp] = useState(true)
+
+const handleSignUp = () => {
+  setSignUp(false)
+}
+
 return (
   <>
     <Button onClick={onOpen}>{!isLogged ? "Log In" : "Log Out"}</Button>
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>Login</ModalHeader>
-          
-          <Box width={"90%"} margin={"auto"} p={"1rem"}>
-            <FormControl isRequired>
-              <FormLabel m={"2"} p={"1"}>Email</FormLabel> 
-                <Input type="email"/>
-              <FormLabel m={"2"} p={"1"}>Password</FormLabel>
-                <Input type="password" />
-            </FormControl>
-          </Box>
-
-          <ModalFooter>
-            <Button onClick={onClose}>Close</Button>
-            <Button width={"30%"}>Login</Button>
-          </ModalFooter>
-      </ModalContent>
-    </Modal>
+        {!signUp ? 
+          <SignUpForm onClose={onClose} /> : 
+          <LoginForm onClose={onClose} handleSignUp={() => handleSignUp}/>
+        }
+      </Modal>
   </>
 )}
