@@ -42,7 +42,7 @@ export default function SignUpForm(props) {
     e.preventDefault();
     try {
       const body = { userData }
-      await fetch("http://localhost:5173/signup", {
+      await fetch("http://localhost:5000/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
@@ -60,12 +60,13 @@ export default function SignUpForm(props) {
     <ModalHeader fontSize={"2rem"} textAlign={"center"}>Sign Up</ModalHeader>
 
       <Box width={"90%"} margin={"auto"} p={"1rem"}>
-        <form onSubmit={handleFormState}>
+        <form onSubmit={onSubmit}>
           <FormControl isRequired>
 
           <FormLabel m={"2"} p={"1"}>First Name:</FormLabel>
             <Input 
-              type="text" 
+              type={"text"}
+              id={"userFirstName"}
               placeholder={"John"}
               {...register("userFirstName", {required: true, maxLength: 20})}
               onChange={e => handleFormState(e, e.target.name)}
@@ -73,16 +74,17 @@ export default function SignUpForm(props) {
 
           <FormLabel m={"2"} p={"1"}>Last Name:</FormLabel>
             <Input 
-              type="text" 
-              placeholder={"Doe"}
+              type={"text"}
               id={"userLastName"}
+              placeholder={"Doe"}
               {...register("userLastName", {required: true, maxLength: 20})}
               onChange={e => handleFormState(e, e.target.name)}
             />
 
           <FormLabel m={"2"} p={"1"}>Business Name:</FormLabel>
             <Input 
-              type="text" 
+              type={"text"}
+              id={"userBusinessName"}
               placeholder={"Joe's Consulting Agency LLC"} 
               {...register("userBusinessName", {required: true, maxLength: 30})}
               onChange={e => handleFormState(e, e.target.name)}
@@ -91,7 +93,8 @@ export default function SignUpForm(props) {
           </FormControl>
           <FormLabel m={"2"} p={"1"}>Business Address:</FormLabel>
             <Input 
-              type="text" 
+              type={"text"}
+              id={"userAddress"}
               placeholder={"123 N Main St, Austin, TX"} 
               {...register("userAddress", {required: false, maxLength: 30})}
               onChange={e => handleFormState(e, e.target.name)}
@@ -100,7 +103,8 @@ export default function SignUpForm(props) {
           <FormControl isRequired>
           <FormLabel m={"2"} p={"1"}>Phone:</FormLabel>
             <Input 
-              type="number" 
+              type={"number"}
+              id={"userPhone"}
               placeholder={"Business Phone: (xxx) xxx-xxxx"} 
               {...register("userPhone", {required: true, maxLength: 20})}
               onChange={e => handleFormState(e, e.target.name)}
@@ -108,7 +112,8 @@ export default function SignUpForm(props) {
 
           <FormLabel m={"2"} p={"1"}>Email</FormLabel> 
               <Input 
-                type="email" 
+                type={"email"}
+                id={"userEmail"} 
                 placeholder={"joe@joeconsulting.com"} 
                 {...register("userEmail", {required: true, maxLength: 30})}
                 onChange={e => handleFormState(e, e.target.name)}
@@ -116,7 +121,8 @@ export default function SignUpForm(props) {
 
           <FormLabel m={"2"} p={"1"}>Password</FormLabel>
               <Input 
-                type="password" 
+                type={"password"}
+                id={"userPassword"} 
                 placeholder={"Password"} 
                 {...register("userPassword", {required: true, maxLength: 20})}
                 onChange={e => handleFormState(e, e.target.name)}

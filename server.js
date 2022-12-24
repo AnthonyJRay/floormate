@@ -22,8 +22,10 @@ app.get("/estimates", async (req, res) => {
 
 app.post("/signup", async (req, res) => {
   // Destructure out user data variables
-  console.log(req.body);
+  console.log("Endpoint Hit!");
+  res.send("Endpoint Hit!");
   try {
+    res.send(req.body);
     // const {} = req.body;
   } catch (error) {
     console.error(error.message);

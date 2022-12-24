@@ -32,9 +32,20 @@ export default function LoginForm(props) {
           <FormControl isRequired>
 
             <FormLabel m={"2"} p={"1"}>Email</FormLabel> 
-              <Input type="email" placeholder={"Enter your email..."} {...register("Email", {required: true, maxLength: 20})}/>
+              <Input 
+              type={"email"}
+              id={"userEmail"} 
+              placeholder={"Enter your email..."} 
+              {...register("userEmail", {required: true, maxLength: 20})}
+              />
+              
             <FormLabel m={"2"} p={"1"}>Password</FormLabel>
-              <Input type="password" placeholder={"Enter your password..."} {...register("Password", {required: true, maxLength: 20})} />
+              <Input 
+              type={"password"}
+              id={"userPassword"} 
+              placeholder={"Enter your password..."} 
+              {...register("userPassword", {required: true, maxLength: 20})} 
+              />
 
           </FormControl>
             <Box display={"flex"} w={"100%"} justifyContent={"center"}>
