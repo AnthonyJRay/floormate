@@ -35,11 +35,15 @@ export default function SignUpForm(props) {
     ...userData,
     [id]: e.target.value
    }))
-   console.log(userData);
   }
 
+  // Why am I destructuring handleSubmit from useForm?
+  // If i'm just using my own Submit function?
+  // Are these two things the same?
+  // Re-visit and potentially refactor later.
   const onSubmit = async (e) => {
     e.preventDefault();
+    console.log(userData)
     try {
       const body = { userData }
       await fetch("http://localhost:5000/signup", {

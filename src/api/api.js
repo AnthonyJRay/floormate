@@ -36,6 +36,7 @@ export function createNewUser(
       user_email,
       user_password
     ) VALUES (
+      DEFAULT,
       ${firstName},
       ${lastName},
       ${businessName},
@@ -44,6 +45,7 @@ export function createNewUser(
       ${userEmail},
       ${userPassword}
     )
+    RETURNING id;
   `);
 }
 

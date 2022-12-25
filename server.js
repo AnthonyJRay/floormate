@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import bodyParser from "body-parser";
 
 import { getTestData, getEstimatesData, createNewUser } from "./src/api/api.js";
 
@@ -8,6 +9,8 @@ const port = 5000;
 
 // Middleware
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // Api endpoints
 app.get("/", async (req, res) => {
@@ -21,12 +24,29 @@ app.get("/estimates", async (req, res) => {
 });
 
 app.post("/signup", async (req, res) => {
-  // Destructure out user data variables
-  console.log("Endpoint Hit!");
-  res.send("Endpoint Hit!");
   try {
-    res.send(req.body);
-    // const {} = req.body;
+    let { userData } = req.body;
+    let {
+      userFirstName,
+      userLastName,
+      userBusinessName,
+      userAddress,
+      userPhone,
+      userEmail,
+      userPassword,
+    } = userData;
+
+    let resData = await createNewUser(
+      userFirstName,
+      userLastName,
+      userBusinessName,
+      userAddress,
+      userPhone,
+      userEmail,
+      userPassword
+    );
+
+    res.send(resData);
   } catch (error) {
     console.error(error.message);
   }
