@@ -41,7 +41,8 @@ export function createNewUser(
   userEmail,
   userPassword
 ) {
-  return pool.query(`
+  return pool.query(
+    `
     INSERT INTO users (
       user_firstname,
       user_lastname,
@@ -59,7 +60,17 @@ export function createNewUser(
       $6,
       $7
     )
-  `);
+  `,
+    [
+      firstName,
+      lastName,
+      businessName,
+      userAddress,
+      phoneNumber,
+      userEmail,
+      userPassword,
+    ]
+  );
 }
 
 // User Login
