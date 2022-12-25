@@ -17,13 +17,13 @@ export default function SignUpForm(props) {
   const { register, handleSubmit, formState: { errors }} = useForm();
   
   const initialState = {
-    userFirstName: "",
-    userLastName: "",
-    userBusinessName: "",
-    userAddress: "",
-    userPhone: "",
-    userEmail: "",
-    userPassword: ""
+    userFirstName: '',
+    userLastName: '',
+    userBusinessName: '',
+    userAddress: '',
+    userPhone: '',
+    userEmail: '',
+    userPassword: ''
   }
 
   const [userData, setUserData] = useState(initialState);
@@ -37,12 +37,8 @@ export default function SignUpForm(props) {
    }))
   }
 
-  // Why am I destructuring handleSubmit from useForm?
-  // If i'm just using my own Submit function?
-  // Are these two things the same?
-  // Re-visit and potentially refactor later.
+  // Submit Handler
   const onSubmit = async (e) => {
-    e.preventDefault();
     console.log(userData)
     try {
       const body = { userData }
@@ -56,15 +52,13 @@ export default function SignUpForm(props) {
       console.error(error.message);
     }
   }
-  
   console.log(errors)
- 
   return (
     <ModalContent>
     <ModalHeader fontSize={"2rem"} textAlign={"center"}>Sign Up</ModalHeader>
 
       <Box width={"90%"} margin={"auto"} p={"1rem"}>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <FormControl isRequired>
 
           <FormLabel m={"2"} p={"1"}>First Name:</FormLabel>

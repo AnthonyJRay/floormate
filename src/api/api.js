@@ -17,6 +17,21 @@ export function getEstimatesData() {
 }
 
 // Create User
+// const insertSQL = `
+//   INSERT INTO Users (
+//     user_firstname,
+//     user_lastname,
+//     user_business_name,
+//     user_address,
+//     user_phone,
+//     user_email,
+//     user_password
+//   ) VALUES ( $1, $2, $3, $4, $5, $6, $7)`;
+
+//   const createNewUser = (insertSQL, userfirstName, userlastName, userbusinessName, userAddress, userPhone, userEmail, userPassword) => {
+
+//   }
+
 export function createNewUser(
   firstName,
   lastName,
@@ -27,7 +42,7 @@ export function createNewUser(
   userPassword
 ) {
   return pool.query(`
-    INSERT INTO Users (
+    INSERT INTO users (
       user_firstname,
       user_lastname,
       user_business_name,
@@ -36,16 +51,14 @@ export function createNewUser(
       user_email,
       user_password
     ) VALUES (
-      DEFAULT,
-      ${firstName},
-      ${lastName},
-      ${businessName},
-      ${userAddress},
-      ${phoneNumber},
-      ${userEmail},
-      ${userPassword}
+      $1,
+      $2,
+      $3,
+      $4,
+      $5,
+      $6,
+      $7
     )
-    RETURNING id;
   `);
 }
 

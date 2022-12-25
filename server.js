@@ -25,7 +25,7 @@ app.get("/estimates", async (req, res) => {
 
 app.post("/signup", async (req, res) => {
   try {
-    let { userData } = req.body;
+    // let { userData } = req.body;
     let {
       userFirstName,
       userLastName,
@@ -34,7 +34,11 @@ app.post("/signup", async (req, res) => {
       userPhone,
       userEmail,
       userPassword,
-    } = userData;
+    } = req.body.userData;
+
+    // console.log(`First Name: ${userFirstName}`);
+    console.log(`User Business: ${userBusinessName}`);
+    console.log(`Business Name: ${req.body.userData.userBusinessName}`);
 
     let resData = await createNewUser(
       userFirstName,
@@ -48,7 +52,7 @@ app.post("/signup", async (req, res) => {
 
     res.send(resData);
   } catch (error) {
-    console.error(error.message);
+    console.error(error);
   }
 });
 
