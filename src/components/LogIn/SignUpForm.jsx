@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react"
 
 export default function SignUpForm(props) {
-  const { register, handleSubmit, reset, formState: { errors }} = useForm();
+  const { register, handleSubmit, formState: { errors }} = useForm();
   
   const initialState = {
     userFirstName: '',

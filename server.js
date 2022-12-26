@@ -23,6 +23,7 @@ app.get("/estimates", async (req, res) => {
   res.send(pendingData);
 });
 
+// Sign Up Form
 app.post("/signup", async (req, res) => {
   try {
     let {
@@ -44,10 +45,16 @@ app.post("/signup", async (req, res) => {
       userEmail,
       userPassword
     );
-    res.send();
+    console.log(resData);
+    res.send;
   } catch (error) {
     console.error(error);
   }
+});
+
+// Login Form
+app.get("./login", async (req, res) => {
+  res.send("Endpoint hit!");
 });
 
 app.listen(port, () => {

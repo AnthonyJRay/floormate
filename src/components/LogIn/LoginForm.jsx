@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import {
@@ -7,16 +7,27 @@ import {
   Input,
   Box,
   Button,
-  useDisclosure,
-  Modal,
-  ModalOverlay,
   ModalContent,
   ModalFooter,
   ModalHeader
 } from "@chakra-ui/react"
 
+const initialState = {
+  userEmail: "",
+  userPassword: ""
+}
+
 export default function LoginForm(props) {
   const { register, handleSubmit, formState: { errors }} = useForm();
+  const [userInput, setUserInput] = useState(initialState)
+
+
+  const handleInputState = (e, id) => {
+    setUserInput(({
+      ...userInput,
+      [id] : e.target.value
+    }))
+  }
 
   // onSubmit is where you may query database etc.
   const onSubmit = data => console.log(data)
@@ -35,8 +46,10 @@ export default function LoginForm(props) {
               <Input 
               type={"email"}
               id={"userEmail"} 
-              placeholder={"Enter your email..."} 
+              placeholder={"Enter your email..."}
+              value={userInput.userEmail} 
               {...register("userEmail", {required: true, maxLength: 20})}
+              onChange={e => handleInputState(e, e.target.name)}
               />
               
             <FormLabel m={"2"} p={"1"}>Password</FormLabel>
@@ -44,7 +57,10 @@ export default function LoginForm(props) {
               type={"password"}
               id={"userPassword"} 
               placeholder={"Enter your password..."} 
-              {...register("userPassword", {required: true, maxLength: 20})} 
+              value={userInput.userPassword}
+              {...register("userPassword", {required: true, maxLength: 20})}
+              onChange={e => handleInputState(e, e.target.name)}
+              
               />
 
           </FormControl>

@@ -75,5 +75,7 @@ export function createNewUser(
 
 // User Login
 export function userLogin(userEmail, userPassword) {
-  return pool.query();
+  return pool.query(
+    `SELECT user_password FROM users WHERE user_password = 'Put password here'`
+  );
 }
