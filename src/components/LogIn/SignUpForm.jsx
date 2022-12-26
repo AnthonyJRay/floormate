@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
+import AccountSuccess from '../utils/accountSuccess'
+
 import {
   FormControl,
   FormLabel,
@@ -12,9 +14,8 @@ import {
   ModalHeader
 } from "@chakra-ui/react"
 
-
 export default function SignUpForm(props) {
-  const { register, handleSubmit, formState: { errors }} = useForm();
+  const { register, handleSubmit, reset, formState: { errors }} = useForm();
   
   const initialState = {
     userFirstName: '',
@@ -27,10 +28,10 @@ export default function SignUpForm(props) {
   }
 
   const [userData, setUserData] = useState(initialState);
+  const [userSuccess, setUserSuccess] = useState(false);
 
   // Input updating State
   const handleFormState = (e, id) => {
-    e.preventDefault()
    setUserData(({
     ...userData,
     [id]: e.target.value
@@ -38,27 +39,33 @@ export default function SignUpForm(props) {
   }
 
   // Submit Handler
-  const onSubmit = async (e) => {
-    console.log(userData)
+  const onSubmitForm = async () => {
     try {
       const body = { userData }
-      await fetch("http://localhost:5000/signup", {
+     const response =  await fetch("http://localhost:5000/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
       })
-      setUserData("");
+      setUserData(initialState)
+      if(response.status === 200) {
+        setUserSuccess(true)
+      } else {
+        return;
+      }
     } catch (error) {
       console.error(error.message);
     }
+    setUserData(initialState)
   }
-  console.log(errors)
+  // console.log(errors)
   return (
+    userSuccess ? <AccountSuccess /> :
     <ModalContent>
     <ModalHeader fontSize={"2rem"} textAlign={"center"}>Sign Up</ModalHeader>
 
       <Box width={"90%"} margin={"auto"} p={"1rem"}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmitForm)}>
           <FormControl isRequired>
 
           <FormLabel m={"2"} p={"1"}>First Name:</FormLabel>
@@ -66,6 +73,8 @@ export default function SignUpForm(props) {
               type={"text"}
               id={"userFirstName"}
               placeholder={"John"}
+              name={"userFirstName"}
+              value={userData.userFirstName}
               {...register("userFirstName", {required: true, maxLength: 20})}
               onChange={e => handleFormState(e, e.target.name)}
               />
@@ -75,6 +84,7 @@ export default function SignUpForm(props) {
               type={"text"}
               id={"userLastName"}
               placeholder={"Doe"}
+              value={userData.userLastName}
               {...register("userLastName", {required: true, maxLength: 20})}
               onChange={e => handleFormState(e, e.target.name)}
             />
@@ -83,7 +93,8 @@ export default function SignUpForm(props) {
             <Input 
               type={"text"}
               id={"userBusinessName"}
-              placeholder={"Joe's Consulting Agency LLC"} 
+              placeholder={"Joe's Consulting Agency LLC"}
+              value={userData.userBusinessName}
               {...register("userBusinessName", {required: true, maxLength: 30})}
               onChange={e => handleFormState(e, e.target.name)}
             />
@@ -94,6 +105,7 @@ export default function SignUpForm(props) {
               type={"text"}
               id={"userAddress"}
               placeholder={"123 N Main St, Austin, TX"} 
+              value={userData.userAddress}
               {...register("userAddress", {required: false, maxLength: 30})}
               onChange={e => handleFormState(e, e.target.name)}
             />
@@ -103,7 +115,8 @@ export default function SignUpForm(props) {
             <Input 
               type={"number"}
               id={"userPhone"}
-              placeholder={"Business Phone: (xxx) xxx-xxxx"} 
+              placeholder={"Business Phone: (xxx) xxx-xxxx"}
+              value={userData.userPhone}
               {...register("userPhone", {required: true, maxLength: 20})}
               onChange={e => handleFormState(e, e.target.name)}
             />
@@ -112,7 +125,8 @@ export default function SignUpForm(props) {
               <Input 
                 type={"email"}
                 id={"userEmail"} 
-                placeholder={"joe@joeconsulting.com"} 
+                placeholder={"joe@joeconsulting.com"}
+                value={userData.userEmail} 
                 {...register("userEmail", {required: true, maxLength: 30})}
                 onChange={e => handleFormState(e, e.target.name)}
               />
@@ -121,22 +135,24 @@ export default function SignUpForm(props) {
               <Input 
                 type={"password"}
                 id={"userPassword"} 
-                placeholder={"Password"} 
+                placeholder={"Password"}
+                value={userData.userPassword}
                 {...register("userPassword", {required: true, maxLength: 20})}
                 onChange={e => handleFormState(e, e.target.name)}
               />
 
           </FormControl>
             <Box display={"flex"} w={"100%"} justifyContent={"center"}>
-              <Button type={"submit"} colorScheme={"green"} w={"90%"} m={2}>Sign Up</Button>
+              <Input type={"submit"} colorScheme={"twitter"} w={"90%"} m={2}/>
+              {/* <Button type={"submit"} colorScheme={"green"} w={"90%"} m={2}>Sign Up</Button> */}
             </Box>
           </form>
       </Box>
 
       <ModalFooter w={"90%"} margin={"auto"}>
         <Box textAlign={"end"} w={"90%"} m={1}>
-          <Button colorScheme={"yellow"} color={"white"} onClick={props.onClose}>Close</Button>
-          <Button colorScheme={"twitter"} m={1} onClick={props.handleSignUp()}>Login</Button>
+          <Button type={"button"} colorScheme={"yellow"} color={"white"} onClick={props.onClose}>Close</Button>
+          <Button type={"button"} colorScheme={"twitter"} m={1} onClick={props.handleSignUp()}>Login</Button>
         </Box>
       </ModalFooter>
   </ModalContent>
