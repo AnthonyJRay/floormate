@@ -12,25 +12,42 @@ import {
   ModalHeader
 } from "@chakra-ui/react"
 
-const initialState = {
-  userEmail: "",
-  userPassword: ""
-}
 
+const initialState = {
+  userEmail: '',
+  userPassword: ''
+}
 export default function LoginForm(props) {
   const { register, handleSubmit, formState: { errors }} = useForm();
+  
+  
   const [userInput, setUserInput] = useState(initialState)
-
 
   const handleInputState = (e, id) => {
     setUserInput(({
       ...userInput,
-      [id] : e.target.value
+      [id]: e.target.value
     }))
   }
+  console.log(userInput)
 
   // onSubmit is where you may query database etc.
-  const onSubmit = data => console.log(data)
+  const onSubmitForm = async () => {
+    try {
+      const body = { userInput };
+      const response = await fetch("http://localhost:5000/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+      }); 
+      const serverResponse =  await response.text();
+      console.log(serverResponse);
+     // Reset form here
+    } catch (error) {
+      console.error(error)
+    }
+    setUserInput(initialState);
+  }
   console.log(errors)
 
 
@@ -39,7 +56,7 @@ export default function LoginForm(props) {
     <ModalHeader fontSize={"2rem"} textAlign={"center"}>Login</ModalHeader>
 
       <Box w={"90%"} margin={"auto"} p={"1rem"}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmitForm)}>
           <FormControl isRequired>
 
             <FormLabel m={"2"} p={"1"}>Email</FormLabel> 

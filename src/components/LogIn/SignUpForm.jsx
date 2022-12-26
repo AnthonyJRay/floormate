@@ -42,12 +42,12 @@ export default function SignUpForm(props) {
   const onSubmitForm = async () => {
     try {
       const body = { userData }
-     const response =  await fetch("http://localhost:5000/signup", {
+      const response =  await fetch("http://localhost:5000/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
-      })
-      setUserData(initialState)
+      });
+        setUserData(initialState)
       if(response.status === 200) {
         setUserSuccess(true)
       } else {
@@ -143,7 +143,7 @@ export default function SignUpForm(props) {
 
           </FormControl>
             <Box display={"flex"} w={"100%"} justifyContent={"center"}>
-              <Input type={"submit"} colorScheme={"twitter"} w={"90%"} m={2}/>
+              <Input type={"submit"} w={"90%"} m={2}/>
               {/* <Button type={"submit"} colorScheme={"green"} w={"90%"} m={2}>Sign Up</Button> */}
             </Box>
           </form>

@@ -2,7 +2,12 @@ import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 
-import { getTestData, getEstimatesData, createNewUser } from "./src/api/api.js";
+import {
+  getTestData,
+  getEstimatesData,
+  createNewUser,
+  userLogin,
+} from "./src/api/api.js";
 
 const app = express();
 const port = 5000;
@@ -53,8 +58,15 @@ app.post("/signup", async (req, res) => {
 });
 
 // Login Form
-app.get("./login", async (req, res) => {
-  res.send("Endpoint hit!");
+app.post("/login", async (req, res) => {
+  try {
+    let { userEmail, userPassword } = req.body.userInput;
+    let resData = await userLogin(userEmail, userPassword);
+    console.log(userEmail, userPassword);
+    res.send("Endpoint hit!");
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 app.listen(port, () => {
