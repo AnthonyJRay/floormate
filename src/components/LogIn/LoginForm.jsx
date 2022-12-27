@@ -40,7 +40,8 @@ export default function LoginForm(props) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
       }); 
-      const serverResponse =  await response.text();
+      const serverResponse =  await response.json();
+      console.log("Below is the server response!")
       console.log(serverResponse);
      // Reset form here
     } catch (error) {

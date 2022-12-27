@@ -7,6 +7,7 @@ import {
   getEstimatesData,
   createNewUser,
   userLogin,
+  authUser,
 } from "./src/api/api.js";
 
 const app = express();
@@ -57,17 +58,32 @@ app.post("/signup", async (req, res) => {
   }
 });
 
-// Login Form
 app.post("/login", async (req, res) => {
-  try {
-    let { userEmail, userPassword } = req.body.userInput;
-    let resData = await userLogin(userEmail, userPassword);
-    console.log(userEmail, userPassword);
-    res.send("Endpoint hit!");
-  } catch (error) {
-    console.error(error);
+  let { userEmail, userPassword } = req.body.userInput;
+  let resData = await authUser(userEmail);
+  if (resData.rows < 1) {
+    return res.send("User doesn't exist!");
+  } else {
+    let { user_password } = resData.rows[0];
+    if (user_password === userPassword) {
+      res.json({ Error: "Password doesn't exist!" });
+    } else {
+      res.send("err");
+    }
   }
 });
+
+// Login Form
+// app.post("/login", async (req, res) => {
+//   try {
+//     let { userEmail, userPassword } = req.body.userInput;
+//     let resData = await userLogin(userEmail, userPassword);
+//     console.log(userEmail, userPassword);
+//     res.send("Endpoint hit!");
+//   } catch (error) {
+//     console.error(error);
+//   }
+// });
 
 app.listen(port, () => {
   console.log(`Server is running on Port: ${port}`);
