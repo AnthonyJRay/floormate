@@ -42,33 +42,46 @@ app.post("/signup", async (req, res) => {
       userPassword,
     } = req.body.userData;
 
-    let resData = await createNewUser(
-      userFirstName,
-      userLastName,
-      userBusinessName,
-      userAddress,
-      userPhone,
-      userEmail,
-      userPassword
-    );
-    console.log(resData);
-    res.send;
+    let isUser = await authUser(userEmail);
+    if (isUser.rows < 1) {
+      let resData = await createNewUser(
+        userFirstName,
+        userLastName,
+        userBusinessName,
+        userAddress,
+        userPhone,
+        userEmail,
+        userPassword
+      );
+      res.status(201).json({
+        resData,
+        Success: true,
+        message: "Account created Successfully",
+      });
+    } else {
+      res
+        .status(401)
+        .json({ succes: false, message: "That email is already taken!" });
+    }
   } catch (error) {
     console.error(error);
   }
 });
 
 app.post("/login", async (req, res) => {
-  let { userEmail, userPassword } = req.body.userInput;
+  // let { userEmail, userPassword } = req.body.userInput;
+  let { userEmail, userPassword } = req.body;
   let resData = await authUser(userEmail);
   if (resData.rows < 1) {
-    return res.send("User doesn't exist!");
+    return res
+      .status(401)
+      .json({ success: false, message: "That user doesn't exist!" });
   } else {
     let { user_password } = resData.rows[0];
     if (user_password === userPassword) {
-      res.json({ Error: "Password doesn't exist!" });
+      res.status(201).json({ success: true, message: "Login Successful" });
     } else {
-      res.send("err");
+      res.status(401).json({ success: false, message: "Incorrect password" });
     }
   }
 });
