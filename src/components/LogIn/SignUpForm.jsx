@@ -11,7 +11,8 @@ import {
   Button,
   ModalContent,
   ModalFooter,
-  ModalHeader
+  ModalHeader,
+  Text
 } from "@chakra-ui/react"
 
 export default function SignUpForm(props) {
@@ -29,6 +30,7 @@ export default function SignUpForm(props) {
 
   const [userData, setUserData] = useState(initialState);
   const [userSuccess, setUserSuccess] = useState(false);
+  const [responseMessage, setResponseMessage] = useState("")
 
   // Input updating State
   const handleFormState = (e, id) => {
@@ -47,18 +49,19 @@ export default function SignUpForm(props) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
       });
-        setUserData(initialState)
-      if(response.status === 200) {
-        setUserSuccess(true)
+      const responseData = await response.json();
+      console.log(responseData)
+      let { success, message } = responseData;
+      if(success) {
+        setUserSuccess(success);
+        setUserData(initialState);
       } else {
-        return;
+        setResponseMessage(message)
       }
     } catch (error) {
       console.error(error.message);
     }
-    setUserData(initialState)
   }
-  // console.log(errors)
   return (
     userSuccess ? <AccountSuccess /> :
     <ModalContent>
@@ -130,6 +133,7 @@ export default function SignUpForm(props) {
                 {...register("userEmail", {required: true, maxLength: 30})}
                 onChange={e => handleFormState(e, e.target.name)}
               />
+              <Text textAlign={"center"} color={"red"}>{!userSuccess ? responseMessage : null}</Text>
 
           <FormLabel m={"2"} p={"1"}>Password</FormLabel>
               <Input 

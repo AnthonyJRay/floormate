@@ -54,14 +54,12 @@ app.post("/signup", async (req, res) => {
         userPassword
       );
       res.status(201).json({
-        resData,
-        Success: true,
-        message: "Account created Successfully",
+        success: true,
       });
     } else {
       res
         .status(401)
-        .json({ succes: false, message: "That email is already taken!" });
+        .json({ success: false, message: "That email is already taken!" });
     }
   } catch (error) {
     console.error(error);
@@ -85,18 +83,6 @@ app.post("/login", async (req, res) => {
     }
   }
 });
-
-// Login Form
-// app.post("/login", async (req, res) => {
-//   try {
-//     let { userEmail, userPassword } = req.body.userInput;
-//     let resData = await userLogin(userEmail, userPassword);
-//     console.log(userEmail, userPassword);
-//     res.send("Endpoint hit!");
-//   } catch (error) {
-//     console.error(error);
-//   }
-// });
 
 app.listen(port, () => {
   console.log(`Server is running on Port: ${port}`);

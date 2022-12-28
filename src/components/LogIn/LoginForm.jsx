@@ -29,7 +29,7 @@ export default function LoginForm(props) {
       [id]: e.target.value
     }))
   }
-  console.log(userInput)
+  // console.log(userInput)
 
   // onSubmit is where you may query database etc.
   const onSubmitForm = async () => {
