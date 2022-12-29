@@ -1,28 +1,49 @@
-import React from 'react'
+import { useState } from 'react'
 
-
-import DisplayCards from "../components/DisplayCards"
 import ExpensesBody from "../components/expenses/ExpensesBody"
 
 import {
   Box,
   Heading,
   List,
-  ListItem,
   Button,
   Text
 } from "@chakra-ui/react"
 
+import {
+  AddIcon
+} from "@chakra-ui/icons"
+
 export default function Expenses() {
+  const [ expenseItems, setExpenseItem ] = useState([{
+    expenseDate: "",
+    expenseName: "",
+    expenseTotal: "",
+    expenseDesc: ""
+  }])
+
+  const [ newExpense, setNewExpense ] = useState({
+    expenseDate: "",
+    expenseName: "",
+    expenseTotal: "",
+    expenseDesc: ""
+  })
+
+  const [isEditing, setIsEditing ] = useState(false);
 
   function editClickHandler() {
-    return console.log("Expenses Edit Button!")
+    setIsEditing(!isEditing)
+    if(!isEditing) {
+      console.log("Editing!")
+    } else {
+      console.log("Saved!")
+    }
   }
   function deleteClickHandler() {
     return console.log("Expenses Delete Button!")
   }
   function addClickHandler() {
-    return console.log("Expenses Add button!")
+    return console.log("New Expenses Added!")
   }
 
 
@@ -30,33 +51,13 @@ export default function Expenses() {
     <Box textAlign={"center"} pt={5}>
       <Heading>Expenses</Heading>
       <List pt={5}>
-      <ListItem display={"flex"} alignItems={"center"} p={1} m={2} border={"1px"} borderRadius={"5px"} borderColor={"gray.500"}>
-          <Box display="flex" flexDirection={"row"} justifyContent={"space-around"} alignItems={"center"} w={"82%"}>
-            <Text p={2}>03/22/22</Text>
-            <Text p={2}>Gas</Text>
-            <Text p={3} color={"red"}>120.00</Text>
-            <Text w={"50%"} pl={1} pr={1}>Fuel for work truck</Text>
-          </Box>
-          <Box display={"flex"} justifyContent={"space-around"} w={"18%"}>
-            <Button colorScheme={"red"}>X</Button>
-            <Button colorScheme={"green"}>X</Button>
-          </Box>
-        </ListItem>
-        <ListItem display={"flex"} alignItems={"center"} p={1} m={2} border={"1px"} borderRadius={"5px"} borderColor={"gray.500"}>
-          <Box display="flex" flexDirection={"row"} justifyContent={"space-around"} alignItems={"center"} w={"82%"}>
-            <Text p={2}>03/22/22</Text>
-            <Text p={2}>Tools</Text>
-            <Text p={3} color={"red"}>120.00</Text>
-            <Text w={"50%"} pl={1} pr={1}>New stretch poles. Texting the responsiveness of this element.</Text>
-          </Box>
-          <Box display={"flex"} justifyContent={"space-around"} w={"18%"}>
-            <Button colorScheme={"red"}>X</Button>
-            <Button colorScheme={"green"}>X</Button>
-          </Box>
-        </ListItem>
+        <ExpensesBody isEditing={isEditing} expenseItems={expenseItems} editClickHandler={editClickHandler} deleteClickHandler={deleteClickHandler}/>
       </List>
 
-      <Button colorScheme={"green"} w={"75%"} m={5}>Add New Expense</Button>
+      <Button colorScheme={"green"} w={"75%"} m={5} onClick={addClickHandler}>
+        <AddIcon/>
+        <Text w={"35%"}>Add New Expense</Text>
+      </Button>
     </Box>
 )
 }
