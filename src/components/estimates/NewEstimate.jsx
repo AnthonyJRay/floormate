@@ -55,8 +55,8 @@ const initialEstimateForm = {
     },
     {
       lineItemsID: 2,
-      lineItemsName: "",
-      lineItemsDesc: "",
+      lineItemsName: "Line Item #2",
+      lineItemsDesc: "Line item description area.",
       lineItemsQty: 0,
       lineItemsRate: 0,
       lineItemsTotal: 0
@@ -259,7 +259,7 @@ return (
                 <Th isNumeric>Qty</Th>
                 <Th isNumeric>Rate</Th>
                 <Th isNumeric>Total</Th>
-              </Tr>1
+              </Tr>
             </Thead>
             <Tbody>
               {estimateFormData.lineItems.map((item, id) => {
