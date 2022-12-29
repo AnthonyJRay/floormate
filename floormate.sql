@@ -46,11 +46,11 @@ CREATE TABLE Clients (
   id BIGSERIAL PRIMARY KEY NOT NULL,
   client_firstname CHAR(20) NOT NULL,
   client_lastname CHAR(20) NOT NULL,
-  client_address CHAR(100) NOT NULL,
+  client_address CHAR(40) NOT NULL,
   client_phone INT NOT NULL,
-  client_email CHAR(100) NOT NULL,
-  -- client_estimates FOREIGN KEY REFERENCES Estimates(id),
+  client_email CHAR(40) NOT NULL,
 )
+  -- client_estimates FOREIGN KEY REFERENCES Estimates(id),
 
 -- Table for creating new estimates for the user.
 CREATE TABLE Estimates (

@@ -17,10 +17,9 @@ const initialState = {
   userEmail: '',
   userPassword: ''
 }
+
 export default function LoginForm(props) {
-  const { register, handleSubmit, formState: { errors }} = useForm();
-  
-  
+  const { register, handleSubmit, formState: { errors }} = useForm();  
   const [userInput, setUserInput] = useState(initialState)
 
   const handleInputState = (e, id) => {
@@ -29,9 +28,7 @@ export default function LoginForm(props) {
       [id]: e.target.value
     }))
   }
-  // console.log(userInput)
 
-  // onSubmit is where you may query database etc.
   const onSubmitForm = async () => {
     try {
       const body = { userInput };
