@@ -47,12 +47,11 @@ export default function Expenses() {
         {expenseItems.map((expense, id) => {
           return <ExpensesBody key={id} expenseItems={expenseItems[id]} deleteClickHandler={deleteClickHandler}/>
         })}
-        {/* <ExpensesBody isEditing={isEditing} expenseItems={expenseItems} editClickHandler={editClickHandler} deleteClickHandler={deleteClickHandler}/> */}
       </List>
 
       <Button colorScheme={"green"} w={["75%", null, "40%", "25"]} m={5} onClick={addClickHandler}>
-            <PlusSquareIcon fontSize={32}/>
-            <Box w={"45%"}>Add New Expense</Box>
+            <PlusSquareIcon boxSize={6}/>
+            <Box>Add New Expense</Box>
       </Button>
     </Box>
 )
