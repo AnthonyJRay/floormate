@@ -22,17 +22,25 @@ export default function Expenses() {
     expenseDesc: "Fuel for work truck"
   }])
 
-  const [ newExpense, setNewExpense ] = useState({
+  // const [ newExpense, setNewExpense ] = useState({
+  //   expenseDate: "",
+  //   expenseName: "",
+  //   expenseTotal: "",
+  //   expenseDesc: ""
+  // })
+
+  const newExpense = {
     expenseDate: "",
     expenseName: "",
     expenseTotal: "",
     expenseDesc: ""
-  })
+  }
 
-  function deleteClickHandler() {
+  const deleteClickHandler = () => {
     return console.log("Expenses Delete Button!")
   }
-  function addClickHandler() {
+
+  const addClickHandler = () => {
     return setExpenseItems([
       ...expenseItems,
       newExpense
@@ -43,20 +51,19 @@ export default function Expenses() {
     <Box textAlign={"center"} pt={5}>
       <Heading>Expenses</Heading>
       <List pt={5}>
-        {expenseItems.map((expense, id) => {  {/* Huh??? Not using expense.*/}
+        {expenseItems.map((expense, id) => {
           return <ExpensesBody 
-                    key={id} 
-                    expenseItems={expense} 
+                    key={id}
+                    targetExpense={expense} 
+                    expenseItems={expenseItems}
                     setExpenseItems={setExpenseItems} 
-                    deleteClickHandler={deleteClickHandler} 
-                    setNewExpense={setNewExpense} 
-                    newExpense={newExpense}/>
+                    deleteClickHandler={deleteClickHandler}/>
         })}
       </List>
 
       <Button colorScheme={"green"} w={["75%", null, "40%", "25"]} m={5} onClick={addClickHandler}>
-            <PlusSquareIcon boxSize={6}/>
-            <Box>Add New Expense</Box>
+          <PlusSquareIcon boxSize={6}/>
+          <Box>Add New Expense</Box>
       </Button>
     </Box>
 )
