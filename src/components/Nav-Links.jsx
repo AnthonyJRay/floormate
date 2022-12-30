@@ -10,8 +10,7 @@ import {
   ListIcon, 
   Hide, 
   Text, 
-  Box, 
-  Button 
+  Box
 } from "@chakra-ui/react"
 
 // Icon Imports
@@ -26,12 +25,12 @@ export default function Navlinks() {
     <Box display="flex" justifyContent="center" pt="2rem">
     <List spacing={12} w={["100%", "80%", "65"]}>
 
-      {/* Dashboard NavLink */}
+  {/* Dashboard NavLink */}
   <ListItem textAlign={[ 'center', null, 'left' ]}>
     <Link to={`/`}>
       <Box display={["null", "null", "flex"]} alignItems="center">
-      <ListIcon as={BiStoreAlt} color='black.900' fontSize={["2rem", null, "2rem"]}/>
-      <Hide below='md'><Text>Dashboard</Text></Hide>
+        <ListIcon as={BiStoreAlt} color='black.900' fontSize={["2rem", null, "2rem"]}/>
+        <Hide below='md'><Text>Dashboard</Text></Hide>
       </Box>
     </Link>
   </ListItem>
@@ -39,20 +38,20 @@ export default function Navlinks() {
   {/* Estimates NavLink */}
   <ListItem textAlign={[ 'center', null, 'left' ]}>
     <Link to={`estimates`}>
-    <Box display={["null", "null", "flex"]} alignItems="center">
-      <ListIcon as={BiEdit} color='black.900' fontSize={["2rem", null, "2rem"]} />
-      <Hide below='md'>Estimates</Hide>
-    </Box>
+      <Box display={["null", "null", "flex"]} alignItems="center">
+        <ListIcon as={BiEdit} color='black.900' fontSize={["2rem", null, "2rem"]} />
+        <Hide below='md'>Estimates</Hide>
+      </Box>
     </Link>
   </ListItem>
 
   {/* Invoices NavLink */}
   <ListItem textAlign={[ 'center', null, 'left' ]}>
     <Link to={`invoices`}>
-    <Box display={["null", "null", "flex"]} alignItems="center">
-      <ListIcon as={FaFileInvoiceDollar} color='black.900' fontSize={["2rem", null, "2rem"]} />
-      <Hide below='md'>Invoices</Hide>
-    </Box>
+      <Box display={["null", "null", "flex"]} alignItems="center">
+        <ListIcon as={FaFileInvoiceDollar} color='black.900' fontSize={["2rem", null, "2rem"]} />
+        <Hide below='md'>Invoices</Hide>
+      </Box>
     </Link>
   </ListItem>
 
@@ -73,7 +72,7 @@ export default function Navlinks() {
       <ListIcon as={BiLineChartDown} color='black.900' fontSize={["2rem", null, "2rem"]}/>
       <Hide below='md'>Expenses</Hide>
       </Box>
-      </Link>
+    </Link>
   </ListItem>
 
   </List>
@@ -81,6 +80,6 @@ export default function Navlinks() {
   <Box position="absolute" justifyContent="center" bottom="5px" margin="auto">
       <Login />
   </Box>
-  </Box>
+</Box>
    )
 }
