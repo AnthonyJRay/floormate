@@ -1,70 +1,78 @@
-import { useState } from 'react'
+import { useState } from "react";
+import { PlusSquareIcon } from "@chakra-ui/icons";
+import { Box, Heading, List, Button } from "@chakra-ui/react";
+import ExpensesBody from "../components/expenses/ExpensesBody";
 
-import ExpensesBody from "../components/expenses/ExpensesBody"
-
-import {
-  Box,
-  Heading,
-  List,
-  Button,
-
-} from "@chakra-ui/react"
-
-import {
-  PlusSquareIcon
-} from "@chakra-ui/icons"
+const defaultValues = {
+  occurredOn: "",
+  name: "",
+  total: "",
+  description: "",
+};
 
 export default function Expenses() {
-  const [ expenseItems, setExpenseItems ] = useState([{
-    expenseDate: "03/22/22",
-    expenseName: "Gas",
-    expenseTotal: "120.00",
-    expenseDesc: "Fuel for work truck"
-  }])
+  const [expenseItems, setExpenseItems] = useState([
+    {
+      occurredOn: "03/22/22",
+      name: "Gas",
+      total: "120.00",
+      description: "Fuel for work truck",
+    },
+    {
+      occurredOn: "05/03/22",
+      name: "Hammer",
+      total: "60.00",
+      description: "New hammer",
+    },
+  ]);
 
-  // const [ newExpense, setNewExpense ] = useState({
-  //   expenseDate: "",
-  //   expenseName: "",
-  //   expenseTotal: "",
-  //   expenseDesc: ""
-  // })
+  const [values, setValues] = useState(defaultValues);
 
-  const newExpense = {
-    expenseDate: "",
-    expenseName: "",
-    expenseTotal: "",
-    expenseDesc: ""
-  }
-
-  const deleteClickHandler = () => {
-    return console.log("Expenses Delete Button!")
-  }
-
-  const addClickHandler = () => {
-    return setExpenseItems([
-      ...expenseItems,
-      newExpense
-    ])
-  }
+  const [editIndex, setEditIndex] = useState(-1);
 
   return (
     <Box textAlign={"center"} pt={5}>
       <Heading>Expenses</Heading>
+
+      <Button
+        colorScheme={"green"}
+        w={["60%", null, "40%", "25"]}
+        m={5}
+        onClick={() => {}}
+      >
+        <PlusSquareIcon boxSize={6} />
+        <Box>Add New Expense</Box>
+      </Button>
+
       <List pt={5}>
-        {expenseItems.map((expense, id) => {
-          return <ExpensesBody 
-                    key={id}
-                    targetExpense={expense} 
-                    expenseItems={expenseItems}
-                    setExpenseItems={setExpenseItems} 
-                    deleteClickHandler={deleteClickHandler}/>
+        {expenseItems.map((expense, i) => {
+          console.dir({ expense, i });
+          return (
+            <ExpensesBody
+              key={i}
+              value={i === editIndex ? values : expense}
+              isEditing={i === editIndex}
+              onEdit={() => {
+                setValues(expense);
+                setEditIndex(i);
+              }}
+              onCancel={() => setEditIndex(-1)}
+              onSave={(changedExpense) => {
+                setExpenseItems((prev) =>
+                  prev.map((_expense, _i) =>
+                    i !== _i ? _expense : changedExpense
+                  )
+                );
+                setValues(defaultValues);
+                setEditIndex(-1);
+              }}
+              onChange={(value) => {
+                setValues(value);
+              }}
+            />
+          );
         })}
       </List>
-
-      <Button colorScheme={"green"} w={["75%", null, "40%", "25"]} m={5} onClick={addClickHandler}>
-          <PlusSquareIcon boxSize={6}/>
-          <Box>Add New Expense</Box>
-      </Button>
     </Box>
-)
+  );
 }

@@ -1,4 +1,4 @@
-import { Heading, Text, Button, Flex, GridItem } from "@chakra-ui/react";
+import { Heading, Text, Button, Flex, GridItem, Box } from "@chakra-ui/react";
 
 export default function EstimatesBody(props) {
   return (
@@ -23,6 +23,12 @@ export default function EstimatesBody(props) {
             <Text color="green">
               {`Total: $${props.price}`}
             </Text>
+            <Box display={"flex"} alignItems={"center"}>
+              <Text pr={2}>Invoiced:</Text>
+            <Text color="red" fontSize={".8rem"} fontStyle={"italic"}>
+              false
+            </Text>
+            </Box>
           </Flex>  
       </Flex>
     </GridItem>
