@@ -27,7 +27,6 @@ export default function Expenses() {
   ]);
 
   const [values, setValues] = useState(defaultValues);
-
   const [editIndex, setEditIndex] = useState(-1);
 
   return (
@@ -38,7 +37,9 @@ export default function Expenses() {
         colorScheme={"green"}
         w={["60%", null, "40%", "25"]}
         m={5}
-        onClick={() => {}}
+        onClick={() => {
+          setExpenseItems([defaultValues, ...expenseItems]);
+        }}
       >
         <PlusSquareIcon boxSize={6} />
         <Box>Add New Expense</Box>
@@ -59,15 +60,22 @@ export default function Expenses() {
               onCancel={() => setEditIndex(-1)}
               onSave={(changedExpense) => {
                 setExpenseItems((prev) =>
-                  prev.map((_expense, _i) =>
-                    i !== _i ? _expense : changedExpense
-                  )
+                  prev.map((_expense, _i) => {
+                    return i !== _i ? _expense : changedExpense;
+                  })
                 );
                 setValues(defaultValues);
                 setEditIndex(-1);
               }}
               onChange={(value) => {
                 setValues(value);
+              }}
+              onDelete={() => {
+                setExpenseItems((prev) =>
+                  prev.filter((_deletedExpense, _i) => {
+                    return _i !== i;
+                  })
+                );
               }}
             />
           );

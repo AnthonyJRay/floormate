@@ -1,5 +1,7 @@
 import { CloseIcon, CheckIcon, EditIcon, DeleteIcon } from "@chakra-ui/icons";
-import { ListItem, Box, Text, Button, Input } from "@chakra-ui/react";
+import { ListItem, Box, Button } from "@chakra-ui/react";
+import ExpenseForm from "./ExpenseForm";
+import ExpenseDisplay from "./ExpenseDisplay";
 
 export default function ExpensesBody({
   value,
@@ -7,6 +9,7 @@ export default function ExpensesBody({
   onEdit = () => {},
   onSave = () => {},
   onCancel = () => {},
+  onDelete = () => {},
   isEditing = false,
 }) {
   return (
@@ -54,64 +57,12 @@ export default function ExpensesBody({
             <Button colorScheme={"yellow"} onClick={onEdit}>
               <EditIcon color={"white"} boxSize={4} />
             </Button>
-            <Button onClick={() => {}} colorScheme={"red"}>
+            <Button colorScheme={"red"} onClick={onDelete}>
               <DeleteIcon boxSize={3} />
             </Button>
           </>
         )}
       </Box>
     </ListItem>
-  );
-}
-
-function ExpenseForm({ value, onChange = () => {} }) {
-  const { name, occurredOn, total, description } = value;
-  return (
-    <>
-      <Input
-        id={"occurredOn"}
-        placeholder={"Expense Date"}
-        value={occurredOn}
-        onChange={(e) => onChange({ ...value, occurredOn: e.target.value })}
-        m={2}
-      />
-
-      <Input
-        id={"name"}
-        placeholder={"Expense Name"}
-        value={name}
-        onChange={(e) => onChange({ ...value, name: e.target.value })}
-        m={2}
-      />
-
-      <Input
-        id={"total"}
-        placeholder={"Expense Total"}
-        value={total}
-        onChange={(e) => onChange({ ...value, total: e.target.value })}
-        m={2}
-      />
-
-      <Input
-        id={"description"}
-        placeholder={"Expense Description"}
-        value={description}
-        onChange={(e) => onChange({ ...value, description: e.target.value })}
-        m={2}
-      />
-    </>
-  );
-}
-
-function ExpenseDisplay({ name, occurredOn, total, description }) {
-  return (
-    <>
-      <Text p={2}>{occurredOn}</Text>
-      <Text p={2}>{name}</Text>
-      <Text p={2} color={"red"}>
-        {total}
-      </Text>
-      <Text p={2}>{description}</Text>
-    </>
   );
 }
