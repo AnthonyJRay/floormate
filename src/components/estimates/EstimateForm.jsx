@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Textarea, FormLabel } from "@chakra-ui/react";
 
 import "./tableBody.css";
 
@@ -223,14 +224,11 @@ export default function NewEstimate({
           <Box>
             <Box
               display={"flex"}
+              flexDirection={["column", "column", "column", "row"]}
               justifyContent={["center", "center", "start"]}
               margin={"1rem"}
             >
-              <List
-                border={["1px", "1px", "none"]}
-                width={["100%", "95%", "65%"]}
-                m={1}
-              >
+              <List width={["100%", "95%", "65%"]} mb={8}>
                 <ListItem m={1}>
                   <Heading fontSize={"xl"}>Bill To:</Heading>
                 </ListItem>
@@ -285,6 +283,10 @@ export default function NewEstimate({
                   </ListItem>
                 </Box>
               </List>
+              <Box width={"100%"}>
+                <FormLabel>Job Description</FormLabel>
+                <Textarea height={"116px"} />
+              </Box>
             </Box>
           </Box>
 
@@ -364,29 +366,41 @@ export default function NewEstimate({
             </Table>
           </TableContainer>
 
-          <Box display={"flex"} justifyContent={"flex-end"} m={"2rem"} mr={10}>
-            <List fontWeight={"bold"}>
-              <ListItem p={1}>SUBTOTAL: </ListItem>
-              <ListItem p={1}>TAX: </ListItem>
-              <ListItem p={1}>TOTAL: </ListItem>
-            </List>
-            <List pl={5}>
-              <ListItem h={"32px"} p={1}>
-                {estimateFormData.estimateSubTotal}
-              </ListItem>
-              <ListItem h={"32px"} p={1}>
-                <Input
-                  w={"3rem"}
-                  size={"xs"}
-                  value={estimateFormData.estimateTaxRate}
-                  onChange={(e) => handleTaxInput(e)}
-                />{" "}
-                %
-              </ListItem>
-              <ListItem h={"32px"} p={1}>
-                {estimateFormData.estimateTotal}
-              </ListItem>
-            </List>
+          <Box
+            display={"flex"}
+            flexDirection={"column"}
+            justifyContent={"flex-end"}
+            m={"2rem"}
+            mr={10}
+          >
+            <Box display={"flex"} flexDirection={"column"} mt={4}>
+              <FormLabel>Additional Notes:</FormLabel>
+              <Textarea />
+            </Box>
+            <Box display={"flex"} justifyContent={"end"} mt={4}>
+              <List fontWeight={"bold"}>
+                <ListItem p={1}>SUBTOTAL: </ListItem>
+                <ListItem p={1}>TAX: </ListItem>
+                <ListItem p={1}>TOTAL: </ListItem>
+              </List>
+              <List pl={5}>
+                <ListItem h={"32px"} p={1}>
+                  {estimateFormData.estimateSubTotal}
+                </ListItem>
+                <ListItem h={"32px"} p={1}>
+                  <Input
+                    w={"3rem"}
+                    size={"xs"}
+                    value={estimateFormData.estimateTaxRate}
+                    onChange={(e) => handleTaxInput(e)}
+                  />{" "}
+                  %
+                </ListItem>
+                <ListItem h={"32px"} p={1}>
+                  {estimateFormData.estimateTotal}
+                </ListItem>
+              </List>
+            </Box>
           </Box>
 
           <ModalFooter>

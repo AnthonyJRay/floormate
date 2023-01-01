@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
-import { Box, Heading, Grid, Button, GridItem } from "@chakra-ui/react";
-
-import { DeleteIcon } from "@chakra-ui/icons";
+import { Box, Heading, Grid, Button } from "@chakra-ui/react";
 
 import EstimatesBody from "../components/estimates/EstimatesBody";
 import EstimateForm from "../components/estimates/EstimateForm";
@@ -111,45 +109,23 @@ export default function Estimates() {
         {estimateData.map((estimate, i) => {
           return (
             // Pass estimate form state for "editing" or "viewing" an estimate
-            <GridItem border="1px" borderColor="gray.200">
-              <EstimatesBody
-                key={i}
-                value={i === editIndex ? values : estimate}
-                name={estimate.client.name}
-                description={estimate.lineItems[0].description}
-                price={estimate.client.price}
-                total={estimate.lineItems[0].total}
-                invoiced={estimate.invoiced}
-                addLineItem={addLineItem}
-                onDelete={() => {
-                  setEstimateData((prev) => {
-                    return prev.filter((_deletedEstimate, _i) => {
-                      return _i !== i;
-                    });
+            <EstimatesBody
+              key={i}
+              value={i === editIndex ? values : estimate}
+              name={estimate.client.name}
+              description={estimate.lineItems[0].description}
+              price={estimate.client.price}
+              total={estimate.lineItems[0].total}
+              invoiced={estimate.invoiced}
+              addLineItem={addLineItem}
+              onDelete={() => {
+                setEstimateData((prev) => {
+                  return prev.filter((_deletedEstimate, _i) => {
+                    return _i !== i;
                   });
-                }}
-              />
-              <Box
-                display={"flex"}
-                width={"90%"}
-                justifyContent={"space-around"}
-                m={2}
-              >
-                <EstimateForm
-                  btnText={"View"}
-                  btnColor={"yellow"}
-                  btnIcon={false}
-                  addLineItem={addLineItem}
-                />
-                <Button
-                  size={"sm"}
-                  colorScheme={"red"}
-                  onClick={() => console.log("deleted")}
-                >
-                  <DeleteIcon />
-                </Button>
-              </Box>
-            </GridItem>
+                });
+              }}
+            />
           );
         })}
       </Grid>

@@ -15,56 +15,78 @@ export default function EstimatesBody({
   addLineItem = () => {},
 }) {
   return (
-    <Flex
-      flexDir={"column"}
-      alignItems="center"
-      justifyContent="space-between"
-      height="100%"
-    >
-      <Heading size="sm" m={".5rem"}>
-        {name}
-      </Heading>
-      <Text fontSize="xs" textAlign={"center"} m="5px">
-        {description}
-      </Text>
+    <GridItem border="1px" borderColor="gray.200">
       <Flex
-        width={["80%", "70%", "55%"]}
-        flexDirection={"column"}
-        justifyContent={["space-between"]}
+        flexDir={"column"}
         alignItems="center"
+        justifyContent="space-between"
+        height="100%"
       >
+        <Heading size="sm" m={".5rem"}>
+          {name}
+        </Heading>
+        <Text fontSize="xs" textAlign={"center"} m="5px">
+          {description}
+        </Text>
+        <Flex
+          width={["80%", "70%", "55%"]}
+          flexDirection={"column"}
+          justifyContent={["space-between"]}
+          alignItems="center"
+        >
+          <Box
+            display={"flex"}
+            flexDirection={["column", "column", "row"]}
+            alignItems={"center"}
+            justifyContent={"space-around"}
+            width={"100%"}
+            p={2}
+          >
+            <Text color="green" fontSize={".8rem"}>
+              {`$${total}`}
+            </Text>
+            {invoiced ? (
+              <Text
+                color={"green"}
+                fontSize={".75rem"}
+                fontStyle={"italic"}
+                letterSpacing={0.25}
+              >
+                Invoiced
+              </Text>
+            ) : (
+              <Text
+                color={"red"}
+                fontSize={".75rem"}
+                fontStyle={"italic"}
+                letterSpacing={0.25}
+              >
+                Not Invoiced
+              </Text>
+            )}
+          </Box>
+        </Flex>
         <Box
           display={"flex"}
-          flexDirection={["column", "column", "row"]}
-          alignItems={"center"}
+          width={"90%"}
           justifyContent={"space-around"}
-          width={"100%"}
-          p={2}
+          m={2}
         >
-          <Text color="green" fontSize={".8rem"}>
-            {`$${total}`}
-          </Text>
-          {invoiced ? (
-            <Text
-              color={"green"}
-              fontSize={".75rem"}
-              fontStyle={"italic"}
-              letterSpacing={0.25}
-            >
-              Invoiced
-            </Text>
-          ) : (
-            <Text
-              color={"red"}
-              fontSize={".75rem"}
-              fontStyle={"italic"}
-              letterSpacing={0.25}
-            >
-              Not Invoiced
-            </Text>
-          )}
+          <EstimateForm
+            btnText={"View"}
+            btnColor={"yellow"}
+            btnIcon={false}
+            addLineItem={addLineItem}
+          />
+          <Button
+            size={"sm"}
+            colorScheme={"red"}
+            onClick={() => onDelete(value)}
+          >
+            <DeleteIcon />
+          </Button>
         </Box>
       </Flex>
-    </Flex>
+    </GridItem>
   );
 }
