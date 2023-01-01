@@ -4,10 +4,10 @@ import { Box, Heading, List, Button } from "@chakra-ui/react";
 import ExpensesBody from "../components/expenses/ExpensesBody";
 
 const defaultValues = {
-  occurredOn: "",
-  name: "",
-  total: "",
-  description: "",
+  occurredOn: "Date",
+  name: "Name",
+  total: "Total",
+  description: "Description",
 };
 
 export default function Expenses() {
@@ -47,7 +47,6 @@ export default function Expenses() {
 
       <List pt={5}>
         {expenseItems.map((expense, i) => {
-          console.dir({ expense, i });
           return (
             <ExpensesBody
               key={i}
