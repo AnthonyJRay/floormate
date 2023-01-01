@@ -181,7 +181,7 @@ export default function NewEstimate(props) {
         color={"whiteAlpha.900"}
       >
         <Text p={1}>{props.btnText}</Text>
-        <Icon as={BsPlusLg} />
+        {props.btnIcon ? <Icon as={BsPlusLg} /> : null}
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose} size={"full"}>

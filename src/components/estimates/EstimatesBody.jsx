@@ -1,6 +1,6 @@
 import { Heading, Text, Button, Flex, GridItem, Box } from "@chakra-ui/react";
 
-import NewEstimate from "../estimates/NewEstimate";
+import EstimateForm from "../estimates/NewEstimate";
 
 export default function EstimatesBody({
   name = "Client Name",
@@ -24,18 +24,37 @@ export default function EstimatesBody({
         </Text>
         <Flex
           width={["80%", "70%", "55%"]}
-          direction={["column", "column", "column", "row"]}
+          flexDirection={"column"}
           justifyContent={["space-between"]}
           alignItems="center"
         >
-          <Text color="green" fontSize={".8rem"}>{`Total: $${total}`}</Text>
-          <Box display={"flex"} alignItems={"center"}>
+          <Box
+            display={"flex"}
+            flexDirection={["column", "column", "row"]}
+            alignItems={"center"}
+            justifyContent={"space-around"}
+            width={"100%"}
+            p={2}
+          >
+            <Text color="green" fontSize={".8rem"}>
+              {`$${total}`}
+            </Text>
             {invoiced ? (
-              <Text color={"green"} fontSize={".75rem"} fontStyle={"italic"}>
+              <Text
+                color={"green"}
+                fontSize={".75rem"}
+                fontStyle={"italic"}
+                letterSpacing={0.25}
+              >
                 Invoiced
               </Text>
             ) : (
-              <Text color={"red"} fontSize={".75rem"} fontStyle={"italic"}>
+              <Text
+                color={"red"}
+                fontSize={".75rem"}
+                fontStyle={"italic"}
+                letterSpacing={0.25}
+              >
                 Not Invoiced
               </Text>
             )}
@@ -43,7 +62,7 @@ export default function EstimatesBody({
 
           {/* NewEstimate should be changed to "EsimateForm." */}
           {/* If it's not going to be used only for "new" estiamtes but also to "edit" existing ones. */}
-          <NewEstimate btnText={"View"} btnColor={"yellow"} />
+          <EstimateForm btnText={"View"} btnColor={"yellow"} btnIcon={false} />
         </Flex>
       </Flex>
     </GridItem>

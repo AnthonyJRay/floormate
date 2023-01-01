@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
-
 import { Box, Heading, Grid } from "@chakra-ui/react";
 
-// import DisplayCards from "../components/DisplayCards";
 import EstimatesBody from "../components/estimates/EstimatesBody";
-import NewEstimate from "../components/estimates/NewEstimate";
+import EstimateForm from "../components/estimates/NewEstimate";
 
 const defaultValues = {
   client: {
@@ -41,7 +39,7 @@ export default function Estimates() {
           description: "Install new carpet in master bedroom",
           quantity: "40",
           rate: "9.00",
-          total: "",
+          total: "380",
         },
       ],
       invoiced: false,
@@ -60,10 +58,10 @@ export default function Estimates() {
           description: "Install new LVP in kitchen area.",
           quantity: "300",
           rate: "2.00",
-          total: "",
+          total: "600",
         },
       ],
-      invoiced: false,
+      invoiced: true,
     },
   ]);
 
@@ -74,7 +72,11 @@ export default function Estimates() {
           <Heading size={"xl"} pb={"2rem"}>
             Estimates
           </Heading>
-          <NewEstimate btnText={"New Estimate"} btnColor={"green"} />
+          <EstimateForm
+            btnText={"New Estimate"}
+            btnColor={"green"}
+            btnIcon={true}
+          />
         </Box>
 
         <Grid
