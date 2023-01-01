@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
-import { Box, Heading, Grid } from "@chakra-ui/react";
+import { Box, Heading, Grid, Button, GridItem } from "@chakra-ui/react";
+
+import { DeleteIcon } from "@chakra-ui/icons";
 
 import EstimatesBody from "../components/estimates/EstimatesBody";
-import EstimateForm from "../components/estimates/NewEstimate";
+import EstimateForm from "../components/estimates/EstimateForm";
 
 const defaultValues = {
   client: {
@@ -69,6 +71,10 @@ export default function Estimates() {
   const [values, setValues] = useState(defaultValues);
   const [editIndex, setEditIndex] = useState(-1);
 
+  const addLineItem = () => {
+    console.log("Add Line Item");
+  };
+
   return (
     <Box p={5}>
       <Box textAlign="center">
@@ -82,11 +88,13 @@ export default function Estimates() {
           btnColor={"green"}
           btnIcon={true}
           newEstimate={() => setValues(defaultValues)}
-          addLineItem={() => console.log("Add Line Item")}
+          addLineItem={addLineItem}
           onChange={() => console.log("Something changed")}
           onSave={() => console.log("Saved")}
           onDelete={() => onDelete(estimate, i)}
         />
+
+        <Button onClick={() => <EstimateForm />}>Hello</Button>
       </Box>
 
       <Grid
@@ -103,22 +111,45 @@ export default function Estimates() {
         {estimateData.map((estimate, i) => {
           return (
             // Pass estimate form state for "editing" or "viewing" an estimate
-            <EstimatesBody
-              key={i}
-              value={i === editIndex ? values : estimate}
-              name={estimate.client.name}
-              description={estimate.lineItems[0].description}
-              price={estimate.client.price}
-              total={estimate.lineItems[0].total}
-              invoiced={estimate.invoiced}
-              onDelete={() => {
-                setEstimateData((prev) => {
-                  return prev.filter((_deletedEstimate, _i) => {
-                    return _i !== i;
+            <GridItem border="1px" borderColor="gray.200">
+              <EstimatesBody
+                key={i}
+                value={i === editIndex ? values : estimate}
+                name={estimate.client.name}
+                description={estimate.lineItems[0].description}
+                price={estimate.client.price}
+                total={estimate.lineItems[0].total}
+                invoiced={estimate.invoiced}
+                addLineItem={addLineItem}
+                onDelete={() => {
+                  setEstimateData((prev) => {
+                    return prev.filter((_deletedEstimate, _i) => {
+                      return _i !== i;
+                    });
                   });
-                });
-              }}
-            />
+                }}
+              />
+              <Box
+                display={"flex"}
+                width={"90%"}
+                justifyContent={"space-around"}
+                m={2}
+              >
+                <EstimateForm
+                  btnText={"View"}
+                  btnColor={"yellow"}
+                  btnIcon={false}
+                  addLineItem={addLineItem}
+                />
+                <Button
+                  size={"sm"}
+                  colorScheme={"red"}
+                  onClick={() => console.log("deleted")}
+                >
+                  <DeleteIcon />
+                </Button>
+              </Box>
+            </GridItem>
           );
         })}
       </Grid>
