@@ -13,6 +13,7 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
+  ModalOverlay,
   Text,
   Icon,
   Flex,
@@ -192,19 +193,44 @@ export default function NewEstimate({
         {btnIcon ? <Icon as={BsPlusLg} /> : null}
       </Button>
 
-      <Modal isOpen={isOpen} onClose={onClose} size={"full"}>
+      <Modal isOpen={isOpen} onClose={onClose} size={["full", "full", "6xl"]}>
+        <ModalOverlay />
         <ModalContent>
-          <Flex justifyContent={"space-around"} alignItems={"center"} p={2}>
+          <Flex alignItems={"center"} p={2}>
             <ModalHeader flexGrow={1}>New Estimate</ModalHeader>
+            <List display={"flex"} pl={"1rem"} m={"1"}>
+              <Box display={"flex"} flexDirection={"column"}>
+                <ListItem
+                  display={"flex"}
+                  height={"100%"}
+                  alignItems={"center"}
+                >
+                  <Heading size={"sm"}>Estimate:</Heading>
+                  <Text>{`#00015`}</Text>
+                </ListItem>
+                <ListItem
+                  display={"flex"}
+                  alignItems={"center"}
+                  height={"100%"}
+                >
+                  <Heading size={"sm"}>Estimate Date:</Heading>
+                  <Text>{currentDate}</Text>
+                </ListItem>
+              </Box>
+            </List>
           </Flex>
 
           <Box>
             <Box
               display={"flex"}
-              justifyContent={"space-around"}
+              justifyContent={["center", "center", "start"]}
               margin={"1rem"}
             >
-              <List border={"1px"} width={"48%"} m={1}>
+              <List
+                border={["1px", "1px", "none"]}
+                width={["100%", "95%", "65%"]}
+                m={1}
+              >
                 <ListItem m={1}>
                   <Heading fontSize={"xl"}>Bill To:</Heading>
                 </ListItem>
@@ -256,37 +282,6 @@ export default function NewEstimate({
                       variant={"flushed"}
                       defaultValue={estimateFormData.clientEmail}
                     />
-                  </ListItem>
-                </Box>
-              </List>
-
-              <List
-                display={"flex"}
-                border={"1px"}
-                width={"48%"}
-                pl={"1rem"}
-                m={"1"}
-              >
-                <Box
-                  display={"flex"}
-                  flexDir={"column"}
-                  justifyItems={"space-around"}
-                >
-                  <ListItem
-                    display={"flex"}
-                    height={"100%"}
-                    alignItems={"center"}
-                  >
-                    <Heading size={"sm"}>Estimate:</Heading>
-                    <Text>{`#00015`}</Text>
-                  </ListItem>
-                  <ListItem
-                    display={"flex"}
-                    alignItems={"center"}
-                    height={"100%"}
-                  >
-                    <Heading size={"sm"}>Estimate Date:</Heading>
-                    <Text>{currentDate}</Text>
                   </ListItem>
                 </Box>
               </List>
