@@ -41,7 +41,26 @@ export default function Estimates() {
           description: "Install new carpet in master bedroom",
           quantity: "40",
           rate: "9.00",
-          total: "360",
+          total: "",
+        },
+      ],
+      invoiced: false,
+    },
+    {
+      client: {
+        name: "Dee D",
+        address: "555 S Cherry Dr",
+        phone: "123 777 5555",
+        email: "deeD@example.com",
+      },
+      estimateDate: "03/22/22",
+      lineItems: [
+        {
+          name: "Install LVP",
+          description: "Install new LVP in kitchen area.",
+          quantity: "300",
+          rate: "2.00",
+          total: "",
         },
       ],
       invoiced: false,
@@ -55,7 +74,7 @@ export default function Estimates() {
           <Heading size={"xl"} pb={"2rem"}>
             Estimates
           </Heading>
-          <NewEstimate btnText={"New Estimate"} />
+          <NewEstimate btnText={"New Estimate"} btnColor={"green"} />
         </Box>
 
         <Grid
@@ -70,7 +89,6 @@ export default function Estimates() {
           pt={"1rem"}
         >
           {estimateData.map((estimate, i) => {
-            console.dir(estimate);
             return (
               <EstimatesBody
                 key={i}
@@ -78,6 +96,7 @@ export default function Estimates() {
                 description={estimate.lineItems[0].description}
                 price={estimate.client.price}
                 total={estimate.lineItems[0].total}
+                invoiced={estimate.invoiced}
               />
             );
           })}

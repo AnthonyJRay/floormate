@@ -1,6 +1,13 @@
 import { Heading, Text, Button, Flex, GridItem, Box } from "@chakra-ui/react";
 
-export default function EstimatesBody(props) {
+import NewEstimate from "../estimates/NewEstimate";
+
+export default function EstimatesBody({
+  name = "Client Name",
+  description = "Job Description",
+  total = "Estimate total",
+  invoiced = false,
+}) {
   return (
     <GridItem border="1px" borderColor="gray.200">
       <Flex
@@ -10,10 +17,10 @@ export default function EstimatesBody(props) {
         height="100%"
       >
         <Heading size="sm" m={".5rem"}>
-          {props.name}
+          {name}
         </Heading>
         <Text fontSize="xs" textAlign={"center"} m="5px">
-          {props.description}
+          {description}
         </Text>
         <Flex
           width={["80%", "70%", "55%"]}
@@ -21,22 +28,22 @@ export default function EstimatesBody(props) {
           justifyContent={["space-between"]}
           alignItems="center"
         >
-          <Button
-            size="sm"
-            colorScheme="yellow"
-            m={"1rem"}
-            onClick={() => console.log("View Button: Works!")}
-          >
-            View
-          </Button>
-
-          <Text color="green">{`Total: $${props.total}`}</Text>
+          <Text color="green" fontSize={".8rem"}>{`Total: $${total}`}</Text>
           <Box display={"flex"} alignItems={"center"}>
-            <Text pr={2}>Invoiced:</Text>
-            <Text color="red" fontSize={".8rem"} fontStyle={"italic"}>
-              false
-            </Text>
+            {invoiced ? (
+              <Text color={"green"} fontSize={".75rem"} fontStyle={"italic"}>
+                Invoiced
+              </Text>
+            ) : (
+              <Text color={"red"} fontSize={".75rem"} fontStyle={"italic"}>
+                Not Invoiced
+              </Text>
+            )}
           </Box>
+
+          {/* NewEstimate should be changed to "EsimateForm." */}
+          {/* If it's not going to be used only for "new" estiamtes but also to "edit" existing ones. */}
+          <NewEstimate btnText={"View"} btnColor={"yellow"} />
         </Flex>
       </Flex>
     </GridItem>

@@ -65,9 +65,6 @@ export default function NewEstimate(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [estimateFormData, setEstimateFormData] = useState(initialEstimateForm);
-  console.log(props);
-  // Get Client information
-  // const handleClientInfo = () => {};
 
   // Qty Input
   const handleQtyInput = (e, id) => {
@@ -177,7 +174,12 @@ export default function NewEstimate(props) {
 
   return (
     <Box>
-      <Button onClick={onOpen} size={"sm"} colorScheme="green">
+      <Button
+        onClick={onOpen}
+        size={"sm"}
+        colorScheme={props.btnColor}
+        color={"whiteAlpha.900"}
+      >
         <Text p={1}>{props.btnText}</Text>
         <Icon as={BsPlusLg} />
       </Button>
