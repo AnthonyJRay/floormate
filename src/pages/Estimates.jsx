@@ -6,28 +6,47 @@ import { Box, Heading, Grid } from "@chakra-ui/react";
 import EstimatesBody from "../components/estimates/EstimatesBody";
 import NewEstimate from "../components/estimates/NewEstimate";
 
+const defaultValues = {
+  client: {
+    name: "",
+    address: "",
+    phone: "",
+    email: "",
+  },
+  estimateDate: "",
+  lineItems: [
+    {
+      name: "",
+      description: "",
+      quantity: "",
+      rate: "",
+      total: "",
+    },
+  ],
+};
+
 export default function Estimates() {
-  const [estimateData, setEstimateData] = useState([]);
-
-  // Edit button
-  function editClickHandler() {
-    return console.log("Estimate Edit Button!");
-  }
-
-  // Add button
-  function addClickHandler() {
-    return console.log("Estimate Add button!");
-  }
-
-  const estimatesData = async (req, res) => {
-    const response = await fetch("http://localhost:5000/estimates");
-    const jsonData = await response.json();
-    setEstimateData(jsonData.rows);
-  };
-
-  useEffect(() => {
-    estimatesData();
-  }, []);
+  const [estimateData, setEstimateData] = useState([
+    {
+      client: {
+        name: "Vincent Ray",
+        address: "123 N Main St",
+        phone: "5555551234",
+        email: "vincentR@example.com",
+      },
+      estimateDate: "03/22/22",
+      lineItems: [
+        {
+          name: "Install Carpet",
+          description: "Install new carpet in master bedroom",
+          quantity: "40",
+          rate: "9.00",
+          total: "360",
+        },
+      ],
+      invoiced: false,
+    },
+  ]);
 
   return (
     <>
@@ -36,13 +55,9 @@ export default function Estimates() {
           <Heading size={"xl"} pb={"2rem"}>
             Estimates
           </Heading>
-          <NewEstimate
-            btnText={"New Estimate"}
-            addBtn={() => addClickHandler}
-          />
+          <NewEstimate btnText={"New Estimate"} />
         </Box>
 
-        {/* Card */}
         <Grid
           templateColumns={{
             base: "1fr 1fr",
@@ -54,13 +69,15 @@ export default function Estimates() {
           color={"gray.100"}
           pt={"1rem"}
         >
-          {estimateData.map((estimate) => {
+          {estimateData.map((estimate, i) => {
+            console.dir(estimate);
             return (
               <EstimatesBody
-                key={estimate.id}
-                header={estimate.clientname}
-                body={estimate.estimatedesc}
-                price={estimate.price}
+                key={i}
+                name={estimate.client.name}
+                description={estimate.lineItems[0].description}
+                price={estimate.client.price}
+                total={estimate.lineItems[0].total}
               />
             );
           })}

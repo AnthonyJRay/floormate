@@ -46,16 +46,16 @@ const initialEstimateForm = {
       lineItemsID: 1,
       lineItemsName: "Line Item #1",
       lineItemsDesc: "Line item description area.",
-      lineItemsQty: 0,
-      lineItemsRate: 0,
+      lineItemsQty: 15,
+      lineItemsRate: 15,
       lineItemsTotal: 0,
     },
     {
       lineItemsID: 2,
       lineItemsName: "Line Item #2",
       lineItemsDesc: "Line item description area.",
-      lineItemsQty: 0,
-      lineItemsRate: 0,
+      lineItemsQty: 10,
+      lineItemsRate: 10,
       lineItemsTotal: 0,
     },
   ],
@@ -65,7 +65,7 @@ export default function NewEstimate(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [estimateFormData, setEstimateFormData] = useState(initialEstimateForm);
-
+  console.log(props);
   // Get Client information
   // const handleClientInfo = () => {};
 
@@ -268,7 +268,6 @@ export default function NewEstimate(props) {
                     alignItems={"center"}
                   >
                     <Heading size={"sm"}>Estimate:</Heading>
-                    {/* Conditionally render Estimate # from database id auto incrementation */}
                     <Text>{`#00015`}</Text>
                   </ListItem>
                   <ListItem
@@ -277,7 +276,6 @@ export default function NewEstimate(props) {
                     height={"100%"}
                   >
                     <Heading size={"sm"}>Estimate Date:</Heading>
-                    {/*  Date and Header don't vertically align. */}
                     <Text>{currentDate}</Text>
                   </ListItem>
                 </Box>
@@ -394,12 +392,7 @@ export default function NewEstimate(props) {
             <Button mr={1} colorScheme={"linkedin"} onClick={onClose}>
               Close
             </Button>
-            <Button
-              width={"25%"}
-              onClick={props.addBtn()}
-              bg={"green"}
-              color={"whiteAlpha.900"}
-            >
+            <Button width={"25%"} bg={"green"} color={"whiteAlpha.900"}>
               Save
             </Button>
           </ModalFooter>

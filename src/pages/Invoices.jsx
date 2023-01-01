@@ -31,23 +31,16 @@ export default function Estimates() {
 
   return (
     <>
-      <DisplayCards
-        header={"Invoices"}
-        btnText={"New Invoice"}
-        cardBody={estimateData.map((estimate) => {
-          return (
-            <EstimatesBody
-              key={estimate.id}
-              header={estimate.clientname}
-              body={estimate.estimatedesc}
-              price={estimate.price}
-            />
-          );
-        })}
-        addBtn={() => addClickHandler}
-        editBtn={() => editClickHandler}
-        deleteBtn={() => deleteClickHandler}
-      />
+      {estimateData.map((estimate) => {
+        return (
+          <EstimatesBody
+            key={estimate.id}
+            header={estimate.clientname}
+            body={estimate.estimatedesc}
+            price={estimate.price}
+          />
+        );
+      })}
     </>
   );
 }

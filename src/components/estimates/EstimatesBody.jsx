@@ -10,10 +10,10 @@ export default function EstimatesBody(props) {
         height="100%"
       >
         <Heading size="sm" m={".5rem"}>
-          {props.header}
+          {props.name}
         </Heading>
         <Text fontSize="xs" textAlign={"center"} m="5px">
-          {props.body}
+          {props.description}
         </Text>
         <Flex
           width={["80%", "70%", "55%"]}
@@ -30,7 +30,7 @@ export default function EstimatesBody(props) {
             View
           </Button>
 
-          <Text color="green">{`Total: $${props.price}`}</Text>
+          <Text color="green">{`Total: $${props.total}`}</Text>
           <Box display={"flex"} alignItems={"center"}>
             <Text pr={2}>Invoiced:</Text>
             <Text color="red" fontSize={".8rem"} fontStyle={"italic"}>
