@@ -67,7 +67,7 @@ export default function NewEstimate(props) {
   const [estimateFormData, setEstimateFormData] = useState(initialEstimateForm);
 
   // Get Client information
-  const handleClientInfo = () => {};
+  // const handleClientInfo = () => {};
 
   // Qty Input
   const handleQtyInput = (e, id) => {
@@ -302,10 +302,22 @@ export default function NewEstimate(props) {
                   return (
                     <Tr key={item.lineItemsID}>
                       <Td>
-                        <Input p={1} value={item.lineItemsName} />
+                        <Input
+                          p={1}
+                          value={item.lineItemsName}
+                          onChange={() =>
+                            console.log("Line Item Name changed!")
+                          }
+                        />
                       </Td>
                       <Td>
-                        <Input p={1} value={item.lineItemsDesc} />
+                        <Input
+                          p={1}
+                          value={item.lineItemsDesc}
+                          onChange={() =>
+                            console.log("Line Item Description changed!")
+                          }
+                        />
                       </Td>
                       <Td textAlign={"end"}>
                         <Input
