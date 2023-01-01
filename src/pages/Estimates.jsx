@@ -65,6 +65,9 @@ export default function Estimates() {
     },
   ]);
 
+  const [values, setValues] = useState(defaultValues);
+  const [editIndex, setEditIndex] = useState(-1);
+
   return (
     <>
       <Box p={5}>
@@ -94,6 +97,7 @@ export default function Estimates() {
             return (
               <EstimatesBody
                 key={i}
+                value={i === editIndex ? values : estimate}
                 name={estimate.client.name}
                 description={estimate.lineItems[0].description}
                 price={estimate.client.price}

@@ -60,8 +60,6 @@ export default function EstimatesBody({
             )}
           </Box>
 
-          {/* NewEstimate should be changed to "EsimateForm." */}
-          {/* If it's not going to be used only for "new" estiamtes but also to "edit" existing ones. */}
           <EstimateForm btnText={"View"} btnColor={"yellow"} btnIcon={false} />
         </Flex>
       </Flex>

@@ -394,7 +394,20 @@ export default function NewEstimate(props) {
             <Button mr={1} colorScheme={"linkedin"} onClick={onClose}>
               Close
             </Button>
-            <Button width={"25%"} bg={"green"} color={"whiteAlpha.900"}>
+            <Button
+              mr={1}
+              colorScheme={"yellow"}
+              color={"whiteAlpha.900"}
+              onClick={() => console.log("Editing!")}
+            >
+              Edit
+            </Button>
+            <Button
+              width={"25%"}
+              bg={"green"}
+              color={"whiteAlpha.900"}
+              onClick={() => console.log("Saved!")}
+            >
               Save
             </Button>
           </ModalFooter>
