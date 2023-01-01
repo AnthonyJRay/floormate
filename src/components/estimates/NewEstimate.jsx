@@ -61,7 +61,15 @@ const initialEstimateForm = {
   ],
 };
 
-export default function NewEstimate(props) {
+export default function NewEstimate({
+  onSave = () => {},
+  onChange = () => {},
+  onDelete = () => {},
+  addLineItem = () => {},
+  btnColor = "",
+  btnIcon = "",
+  btnText = "",
+}) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [estimateFormData, setEstimateFormData] = useState(initialEstimateForm);
@@ -177,11 +185,11 @@ export default function NewEstimate(props) {
       <Button
         onClick={onOpen}
         size={"sm"}
-        colorScheme={props.btnColor}
+        colorScheme={btnColor}
         color={"whiteAlpha.900"}
       >
-        <Text p={1}>{props.btnText}</Text>
-        {props.btnIcon ? <Icon as={BsPlusLg} /> : null}
+        <Text p={1}>{btnText}</Text>
+        {btnIcon ? <Icon as={BsPlusLg} /> : null}
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose} size={"full"}>
@@ -290,6 +298,13 @@ export default function NewEstimate(props) {
               <TableCaption>Placeholder for Table Caption</TableCaption>
               <Thead>
                 <Tr>
+                  <Td>
+                    <Button colorScheme={"green"} onClick={addLineItem}>
+                      New Line Item
+                    </Button>
+                  </Td>
+                </Tr>
+                <Tr>
                   <Th>Item Name</Th>
                   <Th>Item Description</Th>
                   <Th isNumeric>Qty</Th>
@@ -342,7 +357,7 @@ export default function NewEstimate(props) {
                         <Button
                           size={"sm"}
                           colorScheme={"red"}
-                          onClick={props.onDelete}
+                          onClick={onDelete}
                         >
                           X
                         </Button>
@@ -350,17 +365,6 @@ export default function NewEstimate(props) {
                     </Tr>
                   );
                 })}
-
-                <Tr>
-                  <Td>
-                    <Button
-                      colorScheme={"green"}
-                      onClick={(e) => handleAddItem(e)}
-                    >
-                      New Line Item
-                    </Button>
-                  </Td>
-                </Tr>
               </Tbody>
             </Table>
           </TableContainer>

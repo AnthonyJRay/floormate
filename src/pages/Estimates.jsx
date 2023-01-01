@@ -21,6 +21,7 @@ const defaultValues = {
       total: "",
     },
   ],
+  invoiced: false,
 };
 
 export default function Estimates() {
@@ -69,45 +70,58 @@ export default function Estimates() {
   const [editIndex, setEditIndex] = useState(-1);
 
   return (
-    <>
-      <Box p={5}>
-        <Box textAlign="center">
-          <Heading size={"xl"} pb={"2rem"}>
-            Estimates
-          </Heading>
-          <EstimateForm
-            btnText={"New Estimate"}
-            btnColor={"green"}
-            btnIcon={true}
-          />
-        </Box>
-
-        <Grid
-          templateColumns={{
-            base: "1fr 1fr",
-            md: "1fr 1fr 1fr",
-            lg: "1fr 1fr 1fr 1fr",
-          }}
-          gridGap="3"
-          autoRows={"1fr"}
-          color={"gray.100"}
-          pt={"1rem"}
-        >
-          {estimateData.map((estimate, i) => {
-            return (
-              <EstimatesBody
-                key={i}
-                value={i === editIndex ? values : estimate}
-                name={estimate.client.name}
-                description={estimate.lineItems[0].description}
-                price={estimate.client.price}
-                total={estimate.lineItems[0].total}
-                invoiced={estimate.invoiced}
-              />
-            );
-          })}
-        </Grid>
+    <Box p={5}>
+      <Box textAlign="center">
+        <Heading size={"xl"} pb={"2rem"}>
+          Estimates
+        </Heading>
+        {/* ESTIMATE FORM FOR A NEW ESTIMATE */}
+        {/* This is be a blank Estimate for creating a new estimate */}
+        <EstimateForm
+          btnText={"New Estimate"}
+          btnColor={"green"}
+          btnIcon={true}
+          newEstimate={() => setValues(defaultValues)}
+          addLineItem={() => console.log("Add Line Item")}
+          onChange={() => console.log("Something changed")}
+          onSave={() => console.log("Saved")}
+          onDelete={() => onDelete(estimate, i)}
+        />
       </Box>
-    </>
+
+      <Grid
+        templateColumns={{
+          base: "1fr 1fr",
+          md: "1fr 1fr 1fr",
+          lg: "1fr 1fr 1fr 1fr",
+        }}
+        gridGap="3"
+        autoRows={"1fr"}
+        color={"gray.100"}
+        pt={"1rem"}
+      >
+        {estimateData.map((estimate, i) => {
+          return (
+            // Pass estimate form state for "editing" or "viewing" an estimate
+            <EstimatesBody
+              key={i}
+              value={i === editIndex ? values : estimate}
+              name={estimate.client.name}
+              description={estimate.lineItems[0].description}
+              price={estimate.client.price}
+              total={estimate.lineItems[0].total}
+              invoiced={estimate.invoiced}
+              onDelete={() => {
+                setEstimateData((prev) => {
+                  return prev.filter((_deletedEstimate, _i) => {
+                    return _i !== i;
+                  });
+                });
+              }}
+            />
+          );
+        })}
+      </Grid>
+    </Box>
   );
 }

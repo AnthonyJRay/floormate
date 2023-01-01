@@ -1,12 +1,18 @@
 import { Heading, Text, Button, Flex, GridItem, Box } from "@chakra-ui/react";
+import { DeleteIcon } from "@chakra-ui/icons";
 
 import EstimateForm from "../estimates/NewEstimate";
 
 export default function EstimatesBody({
+  value,
   name = "Client Name",
   description = "Job Description",
   total = "Estimate total",
   invoiced = false,
+  onDelete = () => {},
+  onSave = () => {},
+  onChange = () => {},
+  addLineItem = () => {},
 }) {
   return (
     <GridItem border="1px" borderColor="gray.200">
@@ -59,8 +65,22 @@ export default function EstimatesBody({
               </Text>
             )}
           </Box>
-
-          <EstimateForm btnText={"View"} btnColor={"yellow"} btnIcon={false} />
+          <Box
+            display={"flex"}
+            width={"90%"}
+            justifyContent={"space-around"}
+            m={2}
+          >
+            {/* ESTIMATE FORM FOR THE CARDS / TO EDIT */}
+            <EstimateForm
+              btnText={"View"}
+              btnColor={"yellow"}
+              btnIcon={false}
+            />
+            <Button size={"sm"} colorScheme={"red"} onClick={onDelete}>
+              <DeleteIcon />
+            </Button>
+          </Box>
         </Flex>
       </Flex>
     </GridItem>
