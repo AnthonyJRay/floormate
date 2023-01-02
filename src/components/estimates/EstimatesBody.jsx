@@ -1,10 +1,10 @@
 import { Heading, Text, Button, Flex, GridItem, Box } from "@chakra-ui/react";
 import { DeleteIcon } from "@chakra-ui/icons";
 
-import EstimateForm from "./EstimateForm";
+import EstimateForm from "./EstimateForm/EstimateForm";
 
 export default function EstimatesBody({
-  value,
+  // value,
   name = "Client Name",
   description = "Job Description",
   total = "Estimate total",
@@ -68,15 +68,15 @@ export default function EstimatesBody({
         </Flex>
         <Box
           display={"flex"}
-          width={"90%"}
           justifyContent={"space-around"}
           m={2}
+          width={["75%", "65%", "60%", "55%", "35%"]}
         >
           <EstimateForm
             btnText={"View"}
             btnColor={"yellow"}
             btnIcon={false}
-            addLineItem={addLineItem}
+            addLineItem={() => addLineItem}
           />
           <Button
             size={"sm"}

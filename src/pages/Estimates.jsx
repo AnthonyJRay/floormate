@@ -2,16 +2,18 @@ import { useState, useEffect } from "react";
 import { Box, Heading, Grid, Button } from "@chakra-ui/react";
 
 import EstimatesBody from "../components/estimates/EstimatesBody";
-import EstimateForm from "../components/estimates/EstimateForm";
+import EstimateForm from "../components/estimates/EstimateForm/EstimateForm";
+
+const currentDate = new Date().toLocaleDateString();
 
 const defaultValues = {
   client: {
-    name: "",
+    firstName: "Test",
     address: "",
     phone: "",
-    email: "",
+    email: "Default email test",
   },
-  estimateDate: "",
+  estimateDate: currentDate,
   lineItems: [
     {
       name: "",
@@ -67,12 +69,26 @@ export default function Estimates() {
   ]);
 
   const [values, setValues] = useState(defaultValues);
+  console.log(values);
   const [editIndex, setEditIndex] = useState(-1);
 
-  const addLineItem = () => {
-    console.log("Add Line Item");
-  };
+  // const addLineItem = () => {
+  //   setValues({
+  //     ...values,
+  //     lineItems: [
+  //       ...values.lineItems,
+  //       {
+  //         firstName: "",
+  //         description: "",
+  //         quantity: "",
+  //         rate: "",
+  //         total: "",
+  //       },
+  //     ],
+  //   });
+  // };
 
+  // console.dir(values);
   return (
     <Box p={5}>
       <Box textAlign="center">
@@ -82,17 +98,15 @@ export default function Estimates() {
         {/* ESTIMATE FORM FOR A NEW ESTIMATE */}
         {/* This is be a blank Estimate for creating a new estimate */}
         <EstimateForm
+          formValues={values}
           btnText={"New Estimate"}
           btnColor={"green"}
           btnIcon={true}
-          newEstimate={() => setValues(defaultValues)}
-          addLineItem={addLineItem}
-          onChange={() => console.log("Something changed")}
-          onSave={() => console.log("Saved")}
-          onDelete={() => onDelete(estimate, i)}
+          // addLineItem={() => addLineItem}
+          // onChange={() => console.log("Something changed")}
+          // onSave={() => console.log("Saved")}
+          // onDelete={() => onDelete(estimate, i)}
         />
-
-        <Button onClick={() => <EstimateForm />}>Hello</Button>
       </Box>
 
       <Grid
@@ -108,7 +122,7 @@ export default function Estimates() {
       >
         {estimateData.map((estimate, i) => {
           return (
-            // Pass estimate form state for "editing" or "viewing" an estimate
+            // Pass estimate form index state for "editing" or "viewing" an estimate
             <EstimatesBody
               key={i}
               value={i === editIndex ? values : estimate}
@@ -117,7 +131,7 @@ export default function Estimates() {
               price={estimate.client.price}
               total={estimate.lineItems[0].total}
               invoiced={estimate.invoiced}
-              addLineItem={addLineItem}
+              addLineItem={() => addLineItem}
               onDelete={() => {
                 setEstimateData((prev) => {
                   return prev.filter((_deletedEstimate, _i) => {

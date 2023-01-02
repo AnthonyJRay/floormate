@@ -63,9 +63,10 @@ const initialEstimateForm = {
   ],
 };
 
-export default function NewEstimate({
-  onSave = () => {},
-  onChange = () => {},
+export default function EstimateForm({
+  formValues = {},
+  // onSave = () => {},
+  // onChange = () => {},
   onDelete = () => {},
   addLineItem = () => {},
   btnColor = "",
@@ -74,113 +75,12 @@ export default function NewEstimate({
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const [estimateFormData, setEstimateFormData] = useState(initialEstimateForm);
+  // const [estimateFormData, setEstimateFormData] = useState(initialEstimateForm);
 
-  // Qty Input
-  const handleQtyInput = (e, id) => {
-    estimateFormData.lineItems.map((item) => {
-      if (item.lineItemsID === id + 1) {
-        item.lineItemsQty = e.target.value;
-        if (item.lineItemsQty < 0) {
-          item.lineItemsQty = 0;
-        }
-        let qty = parseFloat(item.lineItemsQty);
-        let rate = parseFloat(item.lineItemsRate);
-        if (isNaN(qty)) {
-          qty = 0;
-        }
-        if (isNaN(rate)) {
-          rate = 0;
-        }
-        item.lineItemsTotal = qty * rate;
-        setEstimateFormData((prevState) => ({
-          lineItems: [...prevState.lineItems],
-        }));
-      }
-    });
-    handleInputTotals();
-  };
+  // Removed helper functions from here and moved them to the HelperFunctions.jsx file.
 
-  // Rate Input
-  const handleRateInput = (e, id) => {
-    estimateFormData.lineItems.map((item) => {
-      if (item.lineItemsID === id + 1) {
-        item.lineItemsRate = e.target.value;
-        if (item.lineItemsRate < 0) {
-          item.lineItemsRate = 0;
-        }
-        let qty = parseFloat(item.lineItemsQty);
-        let rate = parseFloat(item.lineItemsRate);
-        if (isNaN(qty)) {
-          qty = 0;
-        }
-        if (isNaN(rate)) {
-          rate = 0;
-        }
-        item.lineItemsTotal = qty * rate;
-        setEstimateFormData((prevState) => ({
-          lineItems: [...prevState.lineItems],
-        }));
-      }
-    });
-    handleInputTotals();
-  };
-
-  // Get Tax
-  const handleTaxInput = (e) => {
-    let taxInput = e.target.value;
-    let taxRate = parseFloat(taxInput) / 100;
-    if (isNaN(taxRate)) {
-      taxRate = 0;
-    }
-    let subtotal = estimateFormData.estimateSubTotal;
-    let taxAmount = subtotal * taxRate;
-    if (isNaN(taxInput)) {
-      taxRate = 0;
-    }
-
-    setEstimateFormData((prevState) => ({
-      ...prevState,
-      estimateTaxRate: taxInput,
-      estimateTotal: subtotal + taxAmount,
-    }));
-    return taxInput;
-  };
-
-  // Get Totals from inputs
-  const handleInputTotals = () => {
-    let subtotal = 0;
-    estimateFormData.lineItems.map((item) => {
-      subtotal = subtotal + item.lineItemsTotal;
-    });
-    if (subtotal === estimateFormData.estimateSubTotal) {
-      return;
-    }
-    setEstimateFormData((prevState) => ({
-      ...prevState,
-      estimateSubTotal: subtotal,
-    }));
-    return subtotal;
-  };
-
-  // Add new line item
-  const handleAddItem = (e) => {
-    setEstimateFormData((prevState) => ({
-      lineItems: [
-        ...prevState.lineItems,
-        {
-          lineItemsID: 3, // This needs a better way to dynamically add an ID property. Only 3 line items allowed before errors because 4th still has ID of 3.
-          lineItemsName: "New line item!",
-          lineItemsDesc: "New line item created with Add new button!",
-          lineItemsQty: 0,
-          lineItemsRate: 0,
-          lineItemsTotal: 0,
-        },
-      ],
-    }));
-  };
-
-  const currentDate = new Date().toLocaleDateString();
+  const { estimateDate } = formValues;
+  console.log(formValues);
 
   return (
     <Box>
@@ -215,7 +115,7 @@ export default function NewEstimate({
                   height={"100%"}
                 >
                   <Heading size={"sm"}>Estimate Date:</Heading>
-                  <Text>{currentDate}</Text>
+                  <Text>{estimateDate}</Text>
                 </ListItem>
               </Box>
             </List>
@@ -235,50 +135,62 @@ export default function NewEstimate({
                 <Box m={1}>
                   <ListItem display={"flex"} alignItems={"center"}>
                     <Text fontWeight={"bold"} fontSize={".85rem"}>
-                      Client Name:
+                      First Name:
                     </Text>
                     <Input
                       type={"text"}
                       size={"xs"}
                       width={"60%"}
                       variant={"flushed"}
-                      defaultValue={estimateFormData.clientFirstName}
+                      // value={estimateFormData.clientFirstName}
                     />
                   </ListItem>
                   <ListItem display={"flex"} alignItems={"center"}>
                     <Text fontWeight={"bold"} fontSize={".85rem"}>
-                      Client Address:
+                      Last Name:
                     </Text>
                     <Input
                       type={"text"}
                       size={"xs"}
                       width={"60%"}
                       variant={"flushed"}
-                      defaultValue={estimateFormData.clientAddress}
+                      // defaultValue={estimateFormData.clientFirstName}
                     />
                   </ListItem>
                   <ListItem display={"flex"} alignItems={"center"}>
                     <Text fontWeight={"bold"} fontSize={".85rem"}>
-                      Client Phone:
+                      Address:
                     </Text>
                     <Input
                       type={"text"}
                       size={"xs"}
                       width={"60%"}
                       variant={"flushed"}
-                      defaultValue={estimateFormData.clientPhone}
+                      // defaultValue={estimateFormData.clientAddress}
                     />
                   </ListItem>
                   <ListItem display={"flex"} alignItems={"center"}>
                     <Text fontWeight={"bold"} fontSize={".85rem"}>
-                      Client Email:
+                      Phone:
                     </Text>
                     <Input
                       type={"text"}
                       size={"xs"}
                       width={"60%"}
                       variant={"flushed"}
-                      defaultValue={estimateFormData.clientEmail}
+                      // defaultValue={estimateFormData.clientPhone}
+                    />
+                  </ListItem>
+                  <ListItem display={"flex"} alignItems={"center"}>
+                    <Text fontWeight={"bold"} fontSize={".85rem"}>
+                      Email:
+                    </Text>
+                    <Input
+                      type={"text"}
+                      size={"xs"}
+                      width={"60%"}
+                      variant={"flushed"}
+                      // defaultValue={estimateFormData.clientEmail}
                     />
                   </ListItem>
                 </Box>
@@ -296,7 +208,7 @@ export default function NewEstimate({
               <Thead>
                 <Tr>
                   <Td>
-                    <Button colorScheme={"green"} onClick={addLineItem}>
+                    <Button colorScheme={"green"} onClick={() => addLineItem}>
                       New Line Item
                     </Button>
                   </Td>
@@ -310,7 +222,7 @@ export default function NewEstimate({
                 </Tr>
               </Thead>
               <Tbody>
-                {estimateFormData.lineItems.map((item, id) => {
+                {/* {estimateFormData.lineItems.map((item, id) => {
                   return (
                     <Tr key={item.lineItemsID}>
                       <Td>
@@ -361,7 +273,7 @@ export default function NewEstimate({
                       </Td>
                     </Tr>
                   );
-                })}
+                })} */}
               </Tbody>
             </Table>
           </TableContainer>
@@ -385,19 +297,19 @@ export default function NewEstimate({
               </List>
               <List pl={5}>
                 <ListItem h={"32px"} p={1}>
-                  {estimateFormData.estimateSubTotal}
+                  {/* {estimateFormData.estimateSubTotal} */}
                 </ListItem>
                 <ListItem h={"32px"} p={1}>
                   <Input
                     w={"3rem"}
                     size={"xs"}
-                    value={estimateFormData.estimateTaxRate}
+                    // value={estimateFormData.estimateTaxRate}
                     onChange={(e) => handleTaxInput(e)}
                   />{" "}
                   %
                 </ListItem>
                 <ListItem h={"32px"} p={1}>
-                  {estimateFormData.estimateTotal}
+                  {/* {estimateFormData.estimateTotal} */}
                 </ListItem>
               </List>
             </Box>
