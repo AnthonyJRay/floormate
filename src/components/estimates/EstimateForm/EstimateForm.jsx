@@ -69,7 +69,7 @@ export default function EstimateForm({
 
   // Input handlers
 
-  const handleClientChange = (e) => {
+  const clientInput = (e) => {
     const { id, value } = e.target;
     setValues((prev) => ({
       ...prev,
@@ -77,15 +77,7 @@ export default function EstimateForm({
     }));
   };
 
-  const handleSummaryChange = (e) => {
-    const { id, value } = e.target;
-    setValues((prev) => ({
-      ...prev,
-      [id]: value,
-    }));
-  };
-
-  const handleNotesChange = (e) => {
+  const summaryNotesInput = (e) => {
     const { id, value } = e.target;
     setValues((prev) => ({
       ...prev,
@@ -102,6 +94,8 @@ export default function EstimateForm({
       lineItems: [{ ...lineItems[i], [id]: value }],
     }));
   };
+
+  const addItem = () => {};
 
   return (
     <Box>
@@ -166,7 +160,7 @@ export default function EstimateForm({
                       variant={"flushed"}
                       id={"firstName"}
                       value={client.firstName}
-                      onChange={(e) => handleClientChange(e)}
+                      onChange={(e) => clientInput(e)}
                     />
                   </ListItem>
                   <ListItem display={"flex"} alignItems={"center"}>
@@ -180,7 +174,7 @@ export default function EstimateForm({
                       variant={"flushed"}
                       id={"lastName"}
                       value={client.lastName}
-                      onChange={(e) => handleClientChange(e)}
+                      onChange={(e) => clientInput(e)}
                     />
                   </ListItem>
                   <ListItem display={"flex"} alignItems={"center"}>
@@ -194,7 +188,7 @@ export default function EstimateForm({
                       variant={"flushed"}
                       id={"address"}
                       value={client.address}
-                      onChange={(e) => handleClientChange(e)}
+                      onChange={(e) => clientInput(e)}
                     />
                   </ListItem>
                   <ListItem display={"flex"} alignItems={"center"}>
@@ -208,7 +202,7 @@ export default function EstimateForm({
                       variant={"flushed"}
                       id={"phone"}
                       value={client.phone}
-                      onChange={(e) => handleClientChange(e)}
+                      onChange={(e) => clientInput(e)}
                     />
                   </ListItem>
                   <ListItem display={"flex"} alignItems={"center"}>
@@ -222,7 +216,7 @@ export default function EstimateForm({
                       variant={"flushed"}
                       id={"email"}
                       value={client.email}
-                      onChange={(e) => handleClientChange(e)}
+                      onChange={(e) => clientInput(e)}
                     />
                   </ListItem>
                 </Box>
@@ -232,7 +226,7 @@ export default function EstimateForm({
                 <Textarea
                   height={"116px"}
                   id={"summary"}
-                  onChange={(e) => handleSummaryChange(e)}
+                  onChange={(e) => summaryNotesInput(e)}
                 />
               </Box>
             </Box>
@@ -323,7 +317,7 @@ export default function EstimateForm({
           >
             <Box display={"flex"} flexDirection={"column"} mt={4}>
               <FormLabel>Additional Notes:</FormLabel>
-              <Textarea id={"notes"} onChange={(e) => handleNotesChange(e)} />
+              <Textarea id={"notes"} onChange={(e) => summaryNotesInput(e)} />
             </Box>
             <Box display={"flex"} justifyContent={"end"} mt={4}>
               <List fontWeight={"bold"}>
