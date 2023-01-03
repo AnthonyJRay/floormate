@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { Textarea, FormLabel } from "@chakra-ui/react";
-
 import "./tableBody.css";
-
 import { BsPlusLg } from "react-icons/bs";
 
 import {
@@ -32,55 +30,17 @@ import {
   Heading,
 } from "@chakra-ui/react";
 
-const initialEstimateForm = {
-  clientFirstName: "Test First name",
-  clientLastName: "Test Last name",
-  clientAddress: "123 N Example St.",
-  clientPhone: "(555) 555-5555",
-  clientEmail: "textClient@example.com",
-  estimateDate: "",
-  notes: "",
-  estimateSubTotal: 0,
-  estimateTaxRate: 0,
-  estimateTotal: 0,
-  lineItems: [
-    {
-      lineItemsID: 1,
-      lineItemsName: "Line Item #1",
-      lineItemsDesc: "Line item description area.",
-      lineItemsQty: 15,
-      lineItemsRate: 15,
-      lineItemsTotal: 0,
-    },
-    {
-      lineItemsID: 2,
-      lineItemsName: "Line Item #2",
-      lineItemsDesc: "Line item description area.",
-      lineItemsQty: 10,
-      lineItemsRate: 10,
-      lineItemsTotal: 0,
-    },
-  ],
-};
-
 export default function EstimateForm({
   formValues = {},
-  // onSave = () => {},
-  // onChange = () => {},
-  onDelete = () => {},
-  addLineItem = () => {},
   btnColor = "",
   btnIcon = "",
   btnText = "",
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  // const [estimateFormData, setEstimateFormData] = useState(initialEstimateForm);
-
   // Removed helper functions from here and moved them to the HelperFunctions.jsx file.
 
-  const { estimateDate } = formValues;
-  console.log(formValues);
+  const { estimateDate, client, lineItems } = formValues;
+  console.log(client);
 
   return (
     <Box>

@@ -69,24 +69,7 @@ export default function Estimates() {
   ]);
 
   const [values, setValues] = useState(defaultValues);
-  console.log(values);
-  const [editIndex, setEditIndex] = useState(-1);
-
-  // const addLineItem = () => {
-  //   setValues({
-  //     ...values,
-  //     lineItems: [
-  //       ...values.lineItems,
-  //       {
-  //         firstName: "",
-  //         description: "",
-  //         quantity: "",
-  //         rate: "",
-  //         total: "",
-  //       },
-  //     ],
-  //   });
-  // };
+  // const [editIndex, setEditIndex] = useState(-1);
 
   // console.dir(values);
   return (
@@ -95,17 +78,11 @@ export default function Estimates() {
         <Heading size={"xl"} pb={"2rem"}>
           Estimates
         </Heading>
-        {/* ESTIMATE FORM FOR A NEW ESTIMATE */}
-        {/* This is be a blank Estimate for creating a new estimate */}
         <EstimateForm
           formValues={values}
           btnText={"New Estimate"}
           btnColor={"green"}
           btnIcon={true}
-          // addLineItem={() => addLineItem}
-          // onChange={() => console.log("Something changed")}
-          // onSave={() => console.log("Saved")}
-          // onDelete={() => onDelete(estimate, i)}
         />
       </Box>
 
@@ -125,7 +102,6 @@ export default function Estimates() {
             // Pass estimate form index state for "editing" or "viewing" an estimate
             <EstimatesBody
               key={i}
-              value={i === editIndex ? values : estimate}
               name={estimate.client.name}
               description={estimate.lineItems[0].description}
               price={estimate.client.price}

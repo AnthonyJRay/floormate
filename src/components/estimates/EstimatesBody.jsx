@@ -10,8 +10,6 @@ export default function EstimatesBody({
   total = "Estimate total",
   invoiced = false,
   onDelete = () => {},
-  onSave = () => {},
-  onChange = () => {},
   addLineItem = () => {},
 }) {
   return (
