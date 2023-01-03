@@ -1,17 +1,17 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { ChakraProvider } from '@chakra-ui/react'
-import './index.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ChakraProvider } from "@chakra-ui/react";
+import "./index.css";
 
-import RootLayout from './routes/RootLayout'
-import SettingsLayout from './pages/SettingsLayout'
-import ErrorPage from "./error-page"
-import Dashboard from './pages/Dashboard'
-import Estimates from './pages/Estimates'
-import Expenses from './pages/Expenses'
-import Clients from './pages/Clients'
-import Invoices from './pages/Invoices'
+import RootLayout from "./routes/RootLayout";
+import Settings from "./pages/Settings";
+import ErrorPage from "./error-page";
+import Dashboard from "./pages/Dashboard";
+import Estimates from "./pages/Estimates";
+import Expenses from "./pages/Expenses";
+import Clients from "./pages/Clients";
+import Invoices from "./pages/Invoices";
 
 const router = createBrowserRouter([
   {
@@ -21,37 +21,36 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Dashboard />
+        element: <Dashboard />,
       },
       {
         path: "estimates",
-        element: <Estimates />
+        element: <Estimates />,
       },
       {
         path: "invoices",
-        element: <Invoices />
+        element: <Invoices />,
       },
       {
         path: "expenses",
-        element: <Expenses />
+        element: <Expenses />,
       },
       {
         path: "clients",
-        element: <Clients />
+        element: <Clients />,
       },
       {
         path: "settings",
-        element: <SettingsLayout />,
+        element: <Settings />,
       },
-    ]
+    ],
   },
+]);
 
-])
-
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ChakraProvider>
       <RouterProvider router={router} />
     </ChakraProvider>
-  </React.StrictMode>,
-)
+  </React.StrictMode>
+);

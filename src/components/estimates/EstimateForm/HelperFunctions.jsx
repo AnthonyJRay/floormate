@@ -1,5 +1,5 @@
 // Qty Input
-const handleQtyInput = (e, id) => {
+export const handleQtyInput = (e, id) => {
   estimateFormData.lineItems.map((item) => {
     if (item.lineItemsID === id + 1) {
       item.lineItemsQty = e.target.value;
@@ -24,7 +24,7 @@ const handleQtyInput = (e, id) => {
 };
 
 // Rate Input
-const handleRateInput = (e, id) => {
+export const handleRateInput = (e, id) => {
   estimateFormData.lineItems.map((item) => {
     if (item.lineItemsID === id + 1) {
       item.lineItemsRate = e.target.value;
@@ -49,7 +49,7 @@ const handleRateInput = (e, id) => {
 };
 
 // Get Tax
-const handleTaxInput = (e) => {
+export const handleTaxInput = (e) => {
   let taxInput = e.target.value;
   let taxRate = parseFloat(taxInput) / 100;
   if (isNaN(taxRate)) {
@@ -70,7 +70,7 @@ const handleTaxInput = (e) => {
 };
 
 // Get Totals from inputs
-const handleInputTotals = () => {
+export const handleInputTotals = () => {
   let subtotal = 0;
   estimateFormData.lineItems.map((item) => {
     subtotal = subtotal + item.lineItemsTotal;
@@ -86,7 +86,7 @@ const handleInputTotals = () => {
 };
 
 // Add new line item
-const handleAddItem = (e) => {
+export const handleAddItem = (e) => {
   setEstimateFormData((prevState) => ({
     lineItems: [
       ...prevState.lineItems,
