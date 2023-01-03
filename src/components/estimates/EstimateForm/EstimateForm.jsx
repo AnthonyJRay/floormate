@@ -91,11 +91,20 @@ export default function EstimateForm({
     console.log(lineItems[i]);
     setValues((prev) => ({
       ...prev,
-      lineItems: [{ ...lineItems[i], [id]: value }],
+      lineItems: lineItems.map((item) => {
+        console.log(item);
+        return item === lineItems[i] ? { ...lineItems[i], [id]: value } : item;
+      }),
     }));
   };
 
-  const addItem = () => {};
+  const addItem = () => {
+    const newItem = defaultValues.lineItems;
+    setValues((prev) => ({
+      ...prev,
+      lineItems: [...lineItems, newItem],
+    }));
+  };
 
   return (
     <Box>
@@ -238,7 +247,8 @@ export default function EstimateForm({
               <Thead>
                 <Tr>
                   <Td>
-                    <Button colorScheme={"green"} onClick={() => addLineItem}>
+                    {/* ADD NEW LINE ITEM */}
+                    <Button colorScheme={"green"} onClick={() => addItem()}>
                       New Line Item
                     </Button>
                   </Td>

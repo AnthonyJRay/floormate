@@ -76,7 +76,6 @@ export default function Estimates() {
           Estimates
         </Heading>
         <EstimateForm
-          // formValues={defaultValues}
           btnText={"New Estimate"}
           btnColor={"green"}
           btnIcon={true}
