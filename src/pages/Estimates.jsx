@@ -4,29 +4,30 @@ import { Box, Heading, Grid, Button } from "@chakra-ui/react";
 import EstimatesBody from "../components/estimates/EstimatesBody";
 import EstimateForm from "../components/estimates/EstimateForm/EstimateForm";
 
-const currentDate = new Date().toLocaleDateString();
+// const currentDate = new Date().toLocaleDateString();
 
-const defaultValues = {
-  client: {
-    firstName: "Test",
-    address: "",
-    phone: "",
-    email: "Default email test",
-  },
-  estimateDate: currentDate,
-  lineItems: [
-    {
-      name: "",
-      description: "",
-      quantity: "",
-      rate: "",
-      total: "",
-    },
-  ],
-  invoiced: false,
-};
+// const defaultValues = {
+//   client: {
+//     firstName: "Test",
+//     address: "123 N Main St",
+//     phone: "555 123 7890",
+//     email: "Default email test",
+//   },
+//   estimateDate: currentDate,
+//   lineItems: [
+//     {
+//       name: "Test",
+//       description: "Test Desc",
+//       quantity: "5",
+//       rate: "5",
+//       total: "25",
+//     },
+//   ],
+//   invoiced: false,
+// };
 
 export default function Estimates() {
+  // const [values, setValues] = useState(defaultValues);
   const [estimateData, setEstimateData] = useState([
     {
       client: {
@@ -67,11 +68,7 @@ export default function Estimates() {
       invoiced: true,
     },
   ]);
-
-  const [values, setValues] = useState(defaultValues);
   // const [editIndex, setEditIndex] = useState(-1);
-
-  // console.dir(values);
   return (
     <Box p={5}>
       <Box textAlign="center">
@@ -79,7 +76,7 @@ export default function Estimates() {
           Estimates
         </Heading>
         <EstimateForm
-          formValues={values}
+          // formValues={defaultValues}
           btnText={"New Estimate"}
           btnColor={"green"}
           btnIcon={true}

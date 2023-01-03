@@ -30,17 +30,78 @@ import {
   Heading,
 } from "@chakra-ui/react";
 
+const currentDate = new Date().toLocaleDateString();
+const defaultValues = {
+  client: {
+    firstName: "",
+    lastName: "",
+    address: "",
+    phone: "",
+    email: "",
+  },
+  estimateDate: currentDate,
+  lineItems: [
+    {
+      name: "",
+      description: "",
+      quantity: "",
+      rate: "",
+      total: "",
+    },
+  ],
+  summary: "",
+  notes: "",
+  invoiced: false,
+  subtotal: "",
+  tax: "",
+  total: "",
+};
+
 export default function EstimateForm({
-  formValues = {},
   btnColor = "",
   btnIcon = "",
   btnText = "",
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [values, setValues] = useState(defaultValues);
+  const { client, lineItems } = values;
   // Removed helper functions from here and moved them to the HelperFunctions.jsx file.
 
-  const { estimateDate, client, lineItems } = formValues;
-  console.log(client);
+  // Input handlers
+
+  const handleClientChange = (e) => {
+    const { id, value } = e.target;
+    setValues((prev) => ({
+      ...prev,
+      client: { ...client, [id]: value },
+    }));
+  };
+
+  const handleSummaryChange = (e) => {
+    const { id, value } = e.target;
+    setValues((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
+  };
+
+  const handleNotesChange = (e) => {
+    const { id, value } = e.target;
+    setValues((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
+  };
+
+  const handleLineItemsChange = (e, i) => {
+    const { id, value } = e.target;
+    console.dir(`id: ${id}, value: ${value}, i: ${i}`);
+    console.log(lineItems[i]);
+    setValues((prev) => ({
+      ...prev,
+      lineItems: [{ ...lineItems[i], [id]: value }],
+    }));
+  };
 
   return (
     <Box>
@@ -66,7 +127,8 @@ export default function EstimateForm({
                   height={"100%"}
                   alignItems={"center"}
                 >
-                  <Heading size={"sm"}>Estimate:</Heading>
+                  <Heading size={"sm"}>Estimate:</Heading>\
+                  {/* Estimate # should be rendered from ID no in DB? */}
                   <Text>{`#00015`}</Text>
                 </ListItem>
                 <ListItem
@@ -75,7 +137,7 @@ export default function EstimateForm({
                   height={"100%"}
                 >
                   <Heading size={"sm"}>Estimate Date:</Heading>
-                  <Text>{estimateDate}</Text>
+                  <Text>{values.estimateDate}</Text>
                 </ListItem>
               </Box>
             </List>
@@ -102,7 +164,9 @@ export default function EstimateForm({
                       size={"xs"}
                       width={"60%"}
                       variant={"flushed"}
-                      // value={estimateFormData.clientFirstName}
+                      id={"firstName"}
+                      value={client.firstName}
+                      onChange={(e) => handleClientChange(e)}
                     />
                   </ListItem>
                   <ListItem display={"flex"} alignItems={"center"}>
@@ -114,7 +178,9 @@ export default function EstimateForm({
                       size={"xs"}
                       width={"60%"}
                       variant={"flushed"}
-                      // defaultValue={estimateFormData.clientFirstName}
+                      id={"lastName"}
+                      value={client.lastName}
+                      onChange={(e) => handleClientChange(e)}
                     />
                   </ListItem>
                   <ListItem display={"flex"} alignItems={"center"}>
@@ -126,7 +192,9 @@ export default function EstimateForm({
                       size={"xs"}
                       width={"60%"}
                       variant={"flushed"}
-                      // defaultValue={estimateFormData.clientAddress}
+                      id={"address"}
+                      value={client.address}
+                      onChange={(e) => handleClientChange(e)}
                     />
                   </ListItem>
                   <ListItem display={"flex"} alignItems={"center"}>
@@ -138,7 +206,9 @@ export default function EstimateForm({
                       size={"xs"}
                       width={"60%"}
                       variant={"flushed"}
-                      // defaultValue={estimateFormData.clientPhone}
+                      id={"phone"}
+                      value={client.phone}
+                      onChange={(e) => handleClientChange(e)}
                     />
                   </ListItem>
                   <ListItem display={"flex"} alignItems={"center"}>
@@ -150,14 +220,20 @@ export default function EstimateForm({
                       size={"xs"}
                       width={"60%"}
                       variant={"flushed"}
-                      // defaultValue={estimateFormData.clientEmail}
+                      id={"email"}
+                      value={client.email}
+                      onChange={(e) => handleClientChange(e)}
                     />
                   </ListItem>
                 </Box>
               </List>
               <Box width={"100%"}>
-                <FormLabel>Job Description</FormLabel>
-                <Textarea height={"116px"} />
+                <FormLabel>Summary</FormLabel>
+                <Textarea
+                  height={"116px"}
+                  id={"summary"}
+                  onChange={(e) => handleSummaryChange(e)}
+                />
               </Box>
             </Box>
           </Box>
@@ -182,25 +258,23 @@ export default function EstimateForm({
                 </Tr>
               </Thead>
               <Tbody>
-                {/* {estimateFormData.lineItems.map((item, id) => {
+                {lineItems.map((item, i) => {
                   return (
-                    <Tr key={item.lineItemsID}>
+                    <Tr key={i}>
                       <Td>
                         <Input
                           p={1}
-                          value={item.lineItemsName}
-                          onChange={() =>
-                            console.log("Line Item Name changed!")
-                          }
+                          value={item.name}
+                          id={"name"}
+                          onChange={(e) => handleLineItemsChange(e, i)}
                         />
                       </Td>
                       <Td>
                         <Input
                           p={1}
-                          value={item.lineItemsDesc}
-                          onChange={() =>
-                            console.log("Line Item Description changed!")
-                          }
+                          value={item.description}
+                          id={"description"}
+                          onChange={(e) => handleLineItemsChange(e, i)}
                         />
                       </Td>
                       <Td textAlign={"end"}>
@@ -208,8 +282,9 @@ export default function EstimateForm({
                           p={1}
                           w={"3rem"}
                           textAlign={"end"}
-                          value={item.lineItemsQty}
-                          onChange={(e) => handleQtyInput(e, id)}
+                          id={"quantity"}
+                          value={item.quantity}
+                          onChange={(e) => handleLineItemsChange(e, i)}
                         />
                       </Td>
                       <Td textAlign={"end"}>
@@ -217,8 +292,9 @@ export default function EstimateForm({
                           p={1}
                           w={"3rem"}
                           textAlign={"end"}
-                          value={item.lineItemsRate}
-                          onChange={(e) => handleRateInput(e, id)}
+                          id={"rate"}
+                          value={item.rate}
+                          onChange={(e) => handleLineItemsChange(e, i)}
                         />
                       </Td>
                       <Td textAlign={"end"}>{item.lineItemsTotal}</Td>
@@ -226,14 +302,14 @@ export default function EstimateForm({
                         <Button
                           size={"sm"}
                           colorScheme={"red"}
-                          onClick={onDelete}
+                          // onClick={onDelete}
                         >
                           X
                         </Button>
                       </Td>
                     </Tr>
                   );
-                })} */}
+                })}
               </Tbody>
             </Table>
           </TableContainer>
@@ -247,7 +323,7 @@ export default function EstimateForm({
           >
             <Box display={"flex"} flexDirection={"column"} mt={4}>
               <FormLabel>Additional Notes:</FormLabel>
-              <Textarea />
+              <Textarea id={"notes"} onChange={(e) => handleNotesChange(e)} />
             </Box>
             <Box display={"flex"} justifyContent={"end"} mt={4}>
               <List fontWeight={"bold"}>
@@ -265,7 +341,7 @@ export default function EstimateForm({
                     size={"xs"}
                     // value={estimateFormData.estimateTaxRate}
                     onChange={(e) => handleTaxInput(e)}
-                  />{" "}
+                  />
                   %
                 </ListItem>
                 <ListItem h={"32px"} p={1}>
