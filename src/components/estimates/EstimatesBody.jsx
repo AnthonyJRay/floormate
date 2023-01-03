@@ -4,7 +4,7 @@ import { DeleteIcon } from "@chakra-ui/icons";
 import EstimateForm from "./EstimateForm/EstimateForm";
 
 export default function EstimatesBody({
-  // value,
+  value,
   name = "Client Name",
   description = "Job Description",
   total = "Estimate total",

@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
-import { Textarea, FormLabel } from "@chakra-ui/react";
+import { useState } from "react";
 import "./tableBody.css";
-import { BsPlusLg } from "react-icons/bs";
+import { DeleteIcon, PlusSquareIcon } from "@chakra-ui/icons";
 
 import {
   Input,
@@ -14,7 +13,6 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
-  Icon,
   Flex,
   TableContainer,
   Table,
@@ -28,6 +26,8 @@ import {
   List,
   ListItem,
   Heading,
+  Textarea,
+  FormLabel,
 } from "@chakra-ui/react";
 
 const currentDate = new Date().toLocaleDateString();
@@ -61,6 +61,7 @@ export default function EstimateForm({
   btnColor = "",
   btnIcon = "",
   btnText = "",
+  onSave = () => {},
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [values, setValues] = useState(defaultValues);
@@ -106,16 +107,24 @@ export default function EstimateForm({
     }));
   };
 
+  const removeItem = (i) => {
+    const newLineItems = lineItems.filter((item) => item !== lineItems[i]);
+    setValues((prev) => ({
+      ...prev,
+      lineItems: newLineItems,
+    }));
+  };
+
   return (
     <Box>
       <Button
         onClick={onOpen}
         size={"sm"}
         colorScheme={btnColor}
-        color={"whiteAlpha.900"}
+        color={"whiteAlpha.800"}
       >
+        {btnIcon ? <PlusSquareIcon boxSize={5} m={1} /> : null}
         <Text p={1}>{btnText}</Text>
-        {btnIcon ? <Icon as={BsPlusLg} /> : null}
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose} size={["full", "full", "6xl"]}>
@@ -130,7 +139,7 @@ export default function EstimateForm({
                   height={"100%"}
                   alignItems={"center"}
                 >
-                  <Heading size={"sm"}>Estimate:</Heading>\
+                  <Heading size={"sm"}>Estimate:</Heading>
                   {/* Estimate # should be rendered from ID no in DB? */}
                   <Text>{`#00015`}</Text>
                 </ListItem>
@@ -249,6 +258,7 @@ export default function EstimateForm({
                   <Td>
                     {/* ADD NEW LINE ITEM */}
                     <Button colorScheme={"green"} onClick={() => addItem()}>
+                      <PlusSquareIcon boxSize={5} m={1} />
                       New Line Item
                     </Button>
                   </Td>
@@ -306,9 +316,9 @@ export default function EstimateForm({
                         <Button
                           size={"sm"}
                           colorScheme={"red"}
-                          // onClick={onDelete}
+                          onClick={() => removeItem(i)}
                         >
-                          X
+                          <DeleteIcon />
                         </Button>
                       </Td>
                     </Tr>
@@ -356,22 +366,20 @@ export default function EstimateForm({
           </Box>
 
           <ModalFooter>
-            <Button mr={1} colorScheme={"linkedin"} onClick={onClose}>
+            <Button
+              m={1}
+              w={"5%"}
+              color={"whiteAlpha.800"}
+              colorScheme={"yellow"}
+              onClick={onClose}
+            >
               Close
             </Button>
             <Button
-              mr={1}
-              colorScheme={"yellow"}
-              color={"whiteAlpha.900"}
-              onClick={() => console.log("Editing!")}
-            >
-              Edit
-            </Button>
-            <Button
-              width={"25%"}
               bg={"green"}
-              color={"whiteAlpha.900"}
-              onClick={() => console.log("Saved!")}
+              w={"10%"}
+              color={"whiteAlpha.800"}
+              onClick={() => [onSave({ ...values }), onClose()]}
             >
               Save
             </Button>

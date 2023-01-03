@@ -4,28 +4,6 @@ import { Box, Heading, Grid, Button } from "@chakra-ui/react";
 import EstimatesBody from "../components/estimates/EstimatesBody";
 import EstimateForm from "../components/estimates/EstimateForm/EstimateForm";
 
-// const currentDate = new Date().toLocaleDateString();
-
-// const defaultValues = {
-//   client: {
-//     firstName: "Test",
-//     address: "123 N Main St",
-//     phone: "555 123 7890",
-//     email: "Default email test",
-//   },
-//   estimateDate: currentDate,
-//   lineItems: [
-//     {
-//       name: "Test",
-//       description: "Test Desc",
-//       quantity: "5",
-//       rate: "5",
-//       total: "25",
-//     },
-//   ],
-//   invoiced: false,
-// };
-
 export default function Estimates() {
   // const [values, setValues] = useState(defaultValues);
   const [estimateData, setEstimateData] = useState([
@@ -79,6 +57,11 @@ export default function Estimates() {
           btnText={"New Estimate"}
           btnColor={"green"}
           btnIcon={true}
+          onSave={(estimate) => {
+            setEstimateData((prev) => {
+              return [...prev, estimate];
+            });
+          }}
         />
       </Box>
 
