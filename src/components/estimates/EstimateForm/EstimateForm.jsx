@@ -162,6 +162,7 @@ export default function EstimateForm({
               justifyContent={["center", "center", "start"]}
               margin={"1rem"}
             >
+              {/* Inputs and labels share an Li. Perhaps break labels and inputs into their own Divs to get better style spacing. */}
               <List width={["100%", "95%", "65%"]} mb={8}>
                 <ListItem m={1}>
                   <Heading fontSize={"xl"}>Bill To:</Heading>
@@ -176,6 +177,7 @@ export default function EstimateForm({
                       size={"xs"}
                       width={"60%"}
                       variant={"flushed"}
+                      placeholder={"First Name"}
                       id={"firstName"}
                       value={client.firstName}
                       onChange={(e) => clientInput(e)}
@@ -190,6 +192,7 @@ export default function EstimateForm({
                       size={"xs"}
                       width={"60%"}
                       variant={"flushed"}
+                      placeholder={"Last Name"}
                       id={"lastName"}
                       value={client.lastName}
                       onChange={(e) => clientInput(e)}
@@ -204,6 +207,7 @@ export default function EstimateForm({
                       size={"xs"}
                       width={"60%"}
                       variant={"flushed"}
+                      placeholder={"Street Address"}
                       id={"address"}
                       value={client.address}
                       onChange={(e) => clientInput(e)}
@@ -218,6 +222,7 @@ export default function EstimateForm({
                       size={"xs"}
                       width={"60%"}
                       variant={"flushed"}
+                      placeholder={"Phone Number"}
                       id={"phone"}
                       value={client.phone}
                       onChange={(e) => clientInput(e)}
@@ -232,6 +237,7 @@ export default function EstimateForm({
                       size={"xs"}
                       width={"60%"}
                       variant={"flushed"}
+                      placeholder={"Email Address"}
                       id={"email"}
                       value={client.email}
                       onChange={(e) => clientInput(e)}
