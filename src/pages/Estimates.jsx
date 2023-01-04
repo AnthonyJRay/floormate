@@ -9,7 +9,8 @@ export default function Estimates() {
   const [estimateData, setEstimateData] = useState([
     {
       client: {
-        name: "Vincent Ray",
+        firstName: "Vincent",
+        lastName: "Ray",
         address: "123 N Main St",
         phone: "5555551234",
         email: "vincentR@example.com",
@@ -28,7 +29,8 @@ export default function Estimates() {
     },
     {
       client: {
-        name: "Dee D",
+        firstName: "Dee",
+        lastName: "D",
         address: "555 S Cherry Dr",
         phone: "123 777 5555",
         email: "deeD@example.com",
@@ -77,16 +79,18 @@ export default function Estimates() {
         pt={"1rem"}
       >
         {estimateData.map((estimate, i) => {
+          // console.log(estimateData);
+          // console.log(i);
           return (
             // Pass estimate form index state for "editing" or "viewing" an estimate
             <EstimatesBody
               key={i}
-              name={estimate.client.name}
+              estimateData={estimateData[i]}
+              name={`${estimate.client.firstName} ${estimate.client.lastName}`}
               description={estimate.lineItems[0].description}
               price={estimate.client.price}
               total={estimate.lineItems[0].total}
               invoiced={estimate.invoiced}
-              addLineItem={() => addLineItem}
               onDelete={() => {
                 setEstimateData((prev) => {
                   return prev.filter((_deletedEstimate, _i) => {

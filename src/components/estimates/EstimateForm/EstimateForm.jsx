@@ -58,6 +58,8 @@ const defaultValues = {
 };
 
 export default function EstimateForm({
+  estimate = {},
+  onView = () => {},
   btnColor = "",
   btnIcon = "",
   btnText = "",
@@ -68,8 +70,9 @@ export default function EstimateForm({
   const { client, lineItems } = values;
   // Removed helper functions from here and moved them to the HelperFunctions.jsx file.
 
-  // Input handlers
+  // console.log(estimate);
 
+  // Input handlers
   const clientInput = (e) => {
     const { id, value } = e.target;
     setValues((prev) => ({
@@ -88,12 +91,9 @@ export default function EstimateForm({
 
   const handleLineItemsChange = (e, i) => {
     const { id, value } = e.target;
-    console.dir(`id: ${id}, value: ${value}, i: ${i}`);
-    console.log(lineItems[i]);
     setValues((prev) => ({
       ...prev,
       lineItems: lineItems.map((item) => {
-        console.log(item);
         return item === lineItems[i] ? { ...lineItems[i], [id]: value } : item;
       }),
     }));
@@ -115,10 +115,18 @@ export default function EstimateForm({
     }));
   };
 
+  // console.log(estimate);
   return (
     <Box>
       <Button
-        onClick={onOpen}
+        onClick={() => {
+          Object.entries(estimate).length !== 0
+            ? setValues(estimate)
+            : setValues(defaultValues);
+          // console.log(estimate);
+          onOpen();
+          onView(estimate);
+        }}
         size={"sm"}
         colorScheme={btnColor}
         color={"whiteAlpha.800"}
