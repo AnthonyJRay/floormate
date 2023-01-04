@@ -69,8 +69,6 @@ export default function EstimateForm({
   const { client, lineItems } = values;
   // Removed helper functions from here and moved them to the HelperFunctions.jsx file.
 
-  // console.log(estimate);
-
   // Input handlers
   const clientInput = (e) => {
     const { id, value } = e.target;
@@ -390,7 +388,11 @@ export default function EstimateForm({
               bg={"green"}
               w={"10%"}
               color={"whiteAlpha.800"}
-              onClick={() => [onSave({ ...values }), onClose()]}
+              onClick={() => [
+                console.log(values),
+                onSave({ ...values }),
+                onClose(),
+              ]}
             >
               Save
             </Button>

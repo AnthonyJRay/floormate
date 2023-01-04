@@ -4,15 +4,15 @@ import { DeleteIcon } from "@chakra-ui/icons";
 import EstimateForm from "./EstimateForm/EstimateForm";
 
 export default function EstimatesBody({
+  value,
   estimateData,
-  onView = () => {},
+  onSave = () => {},
   name = "Client Name",
   description = "Job Description",
   total = "Estimate total",
   invoiced = false,
   onDelete = () => {},
 }) {
-  // console.dir(estimateData);
   return (
     <GridItem border="1px" borderColor="gray.200">
       <Flex
@@ -76,6 +76,7 @@ export default function EstimatesBody({
             btnColor={"yellow"}
             btnIcon={false}
             estimate={estimateData}
+            onSave={onSave}
           />
           <Button
             size={"sm"}

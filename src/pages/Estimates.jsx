@@ -79,10 +79,7 @@ export default function Estimates() {
         pt={"1rem"}
       >
         {estimateData.map((estimate, i) => {
-          // console.log(estimateData);
-          // console.log(i);
           return (
-            // Pass estimate form index state for "editing" or "viewing" an estimate
             <EstimatesBody
               key={i}
               estimateData={estimateData[i]}
@@ -91,6 +88,16 @@ export default function Estimates() {
               price={estimate.client.price}
               total={estimate.lineItems[0].total}
               invoiced={estimate.invoiced}
+              onSave={(editEstimate) => {
+                if (JSON.stringify(estimate) === JSON.stringify(editEstimate)) {
+                  return;
+                }
+                setEstimateData((prev) => {
+                  return prev.map((_estimate, _i) => {
+                    return _i === i ? editEstimate : _estimate;
+                  });
+                });
+              }}
               onDelete={() => {
                 setEstimateData((prev) => {
                   return prev.filter((_deletedEstimate, _i) => {
