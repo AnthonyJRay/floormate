@@ -8,6 +8,7 @@ export default function Estimates() {
   // const [values, setValues] = useState(defaultValues);
   const [estimateData, setEstimateData] = useState([
     {
+      estimateNO: "001",
       client: {
         firstName: "Vincent",
         lastName: "Ray",
@@ -25,9 +26,17 @@ export default function Estimates() {
           total: "380",
         },
       ],
+      summary:
+        "Remove and dispose of old carpet. Inspect tackstrip, replace as neccessary. Install new padding and carpet.",
+      notes: "Will need at least 14' of seam tape.",
       invoiced: false,
+      subtotal: "380",
+      tax: "5%",
+      total: "399",
     },
     {
+      estimateNO: "002",
+      estimateDate: "06/14/22",
       client: {
         firstName: "Dee",
         lastName: "D",
@@ -35,7 +44,6 @@ export default function Estimates() {
         phone: "123 777 5555",
         email: "deeD@example.com",
       },
-      estimateDate: "03/22/22",
       lineItems: [
         {
           name: "Install LVP",
@@ -45,7 +53,14 @@ export default function Estimates() {
           total: "600",
         },
       ],
+      summary:
+        "Remove existing sheet vinyl flooring and dispose. Remove existing quarter-round. Inspect subfloor. Prep and sweep subfloor. Install new LVP. Install new quarter-round.",
+      notes:
+        "Don't forget CA Glue for quarter-round mitered corners. Don't forget caulking.",
       invoiced: true,
+      subtotal: "600",
+      tax: "5%",
+      total: "630",
     },
   ]);
   // const [editIndex, setEditIndex] = useState(-1);

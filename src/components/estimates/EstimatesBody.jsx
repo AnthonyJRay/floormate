@@ -4,15 +4,12 @@ import { DeleteIcon } from "@chakra-ui/icons";
 import EstimateForm from "./EstimateForm/EstimateForm";
 
 export default function EstimatesBody({
-  value,
   estimateData,
   onSave = () => {},
-  name = "Client Name",
-  description = "Job Description",
-  total = "Estimate total",
-  invoiced = false,
   onDelete = () => {},
 }) {
+  const { estimateNO, client, estimateDate, summary, invoiced, total } =
+    estimateData;
   return (
     <GridItem border="1px" borderColor="gray.200">
       <Flex
@@ -21,11 +18,20 @@ export default function EstimatesBody({
         justifyContent="space-between"
         height="100%"
       >
+        <Box
+          display={"flex"}
+          width={"100%"}
+          justifyContent={"space-between"}
+          p={1}
+        >
+          <Text fontSize={10}>#{estimateNO}</Text>
+          <Text fontSize={10}>{estimateDate}</Text>
+        </Box>
         <Heading size="sm" m={".5rem"}>
-          {name}
+          {client.firstName} {client.lastName}
         </Heading>
         <Text fontSize="xs" textAlign={"center"} m="5px">
-          {description}
+          {summary}
         </Text>
         <Flex
           width={["80%", "70%", "55%"]}
@@ -78,11 +84,7 @@ export default function EstimatesBody({
             estimate={estimateData}
             onSave={onSave}
           />
-          <Button
-            size={"sm"}
-            colorScheme={"red"}
-            onClick={() => onDelete(value)}
-          >
+          <Button size={"sm"} colorScheme={"red"} onClick={() => onDelete()}>
             <DeleteIcon />
           </Button>
         </Box>
