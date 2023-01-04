@@ -19,7 +19,10 @@ export default function ExpensesBody({
       alignItems={"center"}
       p={1}
       m={[10, 8, 6, 4, 2]}
-      borderColor={"gray.500"}
+      bg={"gray.700"}
+      borderRadius={"sm"}
+      border={"1px"}
+      borderColor={"gray.600"}
     >
       <Box
         display="flex"

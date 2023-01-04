@@ -5,7 +5,6 @@ import EstimatesBody from "../components/estimates/EstimatesBody";
 import EstimateForm from "../components/estimates/EstimateForm/EstimateForm";
 
 export default function Estimates() {
-  // const [values, setValues] = useState(defaultValues);
   const [estimateData, setEstimateData] = useState([
     {
       estimateNO: "001",
@@ -63,7 +62,6 @@ export default function Estimates() {
       total: "630",
     },
   ]);
-  // const [editIndex, setEditIndex] = useState(-1);
   return (
     <Box p={5}>
       <Box textAlign="center">
@@ -98,11 +96,6 @@ export default function Estimates() {
             <EstimatesBody
               key={i}
               estimateData={estimateData[i]}
-              name={`${estimate.client.firstName} ${estimate.client.lastName}`}
-              description={estimate.lineItems[0].description}
-              price={estimate.client.price}
-              total={estimate.lineItems[0].total}
-              invoiced={estimate.invoiced}
               onSave={(editEstimate) => {
                 if (JSON.stringify(estimate) === JSON.stringify(editEstimate)) {
                   return;

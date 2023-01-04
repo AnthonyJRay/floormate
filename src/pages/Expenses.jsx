@@ -35,7 +35,7 @@ export default function Expenses() {
 
       <Button
         colorScheme={"green"}
-        w={["60%", null, "40%", "25"]}
+        w={["56%", "40%", "32%", "16%"]}
         m={5}
         onClick={() => {
           setExpenseItems([defaultValues, ...expenseItems]);

@@ -11,7 +11,12 @@ export default function EstimatesBody({
   const { estimateNO, client, estimateDate, summary, invoiced, total } =
     estimateData;
   return (
-    <GridItem border="1px" borderColor="gray.200">
+    <GridItem
+      border="1px"
+      borderColor="gray.600"
+      borderRadius={"sm"}
+      bg={"gray.700"}
+    >
       <Flex
         flexDir={"column"}
         alignItems="center"
@@ -24,7 +29,7 @@ export default function EstimatesBody({
           justifyContent={"space-between"}
           p={1}
         >
-          <Text fontSize={10}>#{estimateNO}</Text>
+          <Text fontSize={12}>#{estimateNO}</Text>
           <Text fontSize={10}>{estimateDate}</Text>
         </Box>
         <Heading size="sm" m={".5rem"}>
@@ -50,25 +55,27 @@ export default function EstimatesBody({
             <Text color="green" fontSize={".8rem"}>
               {`$${total}`}
             </Text>
-            {invoiced ? (
-              <Text
-                color={"green"}
-                fontSize={".75rem"}
-                fontStyle={"italic"}
-                letterSpacing={0.25}
-              >
-                Invoiced
-              </Text>
-            ) : (
-              <Text
-                color={"red"}
-                fontSize={".75rem"}
-                fontStyle={"italic"}
-                letterSpacing={0.25}
-              >
-                Not Invoiced
-              </Text>
-            )}
+            <Box>
+              {invoiced ? (
+                <Text
+                  color={"green"}
+                  fontSize={".75rem"}
+                  fontStyle={"italic"}
+                  letterSpacing={0.25}
+                >
+                  Invoiced
+                </Text>
+              ) : (
+                <Text
+                  color={"red"}
+                  fontSize={".75rem"}
+                  fontStyle={"italic"}
+                  letterSpacing={0.25}
+                >
+                  Not Invoiced
+                </Text>
+              )}
+            </Box>
           </Box>
         </Flex>
         <Box

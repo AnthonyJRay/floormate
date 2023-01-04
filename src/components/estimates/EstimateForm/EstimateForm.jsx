@@ -124,10 +124,10 @@ export default function EstimateForm({
         }}
         size={"sm"}
         colorScheme={btnColor}
-        color={"whiteAlpha.800"}
+        color={"gray.100"}
       >
         {btnIcon ? <PlusSquareIcon boxSize={5} m={1} /> : null}
-        <Text p={1}>{btnText}</Text>
+        <Text letterSpacing={0.5}>{btnText}</Text>
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose} size={["full", "full", "6xl"]}>
