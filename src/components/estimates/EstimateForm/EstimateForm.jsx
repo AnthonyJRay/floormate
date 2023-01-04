@@ -59,7 +59,6 @@ const defaultValues = {
 
 export default function EstimateForm({
   estimate = {},
-  onView = () => {},
   btnColor = "",
   btnIcon = "",
   btnText = "",
@@ -123,9 +122,7 @@ export default function EstimateForm({
           Object.entries(estimate).length !== 0
             ? setValues(estimate)
             : setValues(defaultValues);
-          // console.log(estimate);
           onOpen();
-          onView(estimate);
         }}
         size={"sm"}
         colorScheme={btnColor}

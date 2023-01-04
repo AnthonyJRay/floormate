@@ -11,7 +11,6 @@ export default function EstimatesBody({
   total = "Estimate total",
   invoiced = false,
   onDelete = () => {},
-  addLineItem = () => {},
 }) {
   // console.dir(estimateData);
   return (
