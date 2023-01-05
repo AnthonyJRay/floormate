@@ -59,7 +59,7 @@ export default function EstimatesBody({
               {invoiced ? (
                 <Text
                   color={"green"}
-                  fontSize={".75rem"}
+                  fontSize={".7rem"}
                   fontStyle={"italic"}
                   letterSpacing={0.25}
                 >
@@ -68,7 +68,7 @@ export default function EstimatesBody({
               ) : (
                 <Text
                   color={"red"}
-                  fontSize={".75rem"}
+                  fontSize={".7rem"}
                   fontStyle={"italic"}
                   letterSpacing={0.25}
                 >
