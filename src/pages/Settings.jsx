@@ -2,6 +2,7 @@ import { useState } from "react";
 import DeleteAccount from "../components/utils/deleteAccount";
 
 import {
+  Box,
   List,
   ListItem,
   Heading,
@@ -39,66 +40,115 @@ export default function Settings() {
   return (
     <>
       <Heading>Settings</Heading>
-      <List display={"grid"} w={"80%"} m={4} gap={4}>
-        <ListItem>
-          <FormLabel>Name</FormLabel>
+      <List display={"grid"} gap={2} w={"80%"} m={"auto"} p={8}>
+        <ListItem p={1}>
+          <FormLabel fontSize={"xs"} fontStyle={"italic"}>
+            Name
+          </FormLabel>
           <Input
             placeholder={"Name"}
             id={"name"}
             onChange={(e) => handleChange(e)}
+            border={"none"}
+            borderBottom={"1px"}
+            borderRadius={3}
           />
         </ListItem>
-        <ListItem>
-          <FormLabel>Business Name</FormLabel>
+        <ListItem p={1}>
+          <FormLabel fontSize={"xs"} fontStyle={"italic"}>
+            Business Name
+          </FormLabel>
           <Input
             placeholder={"Business"}
             id={"business"}
             onChange={(e) => handleChange(e)}
+            border={"none"}
+            borderBottom={"1px"}
+            borderRadius={3}
           />
         </ListItem>
-        <ListItem>
-          <FormLabel>Address</FormLabel>
+        <ListItem p={1}>
+          <FormLabel fontSize={"xs"} fontStyle={"italic"}>
+            Address
+          </FormLabel>
           <Input
             placeholder={"Address"}
             id={"address"}
             onChange={(e) => handleChange(e)}
+            border={"none"}
+            borderBottom={"1px"}
+            borderRadius={3}
           />
         </ListItem>
-        <ListItem>
-          <FormLabel>Phone</FormLabel>
+        <ListItem p={1}>
+          <FormLabel fontSize={"xs"} fontStyle={"italic"}>
+            Phone
+          </FormLabel>
           <Input
             placeholder={"Phone"}
             id={"phone"}
             onChange={(e) => handleChange(e)}
+            border={"none"}
+            borderBottom={"1px"}
+            borderRadius={3}
           />
         </ListItem>
-        <ListItem>
-          <FormLabel>Email</FormLabel>
+        <ListItem p={1}>
+          <FormLabel fontSize={"xs"} fontStyle={"italic"}>
+            Email
+          </FormLabel>
           <Input
             placeholder={"Email"}
             id={"email"}
             onChange={(e) => handleChange(e)}
+            border={"none"}
+            borderBottom={"1px"}
+            borderRadius={3}
           />
         </ListItem>
-        <ListItem>
-          <FormLabel>Upload Your Logo</FormLabel>
-          <Input type="file" />
+        <ListItem p={1}>
+          <FormLabel fontSize={"xs"} fontStyle={"italic"}>
+            Upload Your Logo
+          </FormLabel>
+          <Input
+            type="file"
+            border={"none"}
+            borderBottom={"1px"}
+            borderRadius={3}
+          />
         </ListItem>
-        <ListItem display={"flex"} justifyContent={"space-between"}>
+        <ListItem
+          display={"flex"}
+          flexDirection={["column", "column", "row"]}
+          justifyContent={"space-between"}
+        >
           <Button onClick={() => onSave()} colorScheme={"green"}>
             Save
           </Button>
-          <Button
-            onClick={() => onOpen()}
-            colorScheme={"transparent"}
-            color={"red.700"}
-            fontStyle={"italic"}
-            _hover={{ color: "red.500" }}
-            fontSize={"xs"}
-            p={0}
-          >
-            Delete Account
-          </Button>
+
+          <Box textAlign={["center"]}>
+            <Button
+              onClick={() => console.log("Changed Password!")}
+              colorScheme={"transparent"}
+              fontStyle={"italic"}
+              fontSize={"xs"}
+              color={"gray.400"}
+            >
+              Change Password
+            </Button>
+
+            <Button
+              onClick={() => onOpen()}
+              colorScheme={"transparent"}
+              color={"red.700"}
+              fontStyle={"italic"}
+              _hover={{ color: "red.500" }}
+              fontSize={"xs"}
+              p={0}
+            >
+              Delete Account
+            </Button>
+          </Box>
           <Modal isOpen={isOpen}>
             <ModalOverlay />
             <DeleteAccount onClose={onClose} />

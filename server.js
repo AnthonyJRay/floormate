@@ -8,7 +8,7 @@ import {
   createNewUser,
   userLogin,
   authUser,
-} from "./src/api/api.js";
+} from "./db/helperFunctions.js";
 
 const app = express();
 const port = 5000;

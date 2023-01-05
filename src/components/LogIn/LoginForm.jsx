@@ -41,8 +41,6 @@ export default function LoginForm(props) {
         body: JSON.stringify(body),
       });
       const serverResponse = await response.json();
-      console.log("Below is the server response!");
-      console.log(serverResponse);
       // Reset form here
     } catch (error) {
       console.error(error);
