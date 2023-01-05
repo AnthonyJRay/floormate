@@ -1,4 +1,5 @@
 import { useState } from "react";
+import DeleteAccount from "../components/utils/deleteAccount";
 
 import {
   List,
@@ -7,9 +8,14 @@ import {
   FormLabel,
   Input,
   Button,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
 } from "@chakra-ui/react";
 
 export default function Settings() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const [settings, setSettings] = useState({
     name: "",
     business: "",
@@ -28,10 +34,6 @@ export default function Settings() {
 
   const onSave = () => {
     console.log("Saved!");
-  };
-
-  const onDelete = () => {
-    console.log("Are you sure  you want to delete your account?");
   };
 
   return (
@@ -87,7 +89,7 @@ export default function Settings() {
             Save
           </Button>
           <Button
-            onClick={() => onDelete()}
+            onClick={() => onOpen()}
             colorScheme={"transparent"}
             color={"red.700"}
             fontStyle={"italic"}
@@ -97,6 +99,10 @@ export default function Settings() {
           >
             Delete Account
           </Button>
+          <Modal isOpen={isOpen}>
+            <ModalOverlay />
+            <DeleteAccount onClose={onClose} />
+          </Modal>
         </ListItem>
       </List>
     </>

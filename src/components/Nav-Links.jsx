@@ -16,7 +16,7 @@ export default function Navlinks() {
   return (
     <Box display={"flex"} flexDirection={"column"} alignItems={"center"}>
       <List
-        spacing={12}
+        spacing={[10, 12]}
         w={["100%", "100%", "90%", "65"]}
         mt={4}
         m={[null, null, 4]}
