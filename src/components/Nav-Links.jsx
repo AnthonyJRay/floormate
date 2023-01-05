@@ -14,12 +14,20 @@ import { FaFileInvoiceDollar } from "react-icons/fa";
 
 export default function Navlinks() {
   return (
-    <Box display="flex" justifyContent="center" pt="2rem">
-      <List spacing={12} w={["100%", "80%", "65"]}>
+    <Box display={"flex"} flexDirection={"column"} alignItems={"center"}>
+      <List
+        spacing={12}
+        w={["100%", "100%", "90%", "65"]}
+        mt={4}
+        m={[null, null, 4]}
+      >
         {/* Dashboard NavLink */}
-        <ListItem textAlign={["center", null, "left"]}>
+        <ListItem textAlign={["center", "center", "left"]}>
           <Link to={`/`}>
-            <Box display={["null", "null", "flex"]} alignItems="center">
+            <Box
+              display={["null", "null", "flex"]}
+              alignItems={["center", "start"]}
+            >
               <ListIcon
                 as={BiStoreAlt}
                 color="black.900"
@@ -33,7 +41,7 @@ export default function Navlinks() {
         </ListItem>
 
         {/* Estimates NavLink */}
-        <ListItem textAlign={["center", null, "left"]}>
+        <ListItem textAlign={["center", "center", "left"]}>
           <Link to={`estimates`}>
             <Box display={["null", "null", "flex"]} alignItems="center">
               <ListIcon
@@ -47,7 +55,7 @@ export default function Navlinks() {
         </ListItem>
 
         {/* Invoices NavLink */}
-        <ListItem textAlign={["center", null, "left"]}>
+        <ListItem textAlign={["center", "center", "left"]}>
           <Link to={`invoices`}>
             <Box display={["null", "null", "flex"]} alignItems="center">
               <ListIcon
@@ -61,7 +69,7 @@ export default function Navlinks() {
         </ListItem>
 
         {/* Clients NavLink */}
-        <ListItem textAlign={["center", null, "left"]}>
+        <ListItem textAlign={["center", "center", "left"]}>
           <Link to={`clients`}>
             <Box display={["null", "null", "flex"]} alignItems="center">
               <ListIcon
@@ -75,7 +83,7 @@ export default function Navlinks() {
         </ListItem>
 
         {/* Expenses NavLink */}
-        <ListItem textAlign={["center", null, "left"]}>
+        <ListItem textAlign={["center", "center", "left"]}>
           <Link to={`expenses`}>
             <Box display={["null", "null", "flex"]} alignItems="center">
               <ListIcon

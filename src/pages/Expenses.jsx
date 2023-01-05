@@ -30,12 +30,12 @@ export default function Expenses() {
   const [editIndex, setEditIndex] = useState(-1);
 
   return (
-    <Box textAlign={"center"} pt={5}>
+    <Box textAlign={"center"} p={5}>
       <Heading>Expenses</Heading>
 
       <Button
         colorScheme={"green"}
-        w={["56%", "40%", "32%", "16%"]}
+        w={["64%", "44%", "32%", "20%", "16%"]}
         m={5}
         onClick={() => {
           setExpenseItems([defaultValues, ...expenseItems]);

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./tableBody.css";
 import { DeleteIcon, PlusSquareIcon } from "@chakra-ui/icons";
+import { testHelperFunction } from "./HelperFunctions";
 
 import {
   Input,
@@ -92,10 +93,32 @@ export default function EstimateForm({
     setValues((prev) => ({
       ...prev,
       lineItems: lineItems.map((item) => {
-        return item === lineItems[i] ? { ...lineItems[i], [id]: value } : item;
+        return (
+          (item.total = testHelperFunction(item)),
+          item === lineItems[i]
+            ? {
+                ...lineItems[i],
+                [id]: value,
+              }
+            : item
+        );
       }),
     }));
   };
+
+  const quantityInput = (e, i) => {
+    const { id, value } = e.target;
+    setValues((prev) => ({
+      ...prev,
+      lineItems: lineItems.map((item) => {
+        return item.quantity === lineItems[i].quantity
+          ? { ...lineItems[i], [id]: value }
+          : item;
+      }),
+    }));
+  };
+
+  const rateInput = (e, i) => {};
 
   const addItem = () => {
     const newItem = defaultValues.lineItems;
