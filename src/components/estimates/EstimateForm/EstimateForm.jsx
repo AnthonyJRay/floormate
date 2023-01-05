@@ -32,6 +32,8 @@ import {
 
 const currentDate = new Date().toLocaleDateString();
 const defaultValues = {
+  estimateNO: "",
+  estimateDate: currentDate,
   client: {
     firstName: "",
     lastName: "",
@@ -39,7 +41,6 @@ const defaultValues = {
     phone: "",
     email: "",
   },
-  estimateDate: currentDate,
   lineItems: [
     {
       name: "",
@@ -66,7 +67,7 @@ export default function EstimateForm({
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [values, setValues] = useState(defaultValues);
-  const { client, lineItems } = values;
+  const { client, lineItems, summary, notes, subtotal, tax, total } = values;
   // Removed helper functions from here and moved them to the HelperFunctions.jsx file.
 
   // Input handlers
@@ -112,7 +113,6 @@ export default function EstimateForm({
     }));
   };
 
-  // console.log(estimate);
   return (
     <Box>
       <Button
@@ -143,7 +143,6 @@ export default function EstimateForm({
                   alignItems={"center"}
                 >
                   <Heading size={"sm"}>Estimate:</Heading>
-                  {/* Estimate # should be rendered from ID no in DB? */}
                   <Text>{`#00015`}</Text>
                 </ListItem>
                 <ListItem
@@ -254,6 +253,7 @@ export default function EstimateForm({
                   height={"116px"}
                   id={"summary"}
                   onChange={(e) => summaryNotesInput(e)}
+                  value={values.summary}
                 />
               </Box>
             </Box>
@@ -320,7 +320,7 @@ export default function EstimateForm({
                           onChange={(e) => handleLineItemsChange(e, i)}
                         />
                       </Td>
-                      <Td textAlign={"end"}>{item.lineItemsTotal}</Td>
+                      <Td textAlign={"end"}>{item.total}</Td>
                       <Td p={0} textAlign={"center"}>
                         <Button
                           size={"sm"}
@@ -346,7 +346,11 @@ export default function EstimateForm({
           >
             <Box display={"flex"} flexDirection={"column"} mt={4}>
               <FormLabel>Additional Notes:</FormLabel>
-              <Textarea id={"notes"} onChange={(e) => summaryNotesInput(e)} />
+              <Textarea
+                id={"notes"}
+                value={notes}
+                onChange={(e) => summaryNotesInput(e)}
+              />
             </Box>
             <Box display={"flex"} justifyContent={"end"} mt={4}>
               <List fontWeight={"bold"}>
@@ -356,19 +360,19 @@ export default function EstimateForm({
               </List>
               <List pl={5}>
                 <ListItem h={"32px"} p={1}>
-                  {/* {estimateFormData.estimateSubTotal} */}
+                  {subtotal}
                 </ListItem>
                 <ListItem h={"32px"} p={1}>
                   <Input
                     w={"3rem"}
                     size={"xs"}
-                    // value={estimateFormData.estimateTaxRate}
+                    value={tax}
                     onChange={(e) => handleTaxInput(e)}
                   />
                   %
                 </ListItem>
                 <ListItem h={"32px"} p={1}>
-                  {/* {estimateFormData.estimateTotal} */}
+                  {total}
                 </ListItem>
               </List>
             </Box>
@@ -388,11 +392,7 @@ export default function EstimateForm({
               bg={"green"}
               w={"10%"}
               color={"whiteAlpha.800"}
-              onClick={() => [
-                console.log(values),
-                onSave({ ...values }),
-                onClose(),
-              ]}
+              onClick={() => [onSave({ ...values }), onClose()]}
             >
               Save
             </Button>

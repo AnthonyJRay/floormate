@@ -1,60 +1,22 @@
-import { createChart, ColorType } from "lightweight-charts";
-import React, { useEffect, useRef } from "react";
+import { Line } from "react-chartjs-2";
 
-import { Box, Grid, GridItem } from "@chakra-ui/react";
+const labels = ["January", "February", "March", "April", "May", "June", "July"];
+const data = {
+  labels: labels,
+  datasets: [
+    {
+      label: "This is a dataset",
+      backgroundColor: "rbg(255, 99, 132)",
+      borderColor: "rbg(255, 99, 132)",
+      data: [0, 10, 5, 2, 20, 30, 45],
+    },
+  ],
+};
 
-export default function ExampleChart(props) {
-  const { data, title } = props;
-  const backgroundColor = "white";
-  const lineColor = "#2962FF";
-  const textColor = "black";
-  const areaTopColor = "#2962FF";
-  const areaBottomColor = "rgba(41, 98, 255, 0.28)";
-
-  const chartContainerRef = useRef();
-
-  useEffect(() => {
-    const handleResize = () => {
-      chart.applyOptions({ width: chartContainerRef.current.clientWidth });
-    };
-
-    const chart = createChart(chartContainerRef.current, {
-      layout: {
-        background: { type: ColorType.Solid, color: backgroundColor },
-        textColor,
-      },
-      width: chartContainerRef.current.clientWidth,
-      height: 300,
-    });
-    chart.timeScale().fitContent();
-
-    const newSeries = chart.addAreaSeries({
-      lineColor,
-      topColor: areaTopColor,
-      bottomColor: areaBottomColor,
-    });
-    newSeries.setData(data);
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-
-      chart.remove();
-    };
-  }, [
-    data,
-    backgroundColor,
-    lineColor,
-    textColor,
-    areaTopColor,
-    areaBottomColor,
-  ]);
-
+export default function ExampleChart() {
   return (
-    <Grid width={"50%"} m={1}>
-      <GridItem></GridItem>
-      <Box ref={chartContainerRef}>{title}</Box>
-    </Grid>
+    <div>
+      <Line data={data} />
+    </div>
   );
 }

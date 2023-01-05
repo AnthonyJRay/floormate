@@ -8,6 +8,7 @@ export default function Estimates() {
   const [estimateData, setEstimateData] = useState([
     {
       estimateNO: "001",
+      estimateDate: "03/22/22",
       client: {
         firstName: "Vincent",
         lastName: "Ray",
@@ -15,7 +16,6 @@ export default function Estimates() {
         phone: "5555551234",
         email: "vincentR@example.com",
       },
-      estimateDate: "03/22/22",
       lineItems: [
         {
           name: "Install Carpet",
@@ -50,6 +50,13 @@ export default function Estimates() {
           quantity: "300",
           rate: "2.00",
           total: "600",
+        },
+        {
+          name: "Install LVP",
+          description: "Install new LVP in kitchen area.",
+          quantity: "200",
+          rate: "2.00",
+          total: "400",
         },
       ],
       summary:

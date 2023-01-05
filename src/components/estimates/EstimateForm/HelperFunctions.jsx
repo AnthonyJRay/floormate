@@ -84,20 +84,3 @@ export const handleInputTotals = () => {
   }));
   return subtotal;
 };
-
-// Add new line item
-export const handleAddItem = (e) => {
-  setEstimateFormData((prevState) => ({
-    lineItems: [
-      ...prevState.lineItems,
-      {
-        lineItemsID: 3, // This needs a better way to dynamically add an ID property. Only 3 line items allowed before errors because 4th still has ID of 3.
-        lineItemsName: "New line item!",
-        lineItemsDesc: "New line item created with Add new button!",
-        lineItemsQty: 0,
-        lineItemsRate: 0,
-        lineItemsTotal: 0,
-      },
-    ],
-  }));
-};

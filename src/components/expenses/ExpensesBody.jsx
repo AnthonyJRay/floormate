@@ -49,7 +49,7 @@ export default function ExpensesBody({
         {isEditing ? (
           <>
             <Button colorScheme={"green"} onClick={() => onSave(value)}>
-              <CheckIcon color={"white"} boxSize={4} />
+              <CheckIcon color={"white"} boxSize={3} />
             </Button>
             <Button onClick={onCancel} colorScheme={"red"}>
               <CloseIcon boxSize={3} />
@@ -58,7 +58,7 @@ export default function ExpensesBody({
         ) : (
           <>
             <Button colorScheme={"yellow"} onClick={onEdit}>
-              <EditIcon color={"white"} boxSize={4} />
+              <EditIcon color={"white"} boxSize={3} />
             </Button>
             <Button colorScheme={"red"} onClick={onDelete}>
               <DeleteIcon boxSize={3} />
