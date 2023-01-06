@@ -1,9 +1,9 @@
 import { Outlet } from "react-router-dom";
 import { Grid, GridItem, Container } from "@chakra-ui/react";
 
-import NavLinks from "../components/Nav-Links";
-import Header from "../components/Header";
-import AvatarDisplay from "../components/AvatarDisplay";
+import NavLinks from "../components/dashboard/Nav-Links";
+import Header from "../components/dashboard/Header";
+import AvatarDisplay from "../components/dashboard/AvatarDisplay";
 
 export default function RootLayout() {
   return (

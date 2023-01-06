@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Login from "./LogIn/Login";
+import Login from "../LogIn/Login";
 
 // UI Imports
 import { List, ListItem, ListIcon, Hide, Text, Box } from "@chakra-ui/react";

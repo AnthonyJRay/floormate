@@ -2,16 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
-import "./index.css";
 
 import RootLayout from "./routes/RootLayout";
-import Settings from "./pages/Settings";
-import ErrorPage from "./error-page";
-import Dashboard from "./pages/Dashboard";
-import Estimates from "./pages/Estimates";
-import Expenses from "./pages/Expenses";
-import Clients from "./pages/Clients";
-import Invoices from "./pages/Invoices";
+import Settings from "./routes/Settings";
+import ErrorPage from "./routes/error-page";
+import Dashboard from "./routes/Dashboard";
+import Estimates from "./routes/Estimates";
+import Expenses from "./routes/Expenses";
+import Clients from "./routes/Clients";
+import Invoices from "./routes/Invoices";
 
 const router = createBrowserRouter([
   {

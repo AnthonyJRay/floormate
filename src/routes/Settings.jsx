@@ -1,4 +1,5 @@
 import { useState } from "react";
+import SettingsForm from "../components/settings/SettingsForm";
 import DeleteAccount from "../components/utils/deleteAccount";
 
 import {
@@ -26,49 +27,56 @@ export default function Settings() {
     logo: "",
   });
 
-  const handleChange = (e, id) => {
+  function handleChange(e) {
     return setSettings((prev) => ({
       ...prev,
       [e.target.id]: e.target.value,
     }));
-  };
+  }
 
-  const onSave = () => {
+  function onSave() {
     console.log("Saved!");
-  };
+  }
 
   return (
     <>
       <Heading>Settings</Heading>
       <List display={"grid"} gap={2} w={"80%"} m={"auto"} p={8}>
         <ListItem p={1}>
-          <FormLabel fontSize={"xs"} fontStyle={"italic"}>
-            Name
-          </FormLabel>
-          <Input
+          <FormLabel fontSize={"sm"}>Name</FormLabel>
+          {/* <Input
             placeholder={"Name"}
             id={"name"}
             onChange={(e) => handleChange(e)}
             border={"none"}
             borderBottom={"1px"}
             borderRadius={3}
-          />
+            fontSize={"xs"}
+            fontStyle={"italic"}
+          /> */}
+          <SettingsForm name={"Name"} handleChange={(e) => handleChange(e)} />
         </ListItem>
         <ListItem p={1}>
-          <FormLabel fontSize={"xs"} fontStyle={"italic"}>
+          <FormLabel fontSize={"sm"} fontStyle={"italic"}>
             Business Name
           </FormLabel>
-          <Input
+          <SettingsForm
+            name={"Business"}
+            handleChange={(e) => handleChange(e)}
+          />
+          {/* <Input
             placeholder={"Business"}
             id={"business"}
             onChange={(e) => handleChange(e)}
             border={"none"}
             borderBottom={"1px"}
             borderRadius={3}
-          />
+            fontSize={"xs"}
+            fontStyle={"italic"}
+          /> */}
         </ListItem>
         <ListItem p={1}>
-          <FormLabel fontSize={"xs"} fontStyle={"italic"}>
+          <FormLabel fontSize={"sm"} fontStyle={"italic"}>
             Address
           </FormLabel>
           <Input
@@ -78,10 +86,12 @@ export default function Settings() {
             border={"none"}
             borderBottom={"1px"}
             borderRadius={3}
+            fontSize={"xs"}
+            fontStyle={"italic"}
           />
         </ListItem>
         <ListItem p={1}>
-          <FormLabel fontSize={"xs"} fontStyle={"italic"}>
+          <FormLabel fontSize={"sm"} fontStyle={"italic"}>
             Phone
           </FormLabel>
           <Input
@@ -91,10 +101,12 @@ export default function Settings() {
             border={"none"}
             borderBottom={"1px"}
             borderRadius={3}
+            fontSize={"xs"}
+            fontStyle={"italic"}
           />
         </ListItem>
         <ListItem p={1}>
-          <FormLabel fontSize={"xs"} fontStyle={"italic"}>
+          <FormLabel fontSize={"sm"} fontStyle={"italic"}>
             Email
           </FormLabel>
           <Input
@@ -104,10 +116,12 @@ export default function Settings() {
             border={"none"}
             borderBottom={"1px"}
             borderRadius={3}
+            fontSize={"xs"}
+            fontStyle={"italic"}
           />
         </ListItem>
         <ListItem p={1}>
-          <FormLabel fontSize={"xs"} fontStyle={"italic"}>
+          <FormLabel fontSize={"sm"} fontStyle={"italic"}>
             Upload Your Logo
           </FormLabel>
           <Input
@@ -115,6 +129,8 @@ export default function Settings() {
             border={"none"}
             borderBottom={"1px"}
             borderRadius={3}
+            fontSize={"xs"}
+            fontStyle={"italic"}
           />
         </ListItem>
         <ListItem
