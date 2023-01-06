@@ -4,6 +4,7 @@ import DeleteAccount from "../components/utils/deleteAccount";
 
 import {
   Box,
+  Container,
   List,
   ListItem,
   Heading,
@@ -27,99 +28,26 @@ export default function Settings() {
     logo: "",
   });
 
-  function handleChange(e) {
+  const handleChange = (e) => {
     return setSettings((prev) => ({
       ...prev,
       [e.target.id]: e.target.value,
     }));
-  }
+  };
 
   function onSave() {
     console.log("Saved!");
   }
 
   return (
-    <>
+    <Container overflow={"hidden"}>
       <Heading>Settings</Heading>
-      <List display={"grid"} gap={2} w={"80%"} m={"auto"} p={8}>
-        <ListItem p={1}>
-          <FormLabel fontSize={"sm"}>Name</FormLabel>
-          {/* <Input
-            placeholder={"Name"}
-            id={"name"}
-            onChange={(e) => handleChange(e)}
-            border={"none"}
-            borderBottom={"1px"}
-            borderRadius={3}
-            fontSize={"xs"}
-            fontStyle={"italic"}
-          /> */}
-          <SettingsForm name={"Name"} handleChange={(e) => handleChange(e)} />
-        </ListItem>
-        <ListItem p={1}>
-          <FormLabel fontSize={"sm"} fontStyle={"italic"}>
-            Business Name
-          </FormLabel>
-          <SettingsForm
-            name={"Business"}
-            handleChange={(e) => handleChange(e)}
-          />
-          {/* <Input
-            placeholder={"Business"}
-            id={"business"}
-            onChange={(e) => handleChange(e)}
-            border={"none"}
-            borderBottom={"1px"}
-            borderRadius={3}
-            fontSize={"xs"}
-            fontStyle={"italic"}
-          /> */}
-        </ListItem>
-        <ListItem p={1}>
-          <FormLabel fontSize={"sm"} fontStyle={"italic"}>
-            Address
-          </FormLabel>
-          <Input
-            placeholder={"Address"}
-            id={"address"}
-            onChange={(e) => handleChange(e)}
-            border={"none"}
-            borderBottom={"1px"}
-            borderRadius={3}
-            fontSize={"xs"}
-            fontStyle={"italic"}
-          />
-        </ListItem>
-        <ListItem p={1}>
-          <FormLabel fontSize={"sm"} fontStyle={"italic"}>
-            Phone
-          </FormLabel>
-          <Input
-            placeholder={"Phone"}
-            id={"phone"}
-            onChange={(e) => handleChange(e)}
-            border={"none"}
-            borderBottom={"1px"}
-            borderRadius={3}
-            fontSize={"xs"}
-            fontStyle={"italic"}
-          />
-        </ListItem>
-        <ListItem p={1}>
-          <FormLabel fontSize={"sm"} fontStyle={"italic"}>
-            Email
-          </FormLabel>
-          <Input
-            placeholder={"Email"}
-            id={"email"}
-            onChange={(e) => handleChange(e)}
-            border={"none"}
-            borderBottom={"1px"}
-            borderRadius={3}
-            fontSize={"xs"}
-            fontStyle={"italic"}
-          />
-        </ListItem>
+      <List>
+        <SettingsForm name={"Name"} handleChange={handleChange} />
+        <SettingsForm name={"Business"} handleChange={handleChange} />
+        <SettingsForm name={"Address"} handleChange={handleChange} />
+        <SettingsForm name={"Phone"} handleChange={handleChange} />
+        <SettingsForm name={"Email"} handleChange={handleChange} />
         <ListItem p={1}>
           <FormLabel fontSize={"sm"} fontStyle={"italic"}>
             Upload Your Logo
@@ -141,7 +69,6 @@ export default function Settings() {
           <Button onClick={() => onSave()} colorScheme={"green"}>
             Save
           </Button>
-
           <Box textAlign={["center"]}>
             <Button
               onClick={() => console.log("Changed Password!")}
@@ -152,7 +79,6 @@ export default function Settings() {
             >
               Change Password
             </Button>
-
             <Button
               onClick={() => onOpen()}
               colorScheme={"transparent"}
@@ -171,6 +97,6 @@ export default function Settings() {
           </Modal>
         </ListItem>
       </List>
-    </>
+    </Container>
   );
 }
