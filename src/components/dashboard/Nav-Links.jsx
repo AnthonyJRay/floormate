@@ -104,15 +104,7 @@ export default function Navlinks() {
           </Link>
         </ListItem>
       </List>
-
-      {/* <Box
-        position="absolute"
-        justifyContent="center"
-        bottom="5px"
-        margin="auto"
-      > */}
       <Login />
-      {/* </Box> */}
     </Box>
   );
 }

@@ -104,13 +104,15 @@ export default function Estimates() {
             <EstimatesBody
               key={i}
               estimateData={estimateData[i]}
-              onSave={(editEstimate) => {
-                if (JSON.stringify(estimate) === JSON.stringify(editEstimate)) {
+              onSave={(editedEstimate) => {
+                if (
+                  JSON.stringify(estimate) === JSON.stringify(editedEstimate)
+                ) {
                   return;
                 }
                 setEstimateData((prev) => {
                   return prev.map((_estimate, _i) => {
-                    return _i === i ? editEstimate : _estimate;
+                    return _i === i ? editedEstimate : _estimate;
                   });
                 });
               }}

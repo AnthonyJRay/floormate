@@ -71,8 +71,6 @@ export default function EstimateForm({
   const [values, setValues] = useState(defaultValues);
   const { client, lineItems, summary, notes, subtotal, tax, total } = values;
 
-  // Removed helper functions from here and moved them to the HelperFunctions.jsx file.
-
   function billInput(e) {
     const { id, value } = e.target;
     setValues((prev) => ({
@@ -123,20 +121,6 @@ export default function EstimateForm({
     }));
   }
 
-  // const quantityInput = (e, i) => {
-  //   const { id, value } = e.target;
-  //   setValues((prev) => ({
-  //     ...prev,
-  //     lineItems: lineItems.map((item) => {
-  //       return item.quantity === lineItems[i].quantity
-  //         ? { ...lineItems[i], [id]: value }
-  //         : item;
-  //     }),
-  //   }));
-  // };
-
-  // const rateInput = (e, i) => {};
-
   return (
     <Box>
       <Button
@@ -154,18 +138,18 @@ export default function EstimateForm({
         <Text letterSpacing={0.5}>{btnText}</Text>
       </Button>
 
-      <Modal isOpen={isOpen} onClose={onClose} size={["full", "full", "6xl"]}>
+      <Modal isOpen={isOpen} onClose={onClose} size={["full", "full", "3xl"]}>
         <ModalOverlay />
         <ModalContent>
+          {/* Form Header */}
           <Flex alignItems={"center"}>
             <ModalHeader fontSize={"xl"} fontWeight={"bold"} flexGrow={1}>
               New Estimate
             </ModalHeader>
-
             <List display={"flex"} flexDirection={"column"} margin={"1rem"}>
               <ListItem display={"flex"} alignItems={"center"}>
                 <Heading size={"xs"}>Estimate:</Heading>
-                <Text>{`#00015`}</Text>
+                <Text>#00015</Text>
               </ListItem>
               <ListItem display={"flex"} alignItems={"center"}>
                 <Heading size={"xs"}>Date:</Heading>
@@ -173,7 +157,7 @@ export default function EstimateForm({
               </ListItem>
             </List>
           </Flex>
-
+          {/* Bill To section */}
           <Box margin={"1rem"}>
             <Heading fontSize={"xl"}>Bill To:</Heading>
             <Box
@@ -183,6 +167,7 @@ export default function EstimateForm({
               m={2}
             >
               <Box display={"flex"} w={["100%", "100%", "50%"]}>
+                {/* Add in City, State, Zip */}
                 <BillLabels />
                 <BillInputs client={client} billInput={billInput} />
               </Box>
@@ -200,7 +185,7 @@ export default function EstimateForm({
               </Box>
             </Box>
           </Box>
-
+          {/* Line Items section */}
           <TableContainer>
             <Table variant="simple" mt={"2rem"} mb={"2rem"}>
               <TableCaption>Placeholder for Table Caption</TableCaption>
@@ -266,6 +251,7 @@ export default function EstimateForm({
                       <Td p={0} textAlign={"center"}>
                         <Button
                           size={"sm"}
+                          m={1}
                           colorScheme={"red"}
                           onClick={() => removeItem(i)}
                         >
@@ -286,6 +272,7 @@ export default function EstimateForm({
             m={"2rem"}
             mr={10}
           >
+            {/* Additional Notes section */}
             <Box display={"flex"} flexDirection={"column"} mt={4}>
               <FormLabel>Additional Notes:</FormLabel>
               <Textarea
@@ -294,6 +281,7 @@ export default function EstimateForm({
                 onChange={(e) => summaryNotesInput(e)}
               />
             </Box>
+            {/* Totals section */}
             <Box display={"flex"} justifyContent={"end"} mt={4}>
               <List fontWeight={"bold"}>
                 <ListItem p={1}>SUBTOTAL: </ListItem>
@@ -319,21 +307,21 @@ export default function EstimateForm({
               </List>
             </Box>
           </Box>
-
+          {/* Close and Save buttons */}
           <ModalFooter>
             <Button
               m={1}
-              w={"5%"}
-              color={"whiteAlpha.800"}
+              w={"7%"}
+              color={"whiteAlpha.900"}
               colorScheme={"yellow"}
               onClick={onClose}
             >
               Close
             </Button>
             <Button
-              bg={"green"}
-              w={"10%"}
-              color={"whiteAlpha.800"}
+              colorScheme={"green"}
+              w={"14%"}
+              color={"whiteAlpha.900"}
               onClick={() => [onSave({ ...values }), onClose()]}
             >
               Save

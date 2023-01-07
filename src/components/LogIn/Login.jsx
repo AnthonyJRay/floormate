@@ -37,9 +37,9 @@ export default function Login() {
         colorScheme={"green"}
         position={"absolute"}
         bottom={"5px"}
-        p={1}
-        size={"sm"}
-        fontSize={[14]}
+        p={5}
+        size={["xs", "md"]}
+        fontSize={12}
       >
         {!isLogged ? "Log In" : "Log Out"}
       </Button>

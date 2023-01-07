@@ -47,7 +47,6 @@ export default function LoginForm(props) {
     }
     setUserInput(initialState);
   };
-  console.log(errors);
 
   return (
     <ModalContent>
