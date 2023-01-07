@@ -1,7 +1,7 @@
 import { Heading, Text, Button, Flex, GridItem, Box } from "@chakra-ui/react";
 import { DeleteIcon } from "@chakra-ui/icons";
 
-import EstimateForm from "./EstimateForm/EstimateForm";
+import EstimateForm from "./EstimateForm";
 
 export default function EstimatesBody({
   estimateData,

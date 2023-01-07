@@ -14,6 +14,7 @@ export default function SettingsForm({ name, handleChange = () => {} }) {
         borderRadius={3}
         fontSize={"xs"}
         fontStyle={"italic"}
+        size={"sm"}
       />
     </ListItem>
   );

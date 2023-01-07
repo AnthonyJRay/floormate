@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
-import { Box, Heading, Grid, Button } from "@chakra-ui/react";
+import { useState } from "react";
+import { Box, Heading, Grid } from "@chakra-ui/react";
 
 import EstimatesBody from "../components/estimates/EstimatesBody";
-import EstimateForm from "../components/estimates/EstimateForm/EstimateForm";
+import EstimateForm from "../components/estimates/EstimateForm";
 
 export default function Estimates() {
   const [estimateData, setEstimateData] = useState([

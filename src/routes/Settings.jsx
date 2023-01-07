@@ -4,7 +4,6 @@ import DeleteAccount from "../components/utils/deleteAccount";
 
 import {
   Box,
-  Container,
   List,
   ListItem,
   Heading,
@@ -40,15 +39,15 @@ export default function Settings() {
   }
 
   return (
-    <Container overflow={"hidden"}>
-      <Heading>Settings</Heading>
-      <List>
+    <Box>
+      <Heading p={1}>Settings</Heading>
+      <List m={1}>
         <SettingsForm name={"Name"} handleChange={handleChange} />
         <SettingsForm name={"Business"} handleChange={handleChange} />
         <SettingsForm name={"Address"} handleChange={handleChange} />
         <SettingsForm name={"Phone"} handleChange={handleChange} />
         <SettingsForm name={"Email"} handleChange={handleChange} />
-        <ListItem p={1}>
+        {/* <ListItem p={1}>
           <FormLabel fontSize={"sm"} fontStyle={"italic"}>
             Upload Your Logo
           </FormLabel>
@@ -60,11 +59,12 @@ export default function Settings() {
             fontSize={"xs"}
             fontStyle={"italic"}
           />
-        </ListItem>
+        </ListItem> */}
         <ListItem
           display={"flex"}
           flexDirection={["column", "column", "row"]}
           justifyContent={"space-between"}
+          p={4}
         >
           <Button onClick={() => onSave()} colorScheme={"green"}>
             Save
@@ -97,6 +97,6 @@ export default function Settings() {
           </Modal>
         </ListItem>
       </List>
-    </Container>
+    </Box>
   );
 }

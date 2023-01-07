@@ -7,19 +7,19 @@ import AvatarDisplay from "../components/dashboard/AvatarDisplay";
 
 export default function RootLayout() {
   return (
-    <Container bg="gray.700" m="0" p="0" maxW="100%">
+    <Container bg="gray.700" m="0" p="0">
       <Grid
         templateAreas={`"header header"
                         "nav main"
                         "footer footer"`}
-        gridTemplateRows={"10vh 80vh 10vh"} // 75px 1fr 75px
+        gridTemplateRows={"10vh 80vh 10vh"}
         gridTemplateColumns={{
           base: "20vw 1fr",
           sm: "20vw 1fr",
           lg: "15vw 1fr",
           xl: "11vw 1fr",
         }}
-        gap="1"
+        gap={1}
         color="blackAlpha.700"
         fontWeight="bold"
         bg="gray.700"
@@ -48,7 +48,12 @@ export default function RootLayout() {
         </GridItem>
 
         {/* Main Content Body */}
-        <GridItem bg="gray.800" color="gray.400" area={"main"}>
+        <GridItem
+          bg="gray.800"
+          color="gray.400"
+          area={"main"}
+          overflow={"scroll"}
+        >
           <Outlet />
         </GridItem>
 

@@ -1,5 +1,0 @@
-tfoot::before {
-  content: "";
-  display: block;
-  height: 5rem;
-}

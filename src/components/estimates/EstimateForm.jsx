@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./tableBody.css";
 import { DeleteIcon, PlusSquareIcon } from "@chakra-ui/icons";
 import { testHelperFunction } from "./HelperFunctions";
 
@@ -69,9 +68,9 @@ export default function EstimateForm({
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [values, setValues] = useState(defaultValues);
   const { client, lineItems, summary, notes, subtotal, tax, total } = values;
+
   // Removed helper functions from here and moved them to the HelperFunctions.jsx file.
 
-  // Input handlers
   const clientInput = (e) => {
     const { id, value } = e.target;
     setValues((prev) => ({

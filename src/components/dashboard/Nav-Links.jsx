@@ -1,9 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Login from "../LogIn/Login";
+import Login from "../logIn/Login";
 
 // UI Imports
-import { List, ListItem, ListIcon, Hide, Text, Box } from "@chakra-ui/react";
+import {
+  List,
+  ListItem,
+  ListIcon,
+  Hide,
+  Text,
+  Box,
+  Container,
+} from "@chakra-ui/react";
 
 // Icon Imports
 import { BiLineChartDown } from "react-icons/bi";
@@ -96,15 +104,15 @@ export default function Navlinks() {
           </Link>
         </ListItem>
       </List>
-      {/* Sign-in / Sign-out  */}
-      <Box
+
+      {/* <Box
         position="absolute"
         justifyContent="center"
         bottom="5px"
         margin="auto"
-      >
-        <Login />
-      </Box>
+      > */}
+      <Login />
+      {/* </Box> */}
     </Box>
   );
 }
