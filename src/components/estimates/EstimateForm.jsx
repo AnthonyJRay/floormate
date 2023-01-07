@@ -105,19 +105,19 @@ export default function EstimateForm({
     }));
   };
 
-  const quantityInput = (e, i) => {
-    const { id, value } = e.target;
-    setValues((prev) => ({
-      ...prev,
-      lineItems: lineItems.map((item) => {
-        return item.quantity === lineItems[i].quantity
-          ? { ...lineItems[i], [id]: value }
-          : item;
-      }),
-    }));
-  };
+  // const quantityInput = (e, i) => {
+  //   const { id, value } = e.target;
+  //   setValues((prev) => ({
+  //     ...prev,
+  //     lineItems: lineItems.map((item) => {
+  //       return item.quantity === lineItems[i].quantity
+  //         ? { ...lineItems[i], [id]: value }
+  //         : item;
+  //     }),
+  //   }));
+  // };
 
-  const rateInput = (e, i) => {};
+  // const rateInput = (e, i) => {};
 
   const addItem = () => {
     const newItem = defaultValues.lineItems;
@@ -155,51 +155,75 @@ export default function EstimateForm({
       <Modal isOpen={isOpen} onClose={onClose} size={["full", "full", "6xl"]}>
         <ModalOverlay />
         <ModalContent>
-          <Flex alignItems={"center"} p={2}>
-            <ModalHeader flexGrow={1}>New Estimate</ModalHeader>
-            <List display={"flex"} pl={"1rem"} m={"1"}>
-              <Box display={"flex"} flexDirection={"column"}>
-                <ListItem
-                  display={"flex"}
-                  height={"100%"}
-                  alignItems={"center"}
-                >
-                  <Heading size={"sm"}>Estimate:</Heading>
-                  <Text>{`#00015`}</Text>
-                </ListItem>
-                <ListItem
-                  display={"flex"}
-                  alignItems={"center"}
-                  height={"100%"}
-                >
-                  <Heading size={"sm"}>Estimate Date:</Heading>
-                  <Text>{values.estimateDate}</Text>
-                </ListItem>
-              </Box>
+          <Flex alignItems={"center"}>
+            <ModalHeader fontSize={"xl"} fontWeight={"bold"} flexGrow={1}>
+              New Estimate
+            </ModalHeader>
+
+            <List display={"flex"} flexDirection={"column"} margin={"1rem"}>
+              <ListItem display={"flex"} alignItems={"center"}>
+                <Heading size={"xs"}>Estimate:</Heading>
+                <Text>{`#00015`}</Text>
+              </ListItem>
+              <ListItem display={"flex"} alignItems={"center"}>
+                <Heading size={"xs"}>Date:</Heading>
+                <Text>{values.estimateDate}</Text>
+              </ListItem>
             </List>
           </Flex>
 
-          <Box>
+          <Box margin={"1rem"}>
+            <Heading fontSize={"xl"}>Bill To:</Heading>
             <Box
               display={"flex"}
               flexDirection={["column", "column", "column", "row"]}
               justifyContent={["center", "center", "start"]}
-              margin={"1rem"}
+              m={2}
             >
               {/* Inputs and labels share an Li. Perhaps break labels and inputs into their own Divs to get better style spacing. */}
-              <List width={["100%", "95%", "65%"]} mb={8}>
-                <ListItem m={1}>
-                  <Heading fontSize={"xl"}>Bill To:</Heading>
-                </ListItem>
-                <Box m={1}>
-                  <ListItem display={"flex"} alignItems={"center"}>
-                    <Text fontWeight={"bold"} fontSize={".85rem"}>
+              <Box display={"flex"} w={["100%", "100%", "50%"]}>
+                <List
+                  display={"flex"}
+                  flexDirection={"column"}
+                  justifyContent={"space-around"}
+                  p={1}
+                >
+                  <ListItem>
+                    <Text fontWeight={"bold"} fontSize={"sm"}>
                       First Name:
                     </Text>
+                  </ListItem>
+                  <ListItem>
+                    <Text fontWeight={"bold"} fontSize={"sm"}>
+                      Last Name:
+                    </Text>
+                  </ListItem>
+                  <ListItem>
+                    <Text fontWeight={"bold"} fontSize={"sm"}>
+                      Address:
+                    </Text>
+                  </ListItem>
+                  <ListItem>
+                    <Text fontWeight={"bold"} fontSize={"sm"}>
+                      Phone:
+                    </Text>
+                  </ListItem>
+                  <ListItem>
+                    <Text fontWeight={"bold"} fontSize={"sm"}>
+                      Email:
+                    </Text>
+                  </ListItem>
+                </List>
+                <List
+                  display={"flex"}
+                  flexDirection={"column"}
+                  justifyContent={"space-around"}
+                  p={1}
+                  w={"70%"}
+                >
+                  <ListItem display={"flex"} alignItems={"center"}>
                     <Input
-                      type={"text"}
                       size={"xs"}
-                      width={"60%"}
                       variant={"flushed"}
                       placeholder={"First Name"}
                       id={"firstName"}
@@ -208,13 +232,8 @@ export default function EstimateForm({
                     />
                   </ListItem>
                   <ListItem display={"flex"} alignItems={"center"}>
-                    <Text fontWeight={"bold"} fontSize={".85rem"}>
-                      Last Name:
-                    </Text>
                     <Input
-                      type={"text"}
                       size={"xs"}
-                      width={"60%"}
                       variant={"flushed"}
                       placeholder={"Last Name"}
                       id={"lastName"}
@@ -223,13 +242,8 @@ export default function EstimateForm({
                     />
                   </ListItem>
                   <ListItem display={"flex"} alignItems={"center"}>
-                    <Text fontWeight={"bold"} fontSize={".85rem"}>
-                      Address:
-                    </Text>
                     <Input
-                      type={"text"}
                       size={"xs"}
-                      width={"60%"}
                       variant={"flushed"}
                       placeholder={"Street Address"}
                       id={"address"}
@@ -238,13 +252,8 @@ export default function EstimateForm({
                     />
                   </ListItem>
                   <ListItem display={"flex"} alignItems={"center"}>
-                    <Text fontWeight={"bold"} fontSize={".85rem"}>
-                      Phone:
-                    </Text>
                     <Input
-                      type={"text"}
                       size={"xs"}
-                      width={"60%"}
                       variant={"flushed"}
                       placeholder={"Phone Number"}
                       id={"phone"}
@@ -253,13 +262,8 @@ export default function EstimateForm({
                     />
                   </ListItem>
                   <ListItem display={"flex"} alignItems={"center"}>
-                    <Text fontWeight={"bold"} fontSize={".85rem"}>
-                      Email:
-                    </Text>
                     <Input
-                      type={"text"}
                       size={"xs"}
-                      width={"60%"}
                       variant={"flushed"}
                       placeholder={"Email Address"}
                       id={"email"}
@@ -267,10 +271,13 @@ export default function EstimateForm({
                       onChange={(e) => clientInput(e)}
                     />
                   </ListItem>
-                </Box>
-              </List>
-              <Box width={"100%"}>
-                <FormLabel>Summary</FormLabel>
+                </List>
+              </Box>
+              <Box
+                w={["100%", "100%", "100%", "50%"]}
+                mt={["2rem", null, null, 0]}
+              >
+                <FormLabel fontWeight={"bold"}>Job Summary</FormLabel>
                 <Textarea
                   height={"116px"}
                   id={"summary"}
