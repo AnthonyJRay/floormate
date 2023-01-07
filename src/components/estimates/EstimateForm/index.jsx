@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { DeleteIcon, PlusSquareIcon } from "@chakra-ui/icons";
-import { testHelperFunction } from "./HelperFunctions";
+import { testHelperFunction } from "../HelperFunctions";
+import BillInputs from "./BillInputs";
+import BillLabels from "./BillLabels";
 
 import {
   Input,
@@ -71,23 +73,23 @@ export default function EstimateForm({
 
   // Removed helper functions from here and moved them to the HelperFunctions.jsx file.
 
-  const clientInput = (e) => {
+  function billInput(e) {
     const { id, value } = e.target;
     setValues((prev) => ({
       ...prev,
       client: { ...client, [id]: value },
     }));
-  };
+  }
 
-  const summaryNotesInput = (e) => {
+  function summaryNotesInput(e) {
     const { id, value } = e.target;
     setValues((prev) => ({
       ...prev,
       [id]: value,
     }));
-  };
+  }
 
-  const handleLineItemsChange = (e, i) => {
+  function handleLineItemsChange(e, i) {
     const { id, value } = e.target;
     setValues((prev) => ({
       ...prev,
@@ -103,7 +105,23 @@ export default function EstimateForm({
         );
       }),
     }));
-  };
+  }
+
+  function addItem() {
+    const newItem = defaultValues.lineItems;
+    setValues((prev) => ({
+      ...prev,
+      lineItems: [...lineItems, newItem],
+    }));
+  }
+
+  function removeItem(i) {
+    const newLineItems = lineItems.filter((item) => item !== lineItems[i]);
+    setValues((prev) => ({
+      ...prev,
+      lineItems: newLineItems,
+    }));
+  }
 
   // const quantityInput = (e, i) => {
   //   const { id, value } = e.target;
@@ -118,22 +136,6 @@ export default function EstimateForm({
   // };
 
   // const rateInput = (e, i) => {};
-
-  const addItem = () => {
-    const newItem = defaultValues.lineItems;
-    setValues((prev) => ({
-      ...prev,
-      lineItems: [...lineItems, newItem],
-    }));
-  };
-
-  const removeItem = (i) => {
-    const newLineItems = lineItems.filter((item) => item !== lineItems[i]);
-    setValues((prev) => ({
-      ...prev,
-      lineItems: newLineItems,
-    }));
-  };
 
   return (
     <Box>
@@ -180,98 +182,9 @@ export default function EstimateForm({
               justifyContent={["center", "center", "start"]}
               m={2}
             >
-              {/* Inputs and labels share an Li. Perhaps break labels and inputs into their own Divs to get better style spacing. */}
               <Box display={"flex"} w={["100%", "100%", "50%"]}>
-                <List
-                  display={"flex"}
-                  flexDirection={"column"}
-                  justifyContent={"space-around"}
-                  p={1}
-                >
-                  <ListItem>
-                    <Text fontWeight={"bold"} fontSize={"sm"}>
-                      First Name:
-                    </Text>
-                  </ListItem>
-                  <ListItem>
-                    <Text fontWeight={"bold"} fontSize={"sm"}>
-                      Last Name:
-                    </Text>
-                  </ListItem>
-                  <ListItem>
-                    <Text fontWeight={"bold"} fontSize={"sm"}>
-                      Address:
-                    </Text>
-                  </ListItem>
-                  <ListItem>
-                    <Text fontWeight={"bold"} fontSize={"sm"}>
-                      Phone:
-                    </Text>
-                  </ListItem>
-                  <ListItem>
-                    <Text fontWeight={"bold"} fontSize={"sm"}>
-                      Email:
-                    </Text>
-                  </ListItem>
-                </List>
-                <List
-                  display={"flex"}
-                  flexDirection={"column"}
-                  justifyContent={"space-around"}
-                  p={1}
-                  w={"70%"}
-                >
-                  <ListItem display={"flex"} alignItems={"center"}>
-                    <Input
-                      size={"xs"}
-                      variant={"flushed"}
-                      placeholder={"First Name"}
-                      id={"firstName"}
-                      value={client.firstName}
-                      onChange={(e) => clientInput(e)}
-                    />
-                  </ListItem>
-                  <ListItem display={"flex"} alignItems={"center"}>
-                    <Input
-                      size={"xs"}
-                      variant={"flushed"}
-                      placeholder={"Last Name"}
-                      id={"lastName"}
-                      value={client.lastName}
-                      onChange={(e) => clientInput(e)}
-                    />
-                  </ListItem>
-                  <ListItem display={"flex"} alignItems={"center"}>
-                    <Input
-                      size={"xs"}
-                      variant={"flushed"}
-                      placeholder={"Street Address"}
-                      id={"address"}
-                      value={client.address}
-                      onChange={(e) => clientInput(e)}
-                    />
-                  </ListItem>
-                  <ListItem display={"flex"} alignItems={"center"}>
-                    <Input
-                      size={"xs"}
-                      variant={"flushed"}
-                      placeholder={"Phone Number"}
-                      id={"phone"}
-                      value={client.phone}
-                      onChange={(e) => clientInput(e)}
-                    />
-                  </ListItem>
-                  <ListItem display={"flex"} alignItems={"center"}>
-                    <Input
-                      size={"xs"}
-                      variant={"flushed"}
-                      placeholder={"Email Address"}
-                      id={"email"}
-                      value={client.email}
-                      onChange={(e) => clientInput(e)}
-                    />
-                  </ListItem>
-                </List>
+                <BillLabels />
+                <BillInputs client={client} billInput={billInput} />
               </Box>
               <Box
                 w={["100%", "100%", "100%", "50%"]}
