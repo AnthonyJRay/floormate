@@ -89,7 +89,8 @@ export default function Estimates() {
 
       <Grid
         templateColumns={{
-          base: "1fr 1fr",
+          base: "1fr",
+          sm: "1fr 1fr",
           md: "1fr 1fr 1fr",
           lg: "1fr 1fr 1fr 1fr",
         }}
