@@ -17,8 +17,8 @@ export default function ExpensesBody({
       display={"flex"}
       flexDirection={["column", null, "row", "row"]}
       alignItems={"center"}
+      m={[3]}
       p={1}
-      m={[10, 8, 6, 4, 2]}
       bg={"gray.700"}
       borderRadius={"sm"}
       border={"1px"}
@@ -49,7 +49,7 @@ export default function ExpensesBody({
         {isEditing ? (
           <>
             <Button colorScheme={"green"} onClick={() => onSave(value)}>
-              <CheckIcon color={"white"} boxSize={3} />
+              <CheckIcon color={"white"} boxSize={4} />
             </Button>
             <Button onClick={onCancel} colorScheme={"red"}>
               <CloseIcon boxSize={3} />

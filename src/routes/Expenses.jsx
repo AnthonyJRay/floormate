@@ -30,22 +30,27 @@ export default function Expenses() {
   const [editIndex, setEditIndex] = useState(-1);
 
   return (
-    <Box textAlign={"center"} p={5}>
+    <Box
+      display={"flex"}
+      flexDirection={"column"}
+      // textAlign={"center"}
+      justifyContent={"center"}
+    >
       <Heading>Expenses</Heading>
 
       <Button
         colorScheme={"green"}
-        w={["64%", "44%", "32%", "20%", "16%"]}
-        m={5}
+        w={["90%", "44%", "32%", "20%", "16%"]}
+        m={2}
         onClick={() => {
           setExpenseItems([defaultValues, ...expenseItems]);
         }}
       >
-        <PlusSquareIcon boxSize={6} />
-        <Box>Add New Expense</Box>
+        <PlusSquareIcon boxSize={5} />
+        <Box m={1}>Add Expense</Box>
       </Button>
 
-      <List pt={5}>
+      <List>
         {expenseItems.map((expense, i) => {
           return (
             <ExpensesBody
