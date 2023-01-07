@@ -6,14 +6,15 @@ export default function ExpenseDisplay({
   total,
   description,
 }) {
+  const widths = ["90%", "80%", "22%"];
   return (
     <>
-      <Text p={2}>{occurredOn}</Text>
-      <Text p={2}>{name}</Text>
-      <Text p={2} color={"red"}>
-        {total}
+      <Text w={widths}>{occurredOn}</Text>
+      <Text w={widths} color={"red.300"}>
+        ${total}
       </Text>
-      <Text p={2}>{description}</Text>
+      <Text w={widths}>{name}</Text>
+      <Text w={widths}>{description}</Text>
     </>
   );
 }

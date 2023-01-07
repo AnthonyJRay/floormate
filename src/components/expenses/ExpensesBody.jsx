@@ -16,8 +16,9 @@ export default function ExpensesBody({
     <ListItem
       display={"flex"}
       flexDirection={["column", null, "row", "row"]}
+      justifyContent={"space-between"}
       alignItems={"center"}
-      m={[3]}
+      m={[2]}
       p={1}
       bg={"gray.700"}
       borderRadius={"sm"}
@@ -26,9 +27,10 @@ export default function ExpensesBody({
     >
       <Box
         display="flex"
+        textAlign={"center"}
         flexDirection={["column", null, "row"]}
         justifyContent={"space-around"}
-        alignItems={["center", "center", "flex-start"]}
+        alignItems={["center", "center", "flex-center", "flex-start"]}
         w={"90%"}
       >
         {isEditing ? (
@@ -40,16 +42,16 @@ export default function ExpensesBody({
 
       <Box
         display={"flex"}
-        flexDirection={["row"]}
-        justifyContent={"space-around"}
-        w={["60%", "36%", "25%", "20%", "14%", "9%"]}
-        p={2}
-        m={"auto"}
+        // flexDirection={["row"]}
+        // justifyContent={"space-around"}
+        // w={["60%", "36%", "25%", "20%", "14%", "9%"]}
+        // p={1}
+        // m={1}
       >
         {isEditing ? (
           <>
             <Button colorScheme={"green"} onClick={() => onSave(value)}>
-              <CheckIcon color={"white"} boxSize={4} />
+              <CheckIcon color={"white"} boxSize={3} />
             </Button>
             <Button onClick={onCancel} colorScheme={"red"}>
               <CloseIcon boxSize={3} />
@@ -57,10 +59,10 @@ export default function ExpensesBody({
           </>
         ) : (
           <>
-            <Button colorScheme={"yellow"} onClick={onEdit}>
+            <Button colorScheme={"yellow"} onClick={onEdit} m={1}>
               <EditIcon color={"white"} boxSize={3} />
             </Button>
-            <Button colorScheme={"red"} onClick={onDelete}>
+            <Button colorScheme={"red"} onClick={onDelete} m={1}>
               <DeleteIcon boxSize={3} />
             </Button>
           </>

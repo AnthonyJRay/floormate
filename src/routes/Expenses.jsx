@@ -34,7 +34,8 @@ export default function Expenses() {
       display={"flex"}
       flexDirection={"column"}
       // textAlign={"center"}
-      justifyContent={"center"}
+      // justifyContent={"center"}
+      alignItems={"center"}
     >
       <Heading>Expenses</Heading>
 
@@ -50,7 +51,7 @@ export default function Expenses() {
         <Box m={1}>Add Expense</Box>
       </Button>
 
-      <List>
+      <List w={["90%"]}>
         {expenseItems.map((expense, i) => {
           return (
             <ExpensesBody

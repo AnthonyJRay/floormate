@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { Grid, GridItem, Container } from "@chakra-ui/react";
+import { Grid, GridItem, Container, Box } from "@chakra-ui/react";
 
 import NavLinks from "../components/dashboard/Nav-Links";
 import Header from "../components/dashboard/Header";
@@ -7,7 +7,7 @@ import AvatarDisplay from "../components/dashboard/AvatarDisplay";
 
 export default function RootLayout() {
   return (
-    <Container bg="gray.700" m="0" p="0">
+    <Box bg="gray.700">
       <Grid
         templateAreas={`"header header"
                         "nav main"
@@ -52,7 +52,7 @@ export default function RootLayout() {
           bg="gray.800"
           color="gray.400"
           area={"main"}
-          overflow={"scroll"}
+          overflowY={["scroll", "hidden"]}
         >
           <Outlet />
         </GridItem>
@@ -62,6 +62,6 @@ export default function RootLayout() {
           Footer
         </GridItem>
       </Grid>
-    </Container>
+    </Box>
   );
 }
