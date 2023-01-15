@@ -30,13 +30,7 @@ export default function Expenses() {
   const [editIndex, setEditIndex] = useState(-1);
 
   return (
-    <Box
-      display={"flex"}
-      flexDirection={"column"}
-      // textAlign={"center"}
-      // justifyContent={"center"}
-      alignItems={"center"}
-    >
+    <Box display={"flex"} flexDirection={"column"} alignItems={"center"}>
       <Heading>Expenses</Heading>
 
       <Button

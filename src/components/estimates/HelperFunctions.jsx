@@ -48,11 +48,13 @@ export const handleRateInput = (e, id) => {
   handleInputTotals();
 };
 
-export const testHelperFunction = (item) => {
-  console.log("testHelperFunction");
-  const total = parseFloat(item.quantity) * parseFloat(item.quantity);
+export function getLineItemTotals(item) {
+  // console.log(item);
+  let qty = parseFloat(item.quatity) === undefined ? 0 : item.quantity;
+  let rate = parseFloat(item.rate) === undefined ? 0 : item.rate;
+  const total = qty * rate;
   return total;
-};
+}
 
 // Get Tax
 export const handleTaxInput = (e) => {

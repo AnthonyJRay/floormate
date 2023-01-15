@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { DeleteIcon, PlusSquareIcon } from "@chakra-ui/icons";
-import { testHelperFunction } from "../HelperFunctions";
+import { getLineItemTotals } from "../HelperFunctions";
 import BillInputs from "./BillInputs";
 import BillLabels from "./BillLabels";
 
@@ -47,9 +47,9 @@ const defaultValues = {
     {
       name: "",
       description: "",
-      quantity: "",
-      rate: "",
-      total: "",
+      quantity: 0,
+      rate: 0,
+      total: 0,
     },
   ],
   summary: "",
@@ -57,7 +57,7 @@ const defaultValues = {
   invoiced: false,
   subtotal: "",
   tax: "",
-  total: "",
+  total: 0,
 };
 
 export default function EstimateForm({
@@ -70,6 +70,9 @@ export default function EstimateForm({
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [values, setValues] = useState(defaultValues);
   const { client, lineItems, summary, notes, subtotal, tax, total } = values;
+
+  // console.log(values);
+  useEffect(() => {}, []);
 
   function billInput(e) {
     const { id, value } = e.target;
@@ -93,7 +96,7 @@ export default function EstimateForm({
       ...prev,
       lineItems: lineItems.map((item) => {
         return (
-          (item.total = testHelperFunction(item)),
+          (item.total = getLineItemTotals(item)),
           item === lineItems[i]
             ? {
                 ...lineItems[i],
@@ -102,6 +105,7 @@ export default function EstimateForm({
             : item
         );
       }),
+      subtotal: 1,
     }));
   }
 
@@ -109,7 +113,7 @@ export default function EstimateForm({
     const newItem = defaultValues.lineItems;
     setValues((prev) => ({
       ...prev,
-      lineItems: [...lineItems, newItem],
+      lineItems: [...lineItems, ...newItem],
     }));
   }
 
